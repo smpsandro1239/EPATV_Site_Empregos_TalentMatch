@@ -1,0 +1,389 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== ENUMS =====
+
+enum UserRole {
+  CANDIDATE
+  COMPANY
+  ADMIN
+}
+
+enum JobStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
+  CLOSED
+}
+
+enum RemoteType {
+  FULLY_REMOTE
+  HYBRID
+  ON_SITE
+}
+
+enum ContractType {
+  FULL_TIME
+  PART_TIME
+  FREELANCE
+  CONTRACT
+}
+
+enum Seniority {
+  JUNIOR
+  MID
+  SENIOR
+}
+
+enum ApplicationStatus {
+  SUBMITTED
+  IN_REVIEW
+  INTERVIEW
+  REJECTED
+  OFFER
+  HIRED
+}
+
+enum SenderType {
+  CANDIDATE
+  COMPANY
+}
+
+// ===== USER & AUTH =====
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  role          UserRole
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  lastLogin     DateTime?
+
+  // Relações
+  candidateProfile CandidateProfile?
+  companyProfile   Company?
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+
+  @@index([email])
+  @@index([role])
+}
+
+// ===== CANDIDATE PROFILE =====
+
+model CandidateProfile {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  name               String
+  headline           String?
+  location           String
+  about              String?
+  cvUrl              String?
+  availabilityStatus String   @default("AVAILABLE") // AVAILABLE, NOT_AVAILABLE
+  remotePreference   RemoteType?
+  salaryMin          Int?
+  salaryMax          Int?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relações
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  experiences        CandidateExperience[]
+  educations         CandidateEducation[]
+  skills             CandidateSkill[]
+  applications       Application[]
+  matchScores        MatchScore[]
+  embeddings         Embedding[]
+
+  @@index([userId])
+  @@index([location])
+}
+
+// ===== CANDIDATE EXPERIENCE =====
+
+model CandidateExperience {
+  id           String   @id @default(cuid())
+  candidateId  String
+  companyName  String
+  role         String
+  description  String?
+  startDate    DateTime
+  endDate      DateTime?
+  createdAt    DateTime @default(now())
+
+  // Relações
+  candidate    CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@index([candidateId])
+}
+
+// ===== CANDIDATE EDUCATION =====
+
+model CandidateEducation {
+  id           String   @id @default(cuid())
+  candidateId  String
+  institution  String
+  degree       String
+  field        String?
+  startDate    DateTime
+  endDate      DateTime?
+  createdAt    DateTime @default(now())
+
+  // Relações
+  candidate    CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@index([candidateId])
+}
+
+// ===== SKILLS =====
+
+model Skill {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  category  String?  // Backend, Frontend, DevOps, etc.
+  createdAt DateTime @default(now())
+
+  // Relações
+  candidates CandidateSkill[]
+  jobSkills  JobSkill[]
+
+  @@index([name])
+  @@index([category])
+}
+
+model CandidateSkill {
+  id          String     @id @default(cuid())
+  candidateId String
+  skillId     String
+  level       Seniority  @default(MID)
+  yearsExp    Int?       // Anos de experiência com a skill
+  createdAt   DateTime   @default(now())
+
+  // Relações
+  candidate   CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  skill       Skill           @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([candidateId, skillId])
+  @@index([candidateId])
+  @@index([skillId])
+}
+
+// ===== COMPANY =====
+
+model Company {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  name        String
+  logoUrl     String?
+  website     String?
+  location    String
+  size        String?  // Startup, SME, Medium, Large, Enterprise
+  industry    String?
+  description String?
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relações
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobs        Job[]
+  members     CompanyMember[]
+  embeddings  Embedding[]
+
+  @@index([userId])
+  @@index([name])
+  @@index([verified])
+}
+
+model CompanyMember {
+  id        String   @id @default(cuid())
+  userId    String
+  companyId String
+  role      String   @default("RECRUITER") // RECRUITER, ADMIN
+  createdAt DateTime @default(now())
+
+  // Relações
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, companyId])
+  @@index([companyId])
+}
+
+// ===== JOBS =====
+
+model Job {
+  id                 String      @id @default(cuid())
+  companyId          String
+  title              String
+  description        String
+  responsibilities   String
+  requirementsMust   String      // JSON or comma-separated
+  requirementsNice   String?     // JSON or comma-separated
+  location           String
+  remoteType         RemoteType
+  contractType       ContractType
+  level              Seniority
+  salaryMin          Int?
+  salaryMax          Int?
+  status             JobStatus   @default(DRAFT)
+  publishedAt        DateTime?
+  closedAt           DateTime?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  // Relações
+  company            Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  applications       Application[]
+  jobSkills          JobSkill[]
+  matchScores        MatchScore[]
+  embeddings         Embedding[]
+
+  @@index([companyId])
+  @@index([status])
+  @@index([level])
+  @@index([location])
+  @@index([publishedAt])
+}
+
+model JobSkill {
+  id        String  @id @default(cuid())
+  jobId     String
+  skillId   String
+  required  Boolean @default(true)
+  level     Seniority?
+
+  // Relações
+  job       Job     @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  skill     Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, skillId])
+  @@index([jobId])
+  @@index([skillId])
+}
+
+// ===== APPLICATIONS =====
+
+model Application {
+  id          String            @id @default(cuid())
+  jobId       String
+  candidateId String
+  status      ApplicationStatus @default(SUBMITTED)
+  message     String?
+  cvUrl       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relações
+  job         Job               @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  candidate   CandidateProfile  @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  messages    ApplicationMessage[]
+
+  @@unique([jobId, candidateId])
+  @@index([jobId])
+  @@index([candidateId])
+  @@index([status])
+}
+
+// ===== APPLICATION MESSAGES =====
+
+model ApplicationMessage {
+  id            String     @id @default(cuid())
+  applicationId String
+  senderType    SenderType
+  senderId      String     // userId ou candidateId
+  content       String
+  createdAt     DateTime   @default(now())
+
+  // Relações
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId])
+  @@index([createdAt])
+}
+
+// ===== MATCH SCORES (DETERMINÍSTICO + SEMÂNTICO) =====
+
+model MatchScore {
+  id          String   @id @default(cuid())
+  jobId       String
+  candidateId String
+  score       Float    // 0-100
+  detailsJson String   // JSON com breakdown do score
+  calculatedAt DateTime @default(now())
+
+  // Relações
+  job         Job              @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  candidate   CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, candidateId])
+  @@index([jobId])
+  @@index([candidateId])
+  @@index([score])
+}
+
+// ===== EMBEDDINGS (pgvector) =====
+
+model Embedding {
+  id         String   @id @default(cuid())
+  entityType String   // "job" ou "candidate"
+  entityId   String
+  vector     String   // Vector armazenado como texto para agora, usar pgvector no futuro
+  createdAt  DateTime @default(now())
+
+  // Relações
+  job        Job?               @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "Embedding_job_entityId_fkey")
+  candidate  CandidateProfile?  @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "Embedding_candidate_entityId_fkey")
+  company    Company?           @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "Embedding_company_entityId_fkey")
+
+  @@index([entityType])
+  @@index([entityId])
+}
+
+// ===== NOTIFICATIONS =====
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // "application", "status", "message", "system"
+  title     String
+  body      String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  // Relações
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+}
+
+// ===== AUDIT LOGS =====
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String   // "CREATE", "UPDATE", "DELETE", "PUBLISH", etc.
+  entityType String  // "Job", "Application", "User", etc.
+  entityId  String
+  metadata  String?  // JSON com detalhes da ação
+  createdAt DateTime @default(now())
+
+  // Relações
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([entityType])
+  @@index([createdAt])
+}
