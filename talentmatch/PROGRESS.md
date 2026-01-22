@@ -89,33 +89,33 @@
 - [ ] Testes E2E Auth endpoints
 
 #### Candidates Module
-- [ ] CandidatesService - CRUD completo
-- [ ] Experiências (create, update, delete)
-- [ ] Educação (create, update, delete)
-- [ ] Skills (add, remove)
+- [x] CandidatesService - CRUD completo ✅
+- [x] Experiências (create, update, delete) ✅
+- [x] Educação (create, update, delete) ✅
+- [x] Skills (add, remove) ✅
 - [ ] Profile picture upload
 - [ ] CV/Resume upload
 - [ ] Testes unitários
 - [ ] Testes E2E
 
 #### Companies Module
-- [ ] CompaniesService - CRUD completo
-- [ ] Company profile
+- [x] CompaniesService - CRUD completo ✅
+- [x] Company profile ✅
 - [ ] Logo upload
 - [ ] Workspace settings
 - [ ] Team management
 - [ ] Testes unitários
 
 #### Jobs Module
-- [ ] JobsService - CRUD completo
-- [ ] Job search/filter
-- [ ] Job posting workflow
+- [x] JobsService - CRUD completo ✅
+- [x] Job search/filter ✅
+- [x] Job posting workflow ✅
 - [ ] Testes unitários
 
 #### Applications Module
-- [ ] ApplicationsService - CRUD
-- [ ] Status workflow (pending, reviewed, accepted, rejected)
-- [ ] Application tracking
+- [x] ApplicationsService - CRUD ✅
+- [x] Status workflow (pending, reviewed, accepted, rejected) ✅
+- [x] Application tracking ✅
 - [ ] Testes unitários
 
 ### Frontend - Fase 1 (Crítico)

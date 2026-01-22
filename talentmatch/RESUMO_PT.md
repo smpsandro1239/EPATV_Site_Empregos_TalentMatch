@@ -21,7 +21,7 @@ Dashboard personalizado por role (Candidate/Company)
 - **http://localhost:3000/auth/login** - Página de Login
 - **http://localhost:3000/auth/register** - Página de Registo
 - **http://localhost:3000/candidate/dashboard** - Dashboard Candidato
-- **http://localhost:3000/company/dashboard** - Dashboard Empresa
+- **company/dashboardhttp://localhost:3000/** - Dashboard Empresa
 
 ### 🔌 Backend - Endpoints Prontos
 - `POST /auth/register` - Criar conta
