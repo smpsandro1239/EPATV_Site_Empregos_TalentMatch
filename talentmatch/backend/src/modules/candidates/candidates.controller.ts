@@ -31,6 +31,12 @@ export class CandidatesController {
     }
   }
 
+  @Get('by-user/:userId')
+  @ApiOperation({ summary: 'Get candidate profile by user ID' })
+  async getProfileByUserId(@Param('userId') userId: string) {
+    return this.candidatesService.getProfileByUserId(userId);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get candidate profile' })
   async getProfile(@Param('id') id: string) {

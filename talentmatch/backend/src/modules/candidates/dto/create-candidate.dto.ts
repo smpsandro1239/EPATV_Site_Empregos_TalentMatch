@@ -1,4 +1,5 @@
-import { IsOptional, IsString, MinLength } from 'class-validator';
+import { RemoteType } from '@prisma/client';
+import { IsEnum, IsNumber, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class CreateCandidateDto {
   @IsString()
@@ -20,4 +21,16 @@ export class CreateCandidateDto {
   @IsString()
   @IsOptional()
   headline?: string;
+
+  @IsEnum(RemoteType)
+  @IsOptional()
+  remotePreference?: RemoteType;
+
+  @IsNumber()
+  @IsOptional()
+  salaryMin?: number;
+
+  @IsNumber()
+  @IsOptional()
+  salaryMax?: number;
 }
