@@ -1,7 +1,6 @@
 'use client';
 
 import Header from '@/components/Header';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface Job {
@@ -147,99 +146,18 @@ export default function JobsPage() {
             </form>
           </div>
 
-          {/* Error Message */}
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-              {error}
-            </div>
-          )}
 
-          {/* Loading State */}
-          {loading && (
-            <div className="flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-            </div>
-          )}
-
-          {/* Jobs Grid */}
-          {!loading && jobs.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {jobs.map((job) => (
-                <Link key={job.id} href={`/jobs/${job.id}`}>
-                  <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 h-full cursor-pointer">
-                    {/* Company Info */}
-                    <div className="flex items-start justify-between mb-4">
-                      {job.company.logoUrl && (
-                        <img
-                          src={job.company.logoUrl}
-                          alt={job.company.name}
-                          className="w-12 h-12 rounded-lg object-cover"
-                        />
-                      )}
-                      <span className="text-sm font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded">
-                        {job.level}
-                      </span>
-                    </div>
-
-                    {/* Job Title */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{job.title}</h3>
-
-                    {/* Company Name */}
-                    <p className="text-gray-600 text-sm mb-3">{job.company.name}</p>
-
-                    {/* Job Description Snippet */}
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {job.description}
-                    </p>
-
-                    {/* Job Details */}
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="w-20">📍 Location:</span>
-                        <span>{job.location}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="w-20">💼 Type:</span>
-                        <span>{job.contractType}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="w-20">🌐 Remote:</span>
-                        <span>{job.remoteType}</span>
-                      </div>
-                      {job.salaryMin && job.salaryMax && (
-                        <div className="flex items-center text-sm text-gray-600">
-                          <span className="w-20">💰 Salary:</span>
-                          <span>${job.salaryMin.toLocaleString()} - ${job.salaryMax.toLocaleString()}</span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Posted Date */}
-                    <p className="text-xs text-gray-500">
-                      Posted {new Date(job.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-
-          {/* No Jobs Found */}
-          {!loading && jobs.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-lg text-gray-600">No jobs found matching your criteria</p>
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setFilters({ level: '', contractType: '', location: '' });
-                  setCurrentPage(0);
-                }}
-                className="mt-4 text-primary-600 hover:text-primary-700 font-semibold"
-              >
-                Clear filters
-              </button>
-            </div>
-          )}
+          {/* Jobs List */}
+          <JobList
+            jobs={jobs}
+            loading={loading}
+            error={error}
+            onClearFilters={() => {
+              setSearchQuery('');
+              setFilters({ level: '', contractType: '', location: '' });
+              setCurrentPage(0);
+            }}
+          />
 
           {/* Pagination */}
           {!loading && jobs.length > 0 && (
