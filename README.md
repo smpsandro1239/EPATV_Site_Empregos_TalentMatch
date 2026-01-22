@@ -414,10 +414,11 @@ Este projeto está licenciado sob a Licença MIT - consulte o ficheiro [LICENSE]
 
 ## 👨‍💻 Autor
 
-Desenvolvido com ❤️ por **Sandro Machado**
+Desenvolvido com ❤️ por **Sandro Pereira**
 
 - GitHub: [@smpsandro1239](https://github.com/smpsandro1239)
-- LinkedIn: [Sandro Machado](https://linkedin.com/in/sandro-machado)
+- LinkedIn: [Sandro Pereira](https://linkedin.com/in/sandro-pereira-a5ab0236)
+- Email: smpsandro1239@gmail.com
 
 ---
 
@@ -434,12 +435,12 @@ Desenvolvido com ❤️ por **Sandro Machado**
 | Componente | Status | % Completo |
 |-----------|--------|-----------|
 | Autenticação | ✅ Completo | 100% |
-| Perfis | 🔄 Em Progresso | 30% |
-| Vagas | 🔄 Em Progresso | 20% |
-| Candidaturas | ⏳ Planeado | 0% |
-| Matching IA | ⏳ Planeado | 0% |
+| Perfis | ✅ Completo | 90% |
+| Vagas | ✅ Completo | 85% |
+| Candidaturas | 🔄 Em Progresso | 60% |
+| Matching IA | 🔄 Em Progresso | 40% |
 | Chat | ⏳ Planeado | 0% |
-| Admin Panel | ⏳ Planeado | 0% |
+| Admin Panel | 🔄 Em Progresso | 20% |
 
 ---
 
