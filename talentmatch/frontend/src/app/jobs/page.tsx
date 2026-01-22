@@ -1,77 +1,37 @@
 'use client';
 
 import Header from '@/components/Header';
+import JobList from '@/components/JobList';
+import { useJobs } from '@/hooks';
 import { useEffect, useState } from 'react';
 
-interface Job {
-  id: string;
-  title: string;
-  description: string;
-  location: string;
-  level: string;
-  contractType: string;
-  remoteType: string;
-  salaryMin?: number;
-  salaryMax?: number;
-  company: {
-    id: string;
-    name: string;
-    logoUrl?: string;
-  };
-  createdAt: string;
-}
-
 export default function JobsPage() {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { jobs, loading, error, searchJobs, currentPage, setCurrentPage, total } = useJobs();
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState({
     level: '',
     contractType: '',
     location: '',
   });
-  const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
 
   useEffect(() => {
-    fetchJobs();
-  }, [currentPage, filters]);
-
-  const fetchJobs = async () => {
-    try {
-      setLoading(true);
-      const params = new URLSearchParams({
-        limit: String(itemsPerPage),
-        offset: String(currentPage * itemsPerPage),
-        ...(filters.level && { level: filters.level }),
-        ...(filters.contractType && { contractType: filters.contractType }),
-        ...(filters.location && { location: filters.location }),
-      });
-
-      const url = searchQuery.length > 0
-        ? `${process.env.NEXT_PUBLIC_API_URL}/jobs/search?query=${encodeURIComponent(searchQuery)}&${params}`
-        : `${process.env.NEXT_PUBLIC_API_URL}/jobs?${params}`;
-
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch jobs');
-
-      const data = await response.json();
-      setJobs(data.data || []);
-      setError('');
-    } catch (err) {
-      console.error('Error fetching jobs:', err);
-      setError('Failed to load jobs');
-      setJobs([]);
-    } finally {
-      setLoading(false);
+    const filters_params = {
+      ...(filters.level && { level: filters.level }),
+      ...(filters.contractType && { contractType: filters.contractType }),
+      ...(filters.location && { location: filters.location }),
+    };
+    
+    if (searchQuery) {
+      searchJobs(searchQuery, { skip: currentPage * itemsPerPage, limit: itemsPerPage, ...filters_params });
+    } else {
+      searchJobs('', { skip: currentPage * itemsPerPage, limit: itemsPerPage, ...filters_params });
     }
-  };
+  }, [currentPage, filters, searchQuery, searchJobs]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setCurrentPage(0);
-    fetchJobs();
   };
 
   const handleFilterChange = (filterName: string, value: string) => {
