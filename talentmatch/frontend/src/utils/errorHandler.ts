@@ -1,5 +1,4 @@
 import { LOGIN_MESSAGES, REGISTER_MESSAGES } from './messages';
-import { VALIDATION } from '../lib/constants';
 
 export function logError(context: string, error: unknown): void {
   const errorMessage = error instanceof Error ? error.message : String(error);

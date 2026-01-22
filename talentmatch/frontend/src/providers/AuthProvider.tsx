@@ -26,19 +26,29 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Check if user is already logged in on mount
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      // Optionally verify token with backend
-      // apiClient.getCurrentUser(token).then(setUser).catch(() => logout());
-    }
-    setIsLoading(false);
+    const checkAuth = () => {
+      try {
+        const storedUser = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+
+        if (storedUser && token) {
+          setUser(JSON.parse(storedUser));
+        }
+      } catch (error) {
+        console.error('Error checking authentication:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
       const response = await apiClient.login({ email, password });
-      localStorage.setItem('access_token', response.access_token);
-      localStorage.setItem('refresh_token', response.refresh_token);
+      localStorage.setItem('token', response.access_token);
+      localStorage.setItem('user', JSON.stringify(response.user));
       setUser(response.user);
     } catch (error) {
       throw error;
@@ -53,8 +63,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   ) => {
     try {
       const response = await apiClient.register({ email, password, name, role });
-      localStorage.setItem('access_token', response.access_token);
-      localStorage.setItem('refresh_token', response.refresh_token);
+      localStorage.setItem('token', response.access_token);
+      localStorage.setItem('user', JSON.stringify(response.user));
       setUser(response.user);
     } catch (error) {
       throw error;
@@ -62,8 +72,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setUser(null);
   };
 
