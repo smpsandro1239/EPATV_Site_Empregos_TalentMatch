@@ -2,7 +2,8 @@
 
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
-import { useEffect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { user, isLoading } = useAuth();
