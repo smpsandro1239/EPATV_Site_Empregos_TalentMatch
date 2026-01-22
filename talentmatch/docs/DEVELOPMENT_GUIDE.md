@@ -3,7 +3,7 @@
 ## Ambiente Local
 
 ### Requisitos
-- Node.js 16+ 
+- Node.js 16+
 - npm 8+
 - PostgreSQL 12+
 - Git

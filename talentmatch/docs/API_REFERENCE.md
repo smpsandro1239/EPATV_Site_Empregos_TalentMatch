@@ -107,7 +107,7 @@ async function apiCall(url, options, maxRetries = 3) {
       const response = await fetch(url, options);
       if (response.ok) return response;
       if (response.status < 500) throw new Error('Client error');
-      
+
       const delay = Math.pow(2, i) * 1000;
       await new Promise(r => setTimeout(r, delay));
     } catch (error) {
