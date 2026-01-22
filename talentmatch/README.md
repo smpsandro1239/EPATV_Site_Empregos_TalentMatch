@@ -163,6 +163,14 @@ NEXT_PUBLIC_API_URL="http://localhost:3000"
 - Sistema de pagamento
 - Multi-tenant
 
+## 📊 Status do Projeto
+
+**Desenvolvedor:** Sandro Pereira
+- **LinkedIn:** [https://linkedin.com/in/sandro-pereira-a5ab0236](https://linkedin.com/in/sandro-pereira-a5ab0236)
+- **Email:** smpsandro1239@gmail.com
+
+O projeto TalentMatch está em desenvolvimento ativo, com foco na criação de uma plataforma de recrutamento inteligente.
+
 ## 🤝 Contribuindo
 
 1. Create a feature branch: `git checkout -b feature/amazing-feature`
