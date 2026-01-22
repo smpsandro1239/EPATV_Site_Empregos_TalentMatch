@@ -2,9 +2,8 @@ import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-valida
 
 export enum Seniority {
   JUNIOR = 'JUNIOR',
-  MIDDLE = 'MIDDLE',
+  MID = 'MID',
   SENIOR = 'SENIOR',
-  LEAD = 'LEAD',
 }
 
 export enum ContractType {

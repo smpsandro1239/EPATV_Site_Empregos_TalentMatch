@@ -107,6 +107,23 @@ export class CompaniesService {
     return company;
   }
 
+  async getCompanyByUserId(userId: string) {
+    const company = await this._prisma.company.findUnique({
+      where: { userId },
+      include: {
+        user: {
+          select: { email: true },
+        },
+      },
+    });
+
+    if (!company) {
+      throw new NotFoundException('Company not found');
+    }
+
+    return company;
+  }
+
   async updateProfile(companyId: string, dto: UpdateCompanyProfileDto) {
     return this._prisma.company.update({
       where: { id: companyId },
@@ -201,9 +218,8 @@ export class CompaniesService {
   }
 
   async deleteJob(jobId: string) {
-    return this._prisma.job.update({
+    return this._prisma.job.delete({
       where: { id: jobId },
-      data: { status: 'CLOSED' },
     });
   }
 
@@ -211,7 +227,6 @@ export class CompaniesService {
     return this._prisma.job.findMany({
       where: {
         companyId,
-        status: 'PUBLISHED',
       },
       skip: offset,
       take: limit,
@@ -271,6 +286,64 @@ export class CompaniesService {
           },
         },
       },
+    });
+  }
+
+  // Job Status Management
+  async publishJob(jobId: string) {
+    return this._prisma.job.update({
+      where: { id: jobId },
+      data: { status: 'PUBLISHED' },
+    });
+  }
+
+  async pauseJob(jobId: string) {
+    return this._prisma.job.update({
+      where: { id: jobId },
+      data: { status: 'PAUSED' },
+    });
+  }
+
+  async closeJob(jobId: string) {
+    return this._prisma.job.update({
+      where: { id: jobId },
+      data: { status: 'CLOSED' },
+    });
+  }
+
+  // Application Management
+  async getCompanyApplications(companyId: string, status?: string, limit: number = 20, offset: number = 0) {
+    const where: any = {
+      job: {
+        companyId,
+      },
+    };
+
+    if (status) {
+      where.status = status;
+    }
+
+    return this._prisma.application.findMany({
+      where,
+      skip: offset,
+      take: limit,
+      include: {
+        candidate: {
+          select: {
+            id: true,
+            name: true,
+            headline: true,
+            location: true,
+          },
+        },
+        job: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
     });
   }
 }

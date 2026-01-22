@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGua
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CompaniesService } from './companies.service';
-import { CreateCompanyDto, CreateJobDto } from './dto';
+import { CreateCompanyDto, CreateJobDto, UpdateCompanyDto } from './dto';
 
 @ApiTags('Companies')
 @Controller('companies')
@@ -38,11 +38,19 @@ export class CompaniesController {
     return this.companiesService.getProfile(id);
   }
 
+  @Get('by-user/:userId')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get company profile by user ID' })
+  async getCompanyByUserId(@Param('userId') userId: string) {
+    return this.companiesService.getCompanyByUserId(userId);
+  }
+
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update company profile' })
-  async updateProfile(@Param('id') id: string, @Body() dto: CreateCompanyDto) {
+  async updateProfile(@Param('id') id: string, @Body() dto: UpdateCompanyDto) {
     return this.companiesService.updateProfile(id, dto);
   }
 
@@ -109,5 +117,44 @@ export class CompaniesController {
   @ApiOperation({ summary: 'Delete job posting' })
   async deleteJob(@Param('jobId') jobId: string) {
     return this.companiesService.deleteJob(jobId);
+  }
+
+  // Job Status Management
+  @Post('jobs/:jobId/publish')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Publish job posting' })
+  async publishJob(@Param('jobId') jobId: string) {
+    return this.companiesService.publishJob(jobId);
+  }
+
+  @Post('jobs/:jobId/pause')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Pause job posting' })
+  async pauseJob(@Param('jobId') jobId: string) {
+    return this.companiesService.pauseJob(jobId);
+  }
+
+  @Post('jobs/:jobId/close')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Close job posting' })
+  async closeJob(@Param('jobId') jobId: string) {
+    return this.companiesService.closeJob(jobId);
+  }
+
+  // Application Management
+  @Get(':id/applications')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'List applications for company jobs' })
+  async getCompanyApplications(
+    @Param('id') companyId: string,
+    @Query('status') status?: string,
+    @Query('limit') limit: number = 20,
+    @Query('offset') offset: number = 0,
+  ) {
+    return this.companiesService.getCompanyApplications(companyId, status, limit, offset);
   }
 }
