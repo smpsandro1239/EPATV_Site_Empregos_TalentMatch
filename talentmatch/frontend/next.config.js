@@ -17,10 +17,6 @@ const nextConfig = {
       },
     ];
   },
-  // Disable static generation for protected routes
-  experimental: {
-    isrMemoryCacheSize: 0,
-  },
   // Exclude protected routes from static export
   publicRuntimeConfig: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
