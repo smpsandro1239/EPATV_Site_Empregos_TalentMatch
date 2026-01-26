@@ -21,6 +21,10 @@
 - ✅ **Frontend**: Componentes (JobCard, JobList), hooks e services atualizados.
 - ✅ **Versionamento**: Código enviado para o branch principal.
 
+### Docker & Deployment
+- ✅ **Dockerfiles**: Criados Dockerfiles para backend (NestJS) e frontend (Next.js).
+- ✅ **Launch Script**: Criado `launch-docker.bat` para iniciar todos os serviços (PostgreSQL, Redis, Meilisearch, backend, frontend) com Docker Compose.
+
 ### Backend Implementation (Fase 1B)
 - ✅ **AuthModule**: Sistema completo de autenticação JWT
 - ✅ **CandidatesModule**: 15 endpoints (perfis, experiências, educação, skills)
@@ -50,6 +54,12 @@
 - 🔄 **Componentização**: Desenvolver os componentes da dashboard do candidato.
 - 🔄 **Integração**: Conectar a página do candidato com os serviços da API.
 
+### Próximas Ações Imediatas
+- ✅ **Testar Docker Config**: Validação da configuração docker-compose.prod.yml realizada com sucesso.
+- 🔄 **Testar Docker Launch**: Executar `launch-docker.bat` para validar que todos os serviços iniciam corretamente.
+- 🔄 **Ajustes Docker**: Corrigir eventuais problemas nos Dockerfiles ou docker-compose.prod.yml.
+- 🔄 **Documentação**: Atualizar docs com instruções de uso do Docker.
+
 ---
 
 ## 📌 PENDENTE - PRÓXIMAS FASES
@@ -67,5 +77,5 @@
 
 ---
 
-**Atualizado:** 23 de Janeiro de 2026
+**Atualizado:** 24 de Janeiro de 2026
 **Próxima Review:** 30 de Janeiro de 2026

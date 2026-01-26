@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useCallback } from 'react';
 import { companyService, type Company, type Job } from '@/services/companyService';
+import { useCallback, useState } from 'react';
 
 interface UseCompanyReturn {
   company: Company | null;

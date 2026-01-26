@@ -123,7 +123,7 @@ localStorage.getItem('user')
 ## ✅ Checklist de Sucesso
 
 - [ ] Register funciona (CORS fixed)
-- [ ] Login funciona (CORS fixed)  
+- [ ] Login funciona (CORS fixed)
 - [ ] Jobs listing funciona (CORS fixed)
 - [ ] Job detail funciona (CORS fixed)
 - [ ] Job apply funciona (CORS fixed)

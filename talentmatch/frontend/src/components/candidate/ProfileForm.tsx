@@ -1,26 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { CandidateProfileDetail } from '@/types/candidate'; // Import the shared interface
 
 interface ProfileFormProps {
   token: string;
   userId: string;
 }
 
-interface CandidateProfile {
-  id: string;
-  name: string;
-  headline?: string;
-  location: string;
-  about?: string;
-  cvUrl?: string;
-  salaryMin?: number;
-  salaryMax?: number;
-  remotePreference?: 'FULLY_REMOTE' | 'HYBRID' | 'ON_SITE';
-}
-
 export default function ProfileForm({ token, userId }: ProfileFormProps) {
-  const [profile, setProfile] = useState<CandidateProfile | null>(null);
+  const [profile, setProfile] = useState<CandidateProfileDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -32,9 +21,9 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
     location: '',
     about: '',
     cvUrl: '',
-    salaryMin: '',
-    salaryMax: '',
-    remotePreference: '',
+    salaryMin: '', // Should be string for input
+    salaryMax: '', // Should be string for input
+    remotePreference: '', // Should be string for select
   });
 
   useEffect(() => {

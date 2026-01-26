@@ -1,19 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Education } from '@/types/candidate'; // Import the shared interface
 
 interface EducationSectionProps {
   token: string;
   userId: string;
-}
-
-interface Education {
-  id: string;
-  institution: string;
-  degree: string;
-  field?: string;
-  startDate: string;
-  endDate?: string;
 }
 
 export default function EducationSection({ token, userId }: EducationSectionProps) {

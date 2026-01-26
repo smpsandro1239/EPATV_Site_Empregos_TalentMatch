@@ -1,122 +1,80 @@
-'use client';
+// src/app/candidate/dashboard/page.tsx
+"use client";
 
-import { useAuth } from '@/providers/AuthProvider';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import Header from '@/components/Header';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import ProfileSummary from '@/components/candidate/dashboard/ProfileSummary';
+import QuickActions from '@/components/candidate/dashboard/QuickActions';
+import RecentApplications from '@/components/candidate/dashboard/RecentApplications';
+import RecommendedJobs from '@/components/candidate/dashboard/RecommendedJobs';
+import { getCandidateProfile } from '@/services/candidateService';
+import { getApplications } from '@/services/applicationService';
+import { getJobs } from '@/services/jobService';
+
+// Placeholder data - replace with actual data from your API
+const candidateData = {
+  name: "John Doe",
+  profileCompleteness: 75,
+};
+
+const recentApplicationsData = [
+  { id: 1, title: "Senior Frontend Developer", company: "TechCorp", status: "In Review" },
+  { id: 2, title: "Full-Stack Engineer", company: "Innovate Inc.", status: "Interviewing" },
+  { id: 3, title: "React Developer", company: "Solutions Co.", status: "Rejected" },
+];
+
+const recommendedJobsData = [
+  { id: 1, title: "UI/UX Designer", company: "Creative Minds" },
+  { id: 2, title: "Next.js Developer", company: "WebApp Builders" },
+  { id: 3, title: "GraphQL Specialist", company: "DataFirst" },
+];
+
 
 export default function CandidateDashboard() {
-  const { user, isLoading } = useAuth();
-  const router = useRouter();
+  // const [candidate, setCandidate] = useState(null);
+  // const [applications, setApplications] = useState([]);
+  // const [recommendedJobs, setRecommendedJobs] = useState([]);
 
-  useEffect(() => {
-    if (!isLoading && (!user || user.role !== 'CANDIDATE')) {
-      router.push('/auth/login');
-    }
-  }, [user, isLoading, router]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const profile = await getCandidateProfile();
+  //       setCandidate(profile);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-      </div>
-    );
-  }
+  //       const apps = await getApplications({ candidateId: profile.id, limit: 3 });
+  //       setApplications(apps.data);
 
-  if (!user) {
-    return null;
-  }
+  //       // This would likely be a more sophisticated recommendation endpoint
+  //       const jobs = await getJobs({ limit: 5 });
+  //       setRecommendedJobs(jobs.data);
+
+  //     } catch (error) {
+  //       console.error("Failed to fetch dashboard data:", error);
+  //       // Handle error state in the UI
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  // if (!candidate) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
-    <>
-      <Header />
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* Welcome Card */}
-          <div className="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome, {user.email}!</h1>
-            <p className="text-gray-600 mb-6">
-              Explore job opportunities and connect with companies looking for your skills.
-            </p>
-            <div className="flex gap-4">
-              <Link
-                href="/candidate/profile"
-                className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition"
-              >
-                Complete Profile
-              </Link>
-              <Link
-                href="/jobs"
-                className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition"
-              >
-                Browse Jobs
-              </Link>
-            </div>
-          </div>
-
-          {/* Stats Card */}
-          <div className="bg-primary-50 rounded-lg shadow-lg p-6 border-l-4 border-primary-600">
-            <h3 className="text-sm font-semibold text-gray-600 mb-4">Your Stats</h3>
-            <div className="space-y-4">
-              <div>
-                <p className="text-3xl font-bold text-primary-600">0</p>
-                <p className="text-sm text-gray-600">Applications</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-primary-600">0</p>
-                <p className="text-sm text-gray-600">Profile Views</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-primary-600">0</p>
-                <p className="text-sm text-gray-600">Matches</p>
-              </div>
-            </div>
-          </div>
+    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Candidate Dashboard</h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
+          <ProfileSummary name={candidateData.name} profileCompleteness={candidateData.profileCompleteness} />
+          <QuickActions />
+          <RecentApplications applications={recentApplicationsData} />
         </div>
-
-        {/* Quick Actions */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link
-              href="/candidate/profile"
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
-            >
-              <div className="text-2xl mb-2">👤</div>
-              <p className="font-semibold text-gray-900">Profile</p>
-              <p className="text-xs text-gray-600">Update your information</p>
-            </Link>
-
-            <Link
-              href="/jobs"
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
-            >
-              <div className="text-2xl mb-2">💼</div>
-              <p className="font-semibold text-gray-900">Jobs</p>
-              <p className="text-xs text-gray-600">Find opportunities</p>
-            </Link>
-
-            <Link
-              href="/candidate/applications"
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
-            >
-              <div className="text-2xl mb-2">📄</div>
-              <p className="font-semibold text-gray-900">Applications</p>
-              <p className="text-xs text-gray-600">Track your applications</p>
-            </Link>
-
-            <Link
-              href="/notifications"
-              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
-            >
-              <div className="text-2xl mb-2">🔔</div>
-              <p className="font-semibold text-gray-900">Messages</p>
-              <p className="text-xs text-gray-600">Communicate with companies</p>
-            </Link>
-          </div>
+        
+        <div className="space-y-6">
+          <RecommendedJobs jobs={recommendedJobsData} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

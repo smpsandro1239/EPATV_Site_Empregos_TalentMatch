@@ -40,11 +40,11 @@
 
 OPÇÃO 1 - Script Interativo (Windows/Bash):
   $ bash launch.sh
-  
+
 OPÇÃO 2 - Terminal 1 (Backend):
   $ cd talentmatch/backend
   $ npm run start:dev
-  
+
 OPÇÃO 3 - Terminal 2 (Frontend):
   $ cd talentmatch/frontend
   $ npm run dev

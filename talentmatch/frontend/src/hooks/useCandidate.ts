@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { candidateService, type CandidateProfile, type CandidateExperience, type CandidateEducation, type CandidateSkill } from '@/services/candidateService';
+import { candidateService, type CandidateEducation, type CandidateExperience, type CandidateProfile, type CandidateSkill } from '@/services/candidateService';
+import { useCallback, useState } from 'react';
 import { useAuth } from './useAuth';
 
 interface UseCandidateReturn {

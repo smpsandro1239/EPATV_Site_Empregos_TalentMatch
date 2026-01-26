@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { jobsService, type Job, type JobSearchParams, type JobsResponse } from '@/services/jobsService';
+import { jobsService, type Job, type JobSearchParams } from '@/services/jobsService';
+import { useCallback, useEffect, useState } from 'react';
 
 interface UseJobsReturn {
   jobs: Job[];

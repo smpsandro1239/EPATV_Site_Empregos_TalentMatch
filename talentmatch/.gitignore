@@ -43,3 +43,7 @@ temp/
 # Logs
 logs/
 *.log
+
+# Special files to ignore
+nul
+*.tsbuildinfo

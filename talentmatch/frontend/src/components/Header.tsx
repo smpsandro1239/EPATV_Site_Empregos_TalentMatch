@@ -39,6 +39,20 @@ export default function Header() {
             </>
           )}
 
+          {user.role === 'ADMIN' && (
+            <>
+              <Link href="/admin/dashboard" className="text-gray-700 hover:text-primary-600">
+                Dashboard
+              </Link>
+              <Link href="/admin/users" className="text-gray-700 hover:text-primary-600">
+                Users
+              </Link>
+              <Link href="/admin/jobs" className="text-gray-700 hover:text-primary-600">
+                Jobs
+              </Link>
+            </>
+          )}
+
           {user.role === 'COMPANY' && (
             <>
               <Link href="/company/dashboard" className="text-gray-700 hover:text-primary-600">

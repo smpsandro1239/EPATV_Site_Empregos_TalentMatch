@@ -3,11 +3,11 @@
 ## 🔧 CORREÇÃO DE BUGS
 
 ### CORS Fixed ✅
-**Problema**: 
+**Problema**:
 ```
-Access to fetch at 'http://localhost:3001/auth/register' from origin 'http://localhost:3000' 
-has been blocked by CORS policy: Response to preflight request doesn't pass access control 
-check: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001' 
+Access to fetch at 'http://localhost:3001/auth/register' from origin 'http://localhost:3000'
+has been blocked by CORS policy: Response to preflight request doesn't pass access control
+check: The 'Access-Control-Allow-Origin' header has a value 'http://localhost:3001'
 that is not equal to the supplied origin.
 ```
 
@@ -17,7 +17,7 @@ that is not equal to the supplied origin.
 1. Alterado `backend/src/main.ts`:
    - CORS origin padrão: `http://localhost:3001` → `http://localhost:3000`
    - Adicionados headers completos: methods, allowedHeaders
-   
+
 2. Criado `backend/.env` com:
    ```dotenv
    PORT=3001
@@ -220,7 +220,7 @@ npm run dev
 
 ---
 
-**Desenvolvido por**: GitHub Copilot  
-**Última atualização**: 22 de Janeiro de 2026  
-**Tempo total sessão**: ~2 horas  
+**Desenvolvido por**: GitHub Copilot
+**Última atualização**: 22 de Janeiro de 2026
+**Tempo total sessão**: ~2 horas
 **LOC adicionadas**: ~1500+

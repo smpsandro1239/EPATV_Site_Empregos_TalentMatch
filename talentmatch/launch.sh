@@ -39,21 +39,21 @@ case $option in
         echo ""
         echo -e "${GREEN}✅ Iniciando Backend + Frontend...${NC}"
         cleanup
-        
+
         # Terminal 1: Backend
         echo -e "${BLUE}[Terminal 1]${NC} Iniciando Backend na porta 3001..."
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/backend"
         npm run start:dev &
         BACKEND_PID=$!
-        
+
         sleep 8
-        
+
         # Terminal 2: Frontend
         echo -e "${BLUE}[Terminal 2]${NC} Iniciando Frontend..."
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/frontend"
         npm run dev &
         FRONTEND_PID=$!
-        
+
         echo ""
         echo -e "${GREEN}✅ Servidores iniciados!${NC}"
         echo ""
@@ -67,72 +67,72 @@ case $option in
         echo "  📧 Empresa:   empresa@test.com"
         echo "  🔑 Senha:     TestPass123!"
         echo ""
-        
+
         wait
         ;;
-        
+
     2)
         echo ""
         echo -e "${GREEN}✅ Iniciando Backend...${NC}"
         cleanup
-        
+
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/backend"
         npm run start:dev
         ;;
-        
+
     3)
         echo ""
         echo -e "${GREEN}✅ Iniciando Frontend...${NC}"
         cleanup
-        
+
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/frontend"
         npm run dev
         ;;
-        
+
     4)
         echo ""
         echo -e "${YELLOW}🧹 Limpando e reiniciando...${NC}"
         cleanup
-        
+
         echo -e "${BLUE}Recriando dados de teste...${NC}"
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/backend"
         npm run prisma:seed
-        
+
         echo ""
         echo -e "${GREEN}✅ Sistema limpo. Iniciando servidores...${NC}"
         npm run start:dev &
         BACKEND_PID=$!
-        
+
         sleep 8
-        
+
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/frontend"
         npm run dev &
         FRONTEND_PID=$!
-        
+
         echo ""
         echo -e "${GREEN}✅ Servidores iniciados!${NC}"
-        
+
         wait
         ;;
-        
+
     5)
         echo ""
         cat "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/TEST_CREDENTIALS.md"
         ;;
-        
+
     6)
         echo ""
         echo -e "${BLUE}Abrindo Prisma Studio...${NC}"
         cd "/c/laragon/www/EPATV_Site_Empregos_TalentMatch/talentmatch/backend"
         npm run prisma:studio
         ;;
-        
+
     7)
         echo ""
         echo -e "${GREEN}Até logo!${NC}"
         exit 0
         ;;
-        
+
     *)
         echo ""
         echo -e "${YELLOW}⚠️  Opção inválida. Saindo...${NC}"

@@ -1,6 +1,6 @@
 # 🎉 TalentMatch - Projeto Lançado com Sucesso!
 
-**Data**: 22 de Janeiro de 2026  
+**Data**: 22 de Janeiro de 2026
 **Status**: ✅ **TOTALMENTE FUNCIONAL**
 
 ---
@@ -328,8 +328,8 @@ npm install
 
 ## 👨‍💻 Desenvolvedor
 
-**Sessão de Desenvolvimento**: GitHub Copilot  
-**Modelo**: Claude Haiku 4.5  
+**Sessão de Desenvolvimento**: GitHub Copilot
+**Modelo**: Claude Haiku 4.5
 **Data de Conclusão**: 22 de Janeiro de 2026
 
 ---
