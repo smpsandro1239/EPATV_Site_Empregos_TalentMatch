@@ -11,6 +11,7 @@ Data: 22 de Janeiro de 2026
 ### ✅ Backend (TODOS IMPLEMENTADOS)
 
 #### Candidates Module
+
 - ✅ POST `/candidates` - Criar perfil
 - ✅ GET `/candidates` - Listar candidatos
 - ✅ GET `/candidates/:id` - Obter perfil
@@ -29,6 +30,7 @@ Data: 22 de Janeiro de 2026
 - ✅ DELETE `/candidates/:id/skills/:skillId` - Remover skill
 
 #### Companies Module
+
 - ✅ POST `/companies` - Criar perfil empresa
 - ✅ GET `/companies` - Listar empresas
 - ✅ GET `/companies/:id` - Obter perfil empresa
@@ -44,6 +46,7 @@ Data: 22 de Janeiro de 2026
 - ✅ GET `/companies/:id/applications` - Listar candidaturas da empresa
 
 #### Jobs Module
+
 - ✅ GET `/jobs` - Listar todas as vagas
 - ✅ GET `/jobs/search` - Buscar vagas com filtros
 - ✅ GET `/jobs/:id` - Obter detalhes da vaga
@@ -53,6 +56,7 @@ Data: 22 de Janeiro de 2026
 - ✅ GET `/jobs/stats` - Estatísticas de vagas
 
 #### Applications Module
+
 - ✅ POST `/applications` - Criar candidatura
 - ✅ GET `/applications` - Listar todas candidaturas
 - ✅ GET `/applications/:id` - Obter candidatura
@@ -83,6 +87,7 @@ curl -X POST http://localhost:3001/candidates \
 ```
 
 **Resposta Esperada:** 201 Created
+
 ```json
 {
   "id": "candidate_id",
@@ -115,6 +120,7 @@ curl -X POST http://localhost:3001/candidates/candidate_id/experiences \
 ```
 
 **Resposta Esperada:** 201 Created
+
 ```json
 {
   "id": "exp_id",
@@ -209,6 +215,7 @@ curl -X POST http://localhost:3001/companies/company_id/jobs \
 ```
 
 **Resposta Esperada:** 201 Created
+
 ```json
 {
   "id": "job_id",
@@ -242,6 +249,7 @@ curl -X GET "http://localhost:3001/jobs?limit=10&offset=0" \
 ```
 
 **Resposta Esperada:** 200 OK
+
 ```json
 {
   "data": [
@@ -291,6 +299,7 @@ curl -X GET http://localhost:3001/jobs/job_id \
 ```
 
 **Resposta Esperada:** 200 OK
+
 ```json
 {
   "id": "job_id",
@@ -328,6 +337,7 @@ curl -X POST http://localhost:3001/applications \
 ```
 
 **Resposta Esperada:** 201 Created
+
 ```json
 {
   "id": "app_id",
@@ -392,6 +402,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ## 📊 Casos de Teste Críticos
 
 ### Teste 1: Fluxo Completo Candidato
+
 - [ ] Candidato registra
 - [ ] Cria perfil com dados pessoais
 - [ ] Adiciona 2-3 experiências
@@ -404,6 +415,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Teste 2: Fluxo Completo Empresa
+
 - [ ] Empresa registra
 - [ ] Cria perfil com dados da empresa
 - [ ] Cria 3 vagas (DRAFT)
@@ -416,6 +428,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Teste 3: Busca e Aplicação
+
 - [ ] Candidato 1 faz login
 - [ ] Busca vagas por "backend"
 - [ ] Encontra 5+ vagas
@@ -428,6 +441,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Teste 4: Recomendações
+
 - [ ] Candidato com skills adicionadas
 - [ ] Solicita vagas recomendadas
 - [ ] Recebe lista de vagas
@@ -438,6 +452,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Teste 5: Validações
+
 - [ ] Tentar criar profile sem auth → 401
 - [ ] Tentar criar profile duplicado → 400
 - [ ] Tentar aplicar 2x mesma vaga → 400
@@ -449,6 +464,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Teste 6: Listagem com Paginação
+
 - [ ] Listar 20 candidatos, offset 0
 - [ ] Listar 20 candidatos, offset 20
 - [ ] Listar 10 vagas, offset 0
@@ -459,6 +475,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Teste 7: Filtros de Busca
+
 - [ ] Buscar por query "developer"
 - [ ] Filtrar por level "SENIOR"
 - [ ] Filtrar por location "São Paulo"
@@ -472,6 +489,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ## 📱 Testes Frontend (Após Backend ✅)
 
 ### Página de Perfil de Candidato
+
 - [ ] Formulário de dados pessoais
 - [ ] Upload de CV
 - [ ] Upload de foto de perfil
@@ -483,6 +501,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Página de Vagas
+
 - [ ] Listagem de vagas funcionando
 - [ ] Paginação funcionando
 - [ ] Busca por texto
@@ -493,6 +512,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 ---
 
 ### Página de Detalhe de Vaga
+
 - [ ] Informações da vaga carregam
 - [ ] Logo da empresa mostra
 - [ ] Botão "Aplicar" funciona
@@ -519,6 +539,7 @@ curl -X GET "http://localhost:3001/jobs/match/candidate_id?limit=20&offset=0" \
 **Fase 1B Status:** Pronto para testes completos
 
 Todos os endpoints backend foram implementados e testados. O próximo passo é:
+
 1. Executar testes de API com Postman/Thunder Client
 2. Implementar páginas frontend
 3. Integrar frontend com backend

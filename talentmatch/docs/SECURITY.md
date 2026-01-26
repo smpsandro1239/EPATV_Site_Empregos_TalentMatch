@@ -5,17 +5,20 @@ Este documento descreve as práticas de segurança implementadas no TalentMatch.
 ## Autenticação e Autorização
 
 ### JWT (JSON Web Tokens)
+
 - ✅ Tokens com expiração de 15 minutos
 - ✅ Refresh tokens com expiração de 7 dias
 - ✅ Assinatura com secret robusto
 - ✅ Verificação em cada pedido autenticado
 
 ### Hashing de Passwords
+
 - ✅ Argon2 para hash de senhas
 - ✅ Sem armazenamento de senhas em plaintext
 - ✅ Salting automático
 
 ### CORS (Cross-Origin Resource Sharing)
+
 - ✅ Configurado para frontend localhost:3000
 - ✅ Credenciais incluídas quando necessário
 - ✅ Preflight requests habilitados
@@ -23,16 +26,19 @@ Este documento descreve as práticas de segurança implementadas no TalentMatch.
 ## Proteção de Dados
 
 ### Transmissão
+
 - ✅ HTTPS/TLS em produção (preparado)
 - ✅ Secure cookies (HttpOnly, Secure, SameSite)
 - ✅ Tokens em Bearer schema
 
 ### Armazenamento
+
 - ✅ Base de dados criptografada (PostgreSQL + Prisma)
 - ✅ Variáveis de ambiente não commitadas
 - ✅ .gitignore configurado
 
 ### Sanitização
+
 - ✅ Validação de entrada em formulários
 - ✅ Sanitização de dados do utilizador
 - ✅ Prevenção de XSS via Content Security Policy
@@ -46,12 +52,14 @@ Este documento descreve as práticas de segurança implementadas no TalentMatch.
 ## Validação de Input
 
 ### Frontend
+
 - ✅ Validação em tempo real
 - ✅ Sanitização de inputs
 - ✅ Máscaras de input (phone, email)
 - ✅ Limites de caracteres
 
 ### Backend
+
 - ✅ DTOs com validação
 - ✅ Validators do NestJS
 - ✅ Type checking com TypeScript
@@ -81,18 +89,21 @@ Este documento descreve as práticas de segurança implementadas no TalentMatch.
 ## Conformidade
 
 ### GDPR
+
 - ✅ Consentimento de privacidade
 - ⚠️ Direito ao esquecimento (direito de exclusão)
 - ⚠️ Portabilidade de dados
 - ⚠️ Política de privacidade
 
 ### LGPD (Lei Geral de Proteção de Dados - Brasil)
+
 - ✅ Estrutura preparada
 - ⚠️ Implementação completa
 
 ## Variáveis de Ambiente
 
 **NUNCA commit:**
+
 ```env
 DATABASE_URL
 JWT_SECRET
@@ -102,6 +113,7 @@ CREDENTIALS
 ```
 
 **Use .env.example:**
+
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 JWT_SECRET=your-secret-here
@@ -111,12 +123,14 @@ JWT_REFRESH_SECRET=your-refresh-secret-here
 ## Dependências
 
 ### Auditoria Regular
+
 ```bash
 npm audit
 npm audit fix  # Corrigir vulnerabilidades automáticas
 ```
 
 ### Dependências Críticas
+
 - `@nestjs/jwt`: Autenticação
 - `passport`: Estratégias de auth
 - `argon2`: Hash de senhas
@@ -137,11 +151,13 @@ npm audit fix  # Corrigir vulnerabilidades automáticas
 ## Segurança em Desenvolvimento
 
 ### Local Development
+
 - ✅ .env não commitado
 - ✅ node_modules no .gitignore
 - ✅ Secrets locais não partilhados
 
 ### Pull Requests
+
 - ✅ Code review obrigatório
 - ✅ Verificação de secrets
 - ✅ Testes de segurança (ESLint, TypeScript)
@@ -151,7 +167,7 @@ npm audit fix  # Corrigir vulnerabilidades automáticas
 Se descobrir uma vulnerabilidade de segurança:
 
 1. **NÃO abra uma issue pública**
-2. Email: security@talentmatch.pt
+2. Email: <security@talentmatch.pt>
 3. Descreva a vulnerabilidade em detalhe
 4. Permitir tempo para correção antes de divulgação
 

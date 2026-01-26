@@ -3,6 +3,7 @@
 ## Frontend Optimization
 
 ### Code Splitting
+
 - Next.js faz automatic code splitting
 - Dynamic imports para componentes grandes
 
@@ -15,6 +16,7 @@ const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
 ```
 
 ### Image Optimization
+
 ```typescript
 import Image from 'next/image';
 
@@ -26,12 +28,14 @@ import Image from 'next/image';
 ```
 
 ### Bundle Size
+
 ```bash
 npm run analyze
 # Identificar dependências grandes
 ```
 
 ### Caching
+
 - Service Workers (PWA)
 - Browser caching headers
 - CDN for static assets
@@ -39,6 +43,7 @@ npm run analyze
 ## Backend Optimization
 
 ### Database Queries
+
 ```prisma
 // ✅ Com select para menos dados
 const user = await prisma.user.findUnique({
@@ -53,16 +58,18 @@ const user = await prisma.user.findUnique({
 ```
 
 ### Pagination
+
 ```typescript
 // ✅ Sempre paginar listas grandes
 const jobs = await prisma.job.findMany({
   take: 10,
   skip: (page - 1) * 10,
-  orderBy: { createdAt: 'desc' }
+  orderBy: { createdAt: "desc" },
 });
 ```
 
 ### Indexing
+
 ```prisma
 model User {
   id    String  @id @default(cuid())
@@ -72,6 +79,7 @@ model User {
 ```
 
 ### Connection Pooling
+
 ```env
 # .env
 DATABASE_URL="postgresql://user:password@host/db?schema=public&connection_limit=10"
@@ -80,28 +88,31 @@ DATABASE_URL="postgresql://user:password@host/db?schema=public&connection_limit=
 ## Caching Strategy
 
 ### Client-side
+
 ```typescript
 // SWR para data fetching com cache automático
-import useSWR from 'swr';
+import useSWR from "swr";
 
-const { data, error } = useSWR('/api/user', fetcher, {
-  revalidateOnFocus: false,  // Não revalidar ao focar
-  dedupingInterval: 10000,   // Cache de 10s
+const { data, error } = useSWR("/api/user", fetcher, {
+  revalidateOnFocus: false, // Não revalidar ao focar
+  dedupingInterval: 10000, // Cache de 10s
 });
 ```
 
 ### Server-side
+
 ```typescript
 // Redis para cache (future)
-import Redis from 'ioredis';
+import Redis from "ioredis";
 
 const redis = new Redis();
-const cached = await redis.get('key');
+const cached = await redis.get("key");
 ```
 
 ## Monitoring
 
 ### Frontend Performance
+
 ```bash
 # Lighthouse
 npm run lighthouse
@@ -111,18 +122,19 @@ import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
 ```
 
 ### Backend Performance
+
 ```bash
 npm run test:performance
 ```
 
 ## Targets
 
-| Métrica | Alvo | Atual |
-|---------|------|-------|
-| LCP | <2.5s | <1s ✅ |
-| FID | <100ms | <50ms ✅ |
-| CLS | <0.1 | <0.05 ✅ |
-| TTFB | <600ms | <200ms ✅ |
+| Métrica   | Alvo   | Atual     |
+| --------- | ------ | --------- |
+| LCP       | <2.5s  | <1s ✅    |
+| FID       | <100ms | <50ms ✅  |
+| CLS       | <0.1   | <0.05 ✅  |
+| TTFB      | <600ms | <200ms ✅ |
 | Bundle JS | <200KB | <125KB ✅ |
 
 ---

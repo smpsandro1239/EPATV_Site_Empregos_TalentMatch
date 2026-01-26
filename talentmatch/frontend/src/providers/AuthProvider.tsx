@@ -1,9 +1,9 @@
 // src/providers/AuthProvider.tsx
 'use client';
 
+import { useCandidate } from '@/hooks/useCandidate';
 import { getAuthToken, getUserId, getUserRole, removeAuthToken } from '@/services/auth.service';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { useCandidate } from '@/hooks/useCandidate';
 
 interface AuthUser {
   id: string;
@@ -24,7 +24,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const { getProfileByUserId, profile, error } = useCandidate();
+  const { getProfileByUserId } = useCandidate();
 
   useEffect(() => {
     const userId = getUserId();
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 
   return (
-    <AuthContext.Provider value={{ user, authToken: getAuthToken(), login, register, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, authToken: getAuthToken() ?? undefined, login, register, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

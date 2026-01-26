@@ -3,7 +3,9 @@
 ## 🔧 CORREÇÃO DE BUGS
 
 ### CORS Fixed ✅
+
 **Problema**:
+
 ```
 Access to fetch at 'http://localhost:3001/auth/register' from origin 'http://localhost:3000'
 has been blocked by CORS policy: Response to preflight request doesn't pass access control
@@ -14,11 +16,13 @@ that is not equal to the supplied origin.
 **Root Cause**: Backend retornava `Access-Control-Allow-Origin: http://localhost:3001` (a si mesmo) ao invés de `http://localhost:3000` (frontend)
 
 **Solução Implementada**:
+
 1. Alterado `backend/src/main.ts`:
    - CORS origin padrão: `http://localhost:3001` → `http://localhost:3000`
    - Adicionados headers completos: methods, allowedHeaders
 
 2. Criado `backend/.env` com:
+
    ```dotenv
    PORT=3001
    CORS_ORIGIN="http://localhost:3000"
@@ -35,6 +39,7 @@ that is not equal to the supplied origin.
 ## ✅ COMPLETADO NESTA SESSÃO
 
 ### 1. Correções de Bugs Frontend
+
 - ✅ **Erro Next.js 13.5.11**: Corrigido imports de `useEffect` e `useRouter`
 - ✅ **React Client Manifest Error**: Atualizado Next.js de v13 para v14
 - ✅ **Fixes de useAuth hook**: Criado `src/hooks/useAuth.ts` com implementação completa
@@ -42,6 +47,7 @@ that is not equal to the supplied origin.
 ### 2. Backend - Implementações Completas
 
 #### Jobs Module
+
 - ✅ `jobs.service.ts` - 8 métodos implementados:
   - `listJobs()` - Listar com paginação
   - `searchJobs()` - Busca com filtros (query, level, contractType, location, remoteType)
@@ -62,22 +68,26 @@ that is not equal to the supplied origin.
   - `GET /jobs/stats` - Estatísticas
 
 #### Candidates & Companies (Já Existentes)
+
 - ✅ Controllers com endpoints completos
 - ✅ Services com métodos CRUD
 - ✅ DTOs com validações
 
 #### Applications (Já Existentes)
+
 - ✅ Controller completo
 - ✅ Service com criar, listar, atualizar status
 
 ### 3. Frontend - Páginas Implementadas
 
 #### Páginas de Candidato
+
 - ✅ **`/candidate/dashboard`** - Dashboard com welcome, stats e quick actions
 - ✅ **`/candidate/profile`** - Perfil de candidato (já existia)
 - ✅ **`/candidate/applications`** - Nova página - Lista aplicações com status
 
 #### Páginas Públicas/Jobs
+
 - ✅ **`/jobs`** - Nova página - Listagem com busca e filtros
   - Search por query
   - Filtros: level, contractType, location
@@ -92,6 +102,7 @@ that is not equal to the supplied origin.
   - Aplicação em tempo real
 
 #### Páginas de Empresa
+
 - ✅ **`/company/jobs`** - Listagem de jobs da empresa (já existia)
 - ✅ **`/company/profile`** - Perfil da empresa (já existia)
 - ✅ **`/company/dashboard`** - Dashboard (já existia)
@@ -99,9 +110,11 @@ that is not equal to the supplied origin.
 ### 4. Componentes
 
 #### Header/Navigation
+
 - ✅ `Header.tsx` - Menu principal com links contextuais por role
 
 #### Hoops & Context
+
 - ✅ `useAuth()` hook - Gerenciamento de autenticação
 - ✅ `AuthProvider` - Contexto de autenticação
 
@@ -109,28 +122,30 @@ that is not equal to the supplied origin.
 
 ## 🔄 STATUS POR MÓDULO
 
-| Módulo | Backend | Frontend | Status |
-|--------|---------|----------|--------|
-| **Auth** | ✅ Completo | ✅ Completo | ✅ READY |
-| **Candidates** | ✅ Completo | ⚠️ Profile apenas | 🟡 80% |
-| **Companies** | ✅ Completo | ⚠️ Profile apenas | 🟡 80% |
-| **Jobs** | ✅ Completo | ✅ Completo | ✅ READY |
-| **Applications** | ✅ Completo | ✅ Completo | ✅ READY |
-| **Skills** | ✅ Schema | ❌ | 🔴 Pendente |
-| **Matching** | ✅ Schema | ❌ | 🔴 Pendente |
-| **AI** | ⚠️ Schema | ❌ | 🔴 Pendente |
+| Módulo           | Backend     | Frontend          | Status      |
+| ---------------- | ----------- | ----------------- | ----------- |
+| **Auth**         | ✅ Completo | ✅ Completo       | ✅ READY    |
+| **Candidates**   | ✅ Completo | ⚠️ Profile apenas | 🟡 80%      |
+| **Companies**    | ✅ Completo | ⚠️ Profile apenas | 🟡 80%      |
+| **Jobs**         | ✅ Completo | ✅ Completo       | ✅ READY    |
+| **Applications** | ✅ Completo | ✅ Completo       | ✅ READY    |
+| **Skills**       | ✅ Schema   | ❌                | 🔴 Pendente |
+| **Matching**     | ✅ Schema   | ❌                | 🔴 Pendente |
+| **AI**           | ⚠️ Schema   | ❌                | 🔴 Pendente |
 
 ---
 
 ## 📋 PRÓXIMAS TAREFAS (PRIORIDADE)
 
 ### IMEDIATO (1-2 horas)
+
 - [ ] Página `/company/jobs/new` - Criar novo job (formulário)
 - [ ] Endpoint POST `/jobs` para criar jobs (já tem serviço)
 - [ ] Página `/candidate/profile` - Melhorar formulário (já existe, precisa API)
 - [ ] Página `/company/profile` - Melhorar formulário (já existe, precisa API)
 
 ### CURTO PRAZO (3-4 horas)
+
 - [ ] Upload de CV/Resume para candidatos
 - [ ] Upload de logo para empresas
 - [ ] Página de estatísticas/dashboard melhorada
@@ -138,6 +153,7 @@ that is not equal to the supplied origin.
 - [ ] Validações frontend/backend
 
 ### MÉDIO PRAZO (5-6 horas)
+
 - [ ] Implementar Skills module (CRUD)
 - [ ] Página de skills para candidatos
 - [ ] Recomendação de jobs (matching algorithm)
@@ -145,6 +161,7 @@ that is not equal to the supplied origin.
 - [ ] Notifications
 
 ### LONGO PRAZO
+
 - [ ] AI-powered matching (já tem estrutura)
 - [ ] Email notifications
 - [ ] Profile completeness percentage
@@ -156,6 +173,7 @@ that is not equal to the supplied origin.
 ## 🚀 COMO TESTAR
 
 ### 1. Iniciar Serviços
+
 ```bash
 # Terminal 1 - Docker
 cd talentmatch
@@ -171,11 +189,13 @@ npm run dev
 ```
 
 ### 2. Acessar Aplicação
+
 - Frontend: `http://localhost:3000`
 - Backend API: `http://localhost:3001`
 - Swagger Docs: `http://localhost:3001/api/docs`
 
 ### 3. Fluxo de Teste
+
 1. **Criar conta candidato** → `/auth/register` (selecionar CANDIDATE)
 2. **Completar perfil** → `/candidate/profile`
 3. **Navegar jobs** → `/jobs` (buscar, filtrar)
@@ -187,13 +207,13 @@ npm run dev
 
 ## 📊 LINHA DO TEMPO
 
-| Data | Milestone | Status |
-|------|-----------|--------|
-| 21 Jan | Projeto setup, autenticação | ✅ Completo |
+| Data   | Milestone                               | Status      |
+| ------ | --------------------------------------- | ----------- |
+| 21 Jan | Projeto setup, autenticação             | ✅ Completo |
 | 22 Jan | Frontend fixes, Jobs module, Core pages | ✅ Completo |
-| 23 Jan | Create job form, Skills module | ⏳ Próximo |
-| 24 Jan | Matching algorithm, Notifications | ⏳ Próximo |
-| 25 Jan | Testing, Deployment prep | ⏳ Próximo |
+| 23 Jan | Create job form, Skills module          | ⏳ Próximo  |
+| 24 Jan | Matching algorithm, Notifications       | ⏳ Próximo  |
+| 25 Jan | Testing, Deployment prep                | ⏳ Próximo  |
 
 ---
 

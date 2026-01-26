@@ -1,6 +1,7 @@
 # 📊 RESUMO DE DESENVOLVIMENTO - TALENTMATCH
 
 ## 🎯 Objetivo Alcançado
+
 **Fase 1 de Autenticação completamente implementada e funcional!**
 
 ---
@@ -8,6 +9,7 @@
 ## ✅ O QUE JÁ ESTÁ PRONTO
 
 ### 🔐 Autenticação Completa
+
 ```
 Utilizador cria conta → Sistema valida → Password é hashado → JWT é gerado
            ↓
@@ -17,19 +19,22 @@ Dashboard personalizado por role (Candidate/Company)
 ```
 
 ### 📱 Frontend - Páginas Criadas
-- **http://localhost:3000** - Home (redireciona para dashboard se logged in)
-- **http://localhost:3000/auth/login** - Página de Login
-- **http://localhost:3000/auth/register** - Página de Registo
-- **http://localhost:3000/candidate/dashboard** - Dashboard Candidato
+
+- **<http://localhost:3000>** - Home (redireciona para dashboard se logged in)
+- **<http://localhost:3000/auth/login>** - Página de Login
+- **<http://localhost:3000/auth/register>** - Página de Registo
+- **<http://localhost:3000/candidate/dashboard>** - Dashboard Candidato
 - **company/dashboardhttp://localhost:3000/** - Dashboard Empresa
 
 ### 🔌 Backend - Endpoints Prontos
+
 - `POST /auth/register` - Criar conta
 - `POST /auth/login` - Fazer login
 - `POST /auth/refresh` - Renovar token
 - `GET /auth/me` - Dados do utilizador (protegido)
 
 ### 🎨 UI/UX
+
 - Design limpo com Tailwind CSS
 - Formulários com validação
 - Mensagens de erro
@@ -42,6 +47,7 @@ Dashboard personalizado por role (Candidate/Company)
 ## 🚀 PRÓXIMOS PASSOS (Próximos 3-5 dias)
 
 ### Prioridade 1: Candidate Profile (2-3 dias)
+
 ```
 Tasks:
 ├── Backend CandidatesService CRUD
@@ -52,6 +58,7 @@ Tasks:
 ```
 
 ### Prioridade 2: Company Profile & Jobs (2-3 dias)
+
 ```
 Tasks:
 ├── Company profile CRUD
@@ -62,6 +69,7 @@ Tasks:
 ```
 
 ### Prioridade 3: Applications (1-2 dias)
+
 ```
 Tasks:
 ├── Apply to job functionality
@@ -105,6 +113,7 @@ Semana 5 ⏳ - Polish & Deploy
 ## 🛠️ Stack Tecnológico
 
 ### Backend
+
 - **Framework**: NestJS (TypeScript)
 - **Database**: PostgreSQL + Prisma ORM
 - **Auth**: JWT + Passport
@@ -112,12 +121,14 @@ Semana 5 ⏳ - Polish & Deploy
 - **API Docs**: Swagger
 
 ### Frontend
+
 - **Framework**: Next.js 13 (TypeScript)
 - **Styling**: Tailwind CSS
 - **State**: Context API
 - **HTTP**: Fetch API
 
 ### DevOps
+
 - **Database**: PostgreSQL (local)
 - **Docker**: Docker Compose ready
 - **Ports**: Backend 3001, Frontend 3000
@@ -126,16 +137,16 @@ Semana 5 ⏳ - Polish & Deploy
 
 ## 📊 Métricas de Qualidade
 
-| Métrica | Status |
-|---------|--------|
-| TypeScript Strict | ✅ Ativo |
-| ESLint | ✅ Configurado |
-| Git | ✅ .gitignore setup |
-| Environment Vars | ✅ .env configurado |
-| CORS | ✅ Ativo |
-| Password Security | ✅ Argon2 |
-| Token Security | ✅ JWT com refresh |
-| Error Handling | ✅ Global |
+| Métrica           | Status              |
+| ----------------- | ------------------- |
+| TypeScript Strict | ✅ Ativo            |
+| ESLint            | ✅ Configurado      |
+| Git               | ✅ .gitignore setup |
+| Environment Vars  | ✅ .env configurado |
+| CORS              | ✅ Ativo            |
+| Password Security | ✅ Argon2           |
+| Token Security    | ✅ JWT com refresh  |
+| Error Handling    | ✅ Global           |
 
 ---
 
@@ -212,13 +223,13 @@ http://localhost:3000
 
 ## ⚡ Performance Atual
 
-| Métrica | Valor |
-|---------|-------|
-| Frontend Build | ~8s |
-| Backend Startup | <1s |
-| Login Request | <200ms |
+| Métrica          | Valor  |
+| ---------------- | ------ |
+| Frontend Build   | ~8s    |
+| Backend Startup  | <1s    |
+| Login Request    | <200ms |
 | Register Request | <500ms |
-| Page Load | <2s |
+| Page Load        | <2s    |
 
 ---
 
@@ -227,6 +238,7 @@ http://localhost:3000
 **Status: PRONTO PARA FASE 2**
 
 A autenticação está 100% funcional e pronta. O projeto tem uma base sólida com:
+
 - ✅ Backend com 11 módulos scaffolded
 - ✅ Frontend com estrutura clara
 - ✅ Database com schema completo
@@ -239,5 +251,5 @@ Estimado: 2-3 dias de trabalho
 
 ---
 
-*Desenvolvido em 21 de Janeiro de 2026*
-*TalentMatch - Recruitment Platform with Intelligent Matching*
+_Desenvolvido em 21 de Janeiro de 2026_
+_TalentMatch - Recruitment Platform with Intelligent Matching_

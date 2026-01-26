@@ -5,18 +5,24 @@
 Versão: `MAJOR.MINOR.PATCH`
 
 ### MAJOR
+
 Quebra compatibilidade:
+
 - Mudanças na API
 - Removel de features
 - Alterações de database schema
 
 ### MINOR
+
 Nova funcionalidade compatível:
+
 - Novas features
 - Melhorias sem quebrar compatibilidade
 
 ### PATCH
+
 Correções:
+
 - Bug fixes
 - Performance improvements
 - Documentação
@@ -31,16 +37,19 @@ Correções:
 ## Branch Strategy
 
 ### main
+
 - Production ready
 - Tags com versão
 - Protected branch
 
 ### develop
+
 - Development branch
 - Staging environment
 - Pre-release
 
-### feature/*
+### feature/\*
+
 - Feature branches
 - PR para develop
 

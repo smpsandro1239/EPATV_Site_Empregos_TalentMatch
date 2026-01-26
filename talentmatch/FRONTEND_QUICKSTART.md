@@ -8,6 +8,7 @@
 ## 📋 Checklist de Implementação
 
 ### ✅ DONE - Backend
+
 ```
 ✅ 55+ API endpoints implementados
 ✅ Documentação de API em PHASE_1B_TESTS.md
@@ -18,6 +19,7 @@
 ### ⏳ TODO - Frontend
 
 #### 1. Candidate Profile Page
+
 ```
 [ ] /candidate/profile - Criar página
 [ ] - Form campos: name, location, headline, about, cvUrl
@@ -35,6 +37,7 @@
 ```
 
 #### 2. Company Profile Page
+
 ```
 [ ] /company/profile - Criar página
 [ ] - Form campos: name, location, website, industry, size, description, logoUrl
@@ -47,6 +50,7 @@
 ```
 
 #### 3. Candidate Dashboard
+
 ```
 [ ] /candidate/dashboard - Criar página
 [ ] - Perfil resumido
@@ -57,6 +61,7 @@
 ```
 
 #### 4. Company Dashboard
+
 ```
 [ ] /company/dashboard - Criar página
 [ ] - Perfil resumido
@@ -67,6 +72,7 @@
 ```
 
 #### 5. Jobs Listing Page
+
 ```
 [ ] /jobs - Criar página
 [ ] - GET /jobs com paginação
@@ -84,6 +90,7 @@
 ```
 
 #### 6. Job Detail Page
+
 ```
 [ ] /jobs/[id] - Criar página
 [ ] - GET /jobs/:id
@@ -105,6 +112,7 @@
 ## 🔧 Setup & Tools
 
 ### Ambiente
+
 ```bash
 # Verificar que backend está rodando
 curl http://localhost:3001/jobs
@@ -116,6 +124,7 @@ npm run dev
 ```
 
 ### Bibliotecas Já Instaladas
+
 ```json
 {
   "next": "^14.0.0",
@@ -127,6 +136,7 @@ npm run dev
 ```
 
 ### Bibliotecas a Instalar (Opcional)
+
 ```bash
 # Para componentes
 npm install @radix-ui/react-dialog @radix-ui/react-select
@@ -212,8 +222,9 @@ frontend/src/
 ## 💻 Código Template
 
 ### Service Exemplo (candidateService.ts)
+
 ```typescript
-import { axiosInstance } from './api';
+import { axiosInstance } from "./api";
 
 export interface CandidateProfile {
   id: string;
@@ -227,7 +238,7 @@ export interface CandidateProfile {
 export const candidateService = {
   // Criar perfil
   createProfile: async (data: Partial<CandidateProfile>) => {
-    const response = await axiosInstance.post('/candidates', data);
+    const response = await axiosInstance.post("/candidates", data);
     return response.data;
   },
 
@@ -248,12 +259,13 @@ export const candidateService = {
 ```
 
 ### Hook Exemplo (useCandidate.ts)
-```typescript
-'use client';
 
-import { useState, useEffect } from 'react';
-import { useAuth } from './useAuth';
-import { candidateService } from '@/services/candidateService';
+```typescript
+"use client";
+
+import { useState, useEffect } from "react";
+import { useAuth } from "./useAuth";
+import { candidateService } from "@/services/candidateService";
 
 export const useCandidate = () => {
   const { user } = useAuth();
@@ -299,6 +311,7 @@ export const useCandidate = () => {
 ```
 
 ### Component Exemplo (JobCard.tsx)
+
 ```typescript
 'use client';
 
@@ -361,6 +374,7 @@ export const JobCard = ({ job }: { job: JobCardProps }) => {
 ## 🧪 Teste Cada Feature
 
 ### Após criar Job List
+
 ```bash
 # 1. Verificar que /jobs carrega
 curl http://localhost:3001/jobs
@@ -373,6 +387,7 @@ curl "http://localhost:3001/jobs/search?query=developer&level=SENIOR"
 ```
 
 ### Após criar Candidate Profile
+
 ```bash
 # 1. Registrar candidato (se não tiver)
 # 2. Ir para /candidate/profile
@@ -411,6 +426,7 @@ const queryClient = new QueryClient();
 ## 🔍 Debugging
 
 ### Verificar requisições
+
 ```bash
 # Abrir DevTools (F12)
 # Network tab
@@ -422,9 +438,10 @@ Response: { data: [...], pagination: {...} }
 ```
 
 ### Verificar autenticação
+
 ```typescript
 // No console do DevTools
-localStorage.getItem('access_token')
+localStorage.getItem("access_token");
 // Deve retornar um token válido
 
 // Se não tiver, fazer login primeiro
@@ -435,6 +452,7 @@ localStorage.getItem('access_token')
 ## 📚 Referências
 
 **Endpoints que vão usar:**
+
 - `POST /candidates` - Criar perfil
 - `GET /candidates/:id` - Obter perfil
 - `PUT /candidates/:id` - Atualizar perfil
@@ -480,7 +498,7 @@ localStorage.getItem('access_token')
 3. Copiar template acima
 4. Criar `/frontend/src/app/jobs/page.tsx`
 5. Renderizar JobCard
-6. Testar em http://localhost:3000/jobs
+6. Testar em <http://localhost:3000/jobs>
 
 **Tempo estimado:** 30-45 min para primeira página funcional! ⚡
 

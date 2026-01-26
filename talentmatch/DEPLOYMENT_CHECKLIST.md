@@ -3,6 +3,7 @@
 ## Pré-Deployment
 
 ### Configuração
+
 - [ ] DATABASE_URL configurada para servidor de produção
 - [ ] JWT_SECRET alterada (não usar default)
 - [ ] JWT_REFRESH_SECRET alterada
@@ -11,6 +12,7 @@
 - [ ] NEXT_PUBLIC_API_URL aponta para API produção
 
 ### Segurança
+
 - [ ] HTTPS/TLS ativado
 - [ ] Certificados SSL válidos
 - [ ] Rate limiting configurado
@@ -19,6 +21,7 @@
 - [ ] Secrets gerenciados (não em .env)
 
 ### Banco de Dados
+
 - [ ] Backup database realizado
 - [ ] Migrations executadas
 - [ ] Índices criados
@@ -26,6 +29,7 @@
 - [ ] Replica para HA configurada (opcional)
 
 ### Testes
+
 - [ ] Testes unitários passando
 - [ ] Testes de integração passando
 - [ ] Testes de performance ok
@@ -33,6 +37,7 @@
 - [ ] Verificação de dependências vulneráveis
 
 ### Monitoring
+
 - [ ] Logging centralizado configurado
 - [ ] Error tracking (Sentry) configurado
 - [ ] Health checks implementados
@@ -40,6 +45,7 @@
 - [ ] Dashboard de monitoring criado
 
 ### Documentação
+
 - [ ] Runbook de operações criado
 - [ ] Procedimento de rollback documentado
 - [ ] Contatos de emergência documentados
@@ -48,6 +54,7 @@
 ## Deployment
 
 ### Frontend
+
 - [ ] `npm run build` executado com sucesso
 - [ ] Bundle size verificado
 - [ ] Images otimizadas
@@ -55,6 +62,7 @@
 - [ ] Cache headers configurados
 
 ### Backend
+
 - [ ] `npm run build` executado com sucesso
 - [ ] Migrations executadas em produção
 - [ ] Health check respondendo
@@ -62,6 +70,7 @@
 - [ ] Rate limiting funcionando
 
 ### Docker
+
 - [ ] Docker images builded
 - [ ] Images enviadas para registry
 - [ ] Docker-compose versão prod testada
@@ -71,6 +80,7 @@
 ## Pós-Deployment
 
 ### Verificação
+
 - [ ] Frontend carrega em produção
 - [ ] API respondendo normalmente
 - [ ] Login funcionando
@@ -78,12 +88,14 @@
 - [ ] Emails sendo enviados (se aplicável)
 
 ### Monitoramento
+
 - [ ] Error logs verificados
 - [ ] Performance metrics ok
 - [ ] User feedback positivo
 - [ ] No critical errors
 
 ### Rollback (se necessário)
+
 - [ ] Backup anterior restaurado
 - [ ] Database reverted
 - [ ] DNS apontando para versão anterior
@@ -99,7 +111,7 @@
 
 ---
 
-**Deployment iniciado por:** ___________
-**Data:** ___________
+**Deployment iniciado por:** ****\_\_\_****
+**Data:** ****\_\_\_****
 **Status:** ✅ Sucesso / ❌ Falhou
-**Notas:** ___________
+**Notas:** ****\_\_\_****

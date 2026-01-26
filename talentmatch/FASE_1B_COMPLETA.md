@@ -9,6 +9,7 @@ A Fase 1B implementa um sistema completo de gerenciamento de perfis de candidato
 ### Backend (NestJS + TypeScript)
 
 #### 1. **CandidatesService** (Extended)
+
 - ✅ `createProfile()` - Criar perfil de candidato
 - ✅ `getProfile(candidateId)` - Buscar perfil por ID
 - ✅ `getProfileByUserId(userId)` - Buscar perfil por ID de utilizador
@@ -26,6 +27,7 @@ A Fase 1B implementa um sistema completo de gerenciamento de perfis de candidato
 - ✅ `removeSkill()` - Remover competência
 
 #### 2. **DTOs com Validação**
+
 - ✅ `CreateCandidateDto` - Extended com RemotePreference, SalaryMin, SalaryMax
 - ✅ `AddExperienceDto` - Com validação de datas
 - ✅ `AddEducationDto` - Com validação de datas
@@ -61,6 +63,7 @@ DELETE /candidates/:id/skills/:skillId               - Remover competência
 ### Frontend (Next.js + React)
 
 #### 1. **Página Principal de Perfil**
+
 - Localização: `/candidate/profile`
 - Abas navegáveis:
   - Profile (Dados pessoais)
@@ -69,6 +72,7 @@ DELETE /candidates/:id/skills/:skillId               - Remover competência
   - Skills (Competências técnicas)
 
 #### 2. **ProfileForm Component**
+
 - Campos:
   - Nome completo (obrigatório)
   - Local (obrigatório)
@@ -84,6 +88,7 @@ DELETE /candidates/:id/skills/:skillId               - Remover competência
   - Validação em tempo real
 
 #### 3. **ExperienceSection Component**
+
 - CRUD completo:
   - Adicionar experiência
   - Listar experiências
@@ -97,6 +102,7 @@ DELETE /candidates/:id/skills/:skillId               - Remover competência
   - Data de fim (opcional)
 
 #### 4. **EducationSection Component**
+
 - CRUD completo:
   - Adicionar educação
   - Listar educações
@@ -110,6 +116,7 @@ DELETE /candidates/:id/skills/:skillId               - Remover competência
   - Data de fim (opcional)
 
 #### 5. **SkillsSection Component**
+
 - Funcionalidades:
   - Selecionar de lista de competências disponíveis
   - Definir nível (JUNIOR, MID, SENIOR)
@@ -138,6 +145,7 @@ DELETE /candidates/:id/skills/:skillId               - Remover competência
 ## 🧪 Testes Recomendados
 
 ### Backend
+
 ```bash
 # Criar perfil
 curl -X POST http://localhost:3001/candidates \
@@ -170,6 +178,7 @@ curl -X POST http://localhost:3001/candidates/CANDIDATE_ID/experiences \
 ```
 
 ### Frontend
+
 1. Fazer login como candidato
 2. Navegar para `/candidate/profile`
 3. Preencher cada aba (Profile, Experience, Education, Skills)
@@ -203,17 +212,20 @@ frontend/src/
 ## 🔄 Próximas Fases (Roadmap)
 
 ### Fase 1C - Job Browsing & Application
+
 - Listar job postings
 - Filtros e busca
 - Detalhes de job
 - Aplicar a jobs
 
 ### Fase 1D - Matching & Recommendations
+
 - Sistema de matching
 - Recomendações personalizadas
 - Score de compatibilidade
 
 ### Fase 1E - Company Dashboard
+
 - Publicar jobs
 - Gerenciar candidaturas
 - Análise de candidatos
@@ -235,12 +247,14 @@ frontend/src/
 ## 🚀 Como Executar
 
 1. **Backend**
+
    ```bash
    cd backend
    npm run start:dev
    ```
 
 2. **Frontend**
+
    ```bash
    cd frontend
    npm run dev

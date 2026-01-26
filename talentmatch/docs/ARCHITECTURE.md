@@ -1,4 +1,3 @@
-
 # 🧱 Arquitetura do TalentMatch
 
 ## Visão Geral

@@ -12,40 +12,41 @@ Por favor, note que este projeto é lançado com um Código de Conduta para Cola
 
 Antes de criar relatórios de bug, verifique a lista de problemas, pois você pode descobrir que não precisa criar um. Quando criar um relatório de bug, inclua o máximo de detalhes possível:
 
-* **Use um título claro e descritivo** para a issue
-* **Descreva os passos exatos** que reproduzem o problema
-* **Forneça exemplos específicos** para demonstrar os passos
-* **Descreva o comportamento observado** e aponte o que está errado
-* **Explique qual é o comportamento esperado** e por quê
-* **Inclua screenshots/videos** se possível
+- **Use um título claro e descritivo** para a issue
+- **Descreva os passos exatos** que reproduzem o problema
+- **Forneça exemplos específicos** para demonstrar os passos
+- **Descreva o comportamento observado** e aponte o que está errado
+- **Explique qual é o comportamento esperado** e por quê
+- **Inclua screenshots/videos** se possível
 
 ### Sugestões de Melhorias
 
 Sugestões de melhorias são sempre bem-vindas! Ao criar uma sugestão de melhoria, inclua:
 
-* **Use um título claro e descritivo**
-* **Forneça uma descrição detalhada** da melhoria sugerida
-* **Liste alguns exemplos** de como essa melhoria seria útil
-* **Mencione outros projetos** que implementam essa funcionalidade
+- **Use um título claro e descritivo**
+- **Forneça uma descrição detalhada** da melhoria sugerida
+- **Liste alguns exemplos** de como essa melhoria seria útil
+- **Mencione outros projetos** que implementam essa funcionalidade
 
 ### Pull Requests
 
-* Siga o [guia de estilo TypeScript](#guia-de-estilo)
-* Inclua screenshots e GIFs animados em suas pull requests
-* Termine todos os arquivos com uma nova linha
-* Evite submeter PRs muito grandes - divida em múltiplos PRs menores
+- Siga o [guia de estilo TypeScript](#guia-de-estilo)
+- Inclua screenshots e GIFs animados em suas pull requests
+- Termine todos os arquivos com uma nova linha
+- Evite submeter PRs muito grandes - divida em múltiplos PRs menores
 
 ## Guia de Estilo
 
 ### Git Commit Messages
 
-* Use o tempo verbal imperativo ("adiciona funcionalidade" não "adicionou funcionalidade")
-* Use a primeira pessoa do singular ("mudo X" não "muda X")
-* Limite a primeira linha a 72 caracteres ou menos
-* Referencie issues e pull requests genericamente após a primeira linha
-* Use português de Portugal (PT-PT)
+- Use o tempo verbal imperativo ("adiciona funcionalidade" não "adicionou funcionalidade")
+- Use a primeira pessoa do singular ("mudo X" não "muda X")
+- Limite a primeira linha a 72 caracteres ou menos
+- Referencie issues e pull requests genericamente após a primeira linha
+- Use português de Portugal (PT-PT)
 
 Exemplos:
+
 ```
 feat: adiciona autenticação com Google
 fix: corrige erro ao atualizar perfil
@@ -56,26 +57,26 @@ test: adiciona testes para autenticação
 
 ### TypeScript
 
-* Sempre declare tipos explícitos
-* Use interfaces para estruturas públicas
-* Evite `any` - use `unknown` se necessário
-* Mantenha funções pequenas e focadas
-* Adicione comentários para lógica complexa
+- Sempre declare tipos explícitos
+- Use interfaces para estruturas públicas
+- Evite `any` - use `unknown` se necessário
+- Mantenha funções pequenas e focadas
+- Adicione comentários para lógica complexa
 
 ### React/Next.js
 
-* Use functional components com hooks
-* Nomes de componentes em PascalCase
-* Nomes de hooks começam com `use`
-* Extraia lógica complexa em custom hooks
-* Use propTypes ou TypeScript para validação de props
+- Use functional components com hooks
+- Nomes de componentes em PascalCase
+- Nomes de hooks começam com `use`
+- Extraia lógica complexa em custom hooks
+- Use propTypes ou TypeScript para validação de props
 
 ### CSS/Tailwind
 
-* Use classes Tailwind ao invés de CSS custom
-* Mantenha componentes responsivos
-* Teste em mobile, tablet e desktop
-* Evite cores hardcoded - use config do Tailwind
+- Use classes Tailwind ao invés de CSS custom
+- Mantenha componentes responsivos
+- Teste em mobile, tablet e desktop
+- Evite cores hardcoded - use config do Tailwind
 
 ## Processo de Desenvolvimento
 
@@ -113,9 +114,9 @@ cd frontend && npm run dev
 
 ## Testes
 
-* Escreva testes para nova funcionalidade
-* Mantenha cobertura de testes acima de 80%
-* Execute `npm run test` antes de fazer commit
+- Escreva testes para nova funcionalidade
+- Mantenha cobertura de testes acima de 80%
+- Execute `npm run test` antes de fazer commit
 
 ```bash
 # Backend
@@ -129,10 +130,10 @@ npm run test:e2e
 
 ## Documentação
 
-* Atualize README.md se adicionar nova funcionalidade
-* Atualize comentários de código inline
-* Atualize CHANGELOG.md com suas mudanças
-* Atualize documentação da API se modificar endpoints
+- Atualize README.md se adicionar nova funcionalidade
+- Atualize comentários de código inline
+- Atualize CHANGELOG.md com suas mudanças
+- Atualize documentação da API se modificar endpoints
 
 ## Licença
 

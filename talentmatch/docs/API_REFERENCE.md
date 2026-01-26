@@ -3,12 +3,14 @@
 ## Autenticação
 
 ### Headers Requeridos
+
 ```
 Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
 ### Status Codes
+
 - `200 OK` - Sucesso
 - `201 Created` - Recurso criado
 - `400 Bad Request` - Dados inválidos
@@ -21,15 +23,17 @@ Content-Type: application/json
 ## Response Format
 
 ### Sucesso
+
 ```json
 {
   "statusCode": 200,
   "message": "Sucesso",
-  "data": { }
+  "data": {}
 }
 ```
 
 ### Erro
+
 ```json
 {
   "statusCode": 400,
@@ -54,11 +58,13 @@ Content-Type: application/json
 ## Pagination
 
 ### Query Parameters
+
 ```
 ?page=1&limit=10&sort=createdAt&order=desc
 ```
 
 ### Response
+
 ```json
 {
   "data": [ ... ],
@@ -74,6 +80,7 @@ Content-Type: application/json
 ## Filtering
 
 ### Exemplos
+
 ```
 GET /jobs?level=SENIOR&location=Lisboa&workType=REMOTE
 GET /candidates?experience=5&skills=JavaScript,TypeScript
@@ -83,11 +90,13 @@ GET /companies?industry=Technology&size=MEDIUM
 ## Search
 
 ### Global Search
+
 ```
 GET /search?q=developer&type=job,candidate,company
 ```
 
 ### Field-specific Search
+
 ```
 GET /jobs/search?title=developer&description=backend
 ```
@@ -95,21 +104,23 @@ GET /jobs/search?title=developer&description=backend
 ## Error Handling
 
 ### Retry Strategy
+
 - 4xx: Não retente (erro do cliente)
 - 5xx: Retente com backoff exponencial
 - Máximo 3 tentativas
 
 ### Exemplo com JS
+
 ```javascript
 async function apiCall(url, options, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
     try {
       const response = await fetch(url, options);
       if (response.ok) return response;
-      if (response.status < 500) throw new Error('Client error');
+      if (response.status < 500) throw new Error("Client error");
 
       const delay = Math.pow(2, i) * 1000;
-      await new Promise(r => setTimeout(r, delay));
+      await new Promise((r) => setTimeout(r, delay));
     } catch (error) {
       if (i === maxRetries - 1) throw error;
     }

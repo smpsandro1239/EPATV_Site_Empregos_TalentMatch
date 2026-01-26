@@ -22,21 +22,25 @@
 ### Backend - 55+ Endpoints Implementados
 
 **Módulo Candidates:**
+
 - ✅ 15 endpoints (profiles, experiences, educations, skills)
 - ✅ CRUD completo
 - ✅ Testes validados
 
 **Módulo Companies:**
+
 - ✅ 18 endpoints (profiles, jobs, applications)
 - ✅ Gestão de vagas (CRUD + publish/pause/close)
 - ✅ Testes validados
 
 **Módulo Jobs:**
+
 - ✅ 10 endpoints (list, search, filter, recommend)
 - ✅ Sistema de recomendação
 - ✅ Testes validados
 
 **Módulo Applications:**
+
 - ✅ 12 endpoints (CRUD, status updates, stats)
 - ✅ Workflow de candidaturas
 - ✅ Testes validados
@@ -44,12 +48,14 @@
 ### Documentação Completa
 
 📄 **PHASE_1B_TESTS.md**
+
 - 15+ exemplos de curl
 - 7 casos de teste críticos
 - Guia de testes frontend
 - Checklist de verificação
 
 📄 **PHASE_1B_COMPLETE.md**
+
 - Relatório final de conclusão
 - Deliverables por módulo
 - Status de implementação
@@ -66,20 +72,21 @@
 
 ## 📈 NÚMEROS
 
-| Item | Quantidade | Status |
-|------|-----------|--------|
-| **Endpoints Backend** | 55+ | ✅ |
-| **Tabelas Database** | 12+ | ✅ |
-| **DTOs/Models** | 20+ | ✅ |
-| **Controllers** | 4 | ✅ |
-| **Services** | 4 | ✅ |
-| **Linhas de Código** | 10.000+ | ✅ |
+| Item                  | Quantidade | Status |
+| --------------------- | ---------- | ------ |
+| **Endpoints Backend** | 55+        | ✅     |
+| **Tabelas Database**  | 12+        | ✅     |
+| **DTOs/Models**       | 20+        | ✅     |
+| **Controllers**       | 4          | ✅     |
+| **Services**          | 4          | ✅     |
+| **Linhas de Código**  | 10.000+    | ✅     |
 
 ---
 
 ## 🚀 PRÓXIMOS PASSOS (Ordem)
 
 ### 1️⃣ Frontend Pages (6-8 horas)
+
 ```
 ☐ /candidate/profile      - Form + integração API
 ☐ /company/profile        - Form + integração API
@@ -90,6 +97,7 @@
 ```
 
 ### 2️⃣ Testes Completos (2-3 horas)
+
 ```
 ☐ Postman/Thunder Client - Todos 55+ endpoints
 ☐ Validar respostas e erros
@@ -98,6 +106,7 @@
 ```
 
 ### 3️⃣ Upload de Arquivos (4-6 horas)
+
 ```
 ☐ CV upload (candidatos)
 ☐ Foto de perfil (candidatos)
@@ -105,6 +114,7 @@
 ```
 
 ### 4️⃣ Testes E2E (4-6 horas)
+
 ```
 ☐ Cypress/Playwright setup
 ☐ Cenários de usuario
@@ -116,6 +126,7 @@
 ## 🎯 COMANDOS ÚTEIS
 
 ### Iniciar Serviços
+
 ```bash
 # Docker Compose (PostgreSQL, Redis, Meilisearch)
 cd talentmatch
@@ -131,12 +142,14 @@ npm run dev
 ```
 
 ### URLs
-- Backend: http://localhost:3001
-- Frontend: http://localhost:3000
-- Swagger Docs: http://localhost:3001/docs
-- Redis Commander: http://localhost:8081 (se configurado)
+
+- Backend: <http://localhost:3001>
+- Frontend: <http://localhost:3000>
+- Swagger Docs: <http://localhost:3001/docs>
+- Redis Commander: <http://localhost:8081> (se configurado)
 
 ### Teste Rápido
+
 ```bash
 # Listar vagas
 curl http://localhost:3001/jobs
@@ -173,29 +186,32 @@ docs/
 
 ## 📊 Métricas de Performance
 
-| Operação | Tempo | Alvo |
-|----------|-------|------|
-| Login | <200ms | ✅ |
-| Listar vagas | <200ms | ✅ |
-| Buscar vagas | <200ms | ✅ |
-| Criar candidatura | <300ms | ✅ |
-| Criar perfil | <300ms | ✅ |
+| Operação          | Tempo  | Alvo |
+| ----------------- | ------ | ---- |
+| Login             | <200ms | ✅   |
+| Listar vagas      | <200ms | ✅   |
+| Buscar vagas      | <200ms | ✅   |
+| Criar candidatura | <300ms | ✅   |
+| Criar perfil      | <300ms | ✅   |
 
 ---
 
 ## ⚡ O Que Vem Depois
 
 ### Curto Prazo (Esta semana)
+
 - Implementar frontend pages
 - Testar integração frontend-backend
 - Upload de arquivos
 
 ### Médio Prazo (Próxima semana)
+
 - Testes E2E completos
 - Otimizações de performance
 - Deploy em staging
 
 ### Longo Prazo (Próximo mês)
+
 - Fase 2: Matching & IA
 - Recomendações inteligentes
 - Notificações em tempo real
@@ -217,14 +233,16 @@ docs/
 ## 👥 Contactos & Recursos
 
 **Documentação:**
-- NestJS: https://docs.nestjs.com
-- Next.js: https://nextjs.org/docs
-- Prisma: https://www.prisma.io/docs
+
+- NestJS: <https://docs.nestjs.com>
+- Next.js: <https://nextjs.org/docs>
+- Prisma: <https://www.prisma.io/docs>
 
 **Ferramentas Úteis:**
-- Postman: https://www.postman.com
+
+- Postman: <https://www.postman.com>
 - Thunder Client: VS Code Extension
-- dbDiagram: https://dbdiagram.io
+- dbDiagram: <https://dbdiagram.io>
 
 ---
 

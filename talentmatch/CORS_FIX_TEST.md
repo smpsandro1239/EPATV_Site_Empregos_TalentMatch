@@ -3,20 +3,24 @@
 ## 1️⃣ Testar Register (CORS Fix Principal)
 
 ### Passo 1: Abrir navegador
+
 ```
 http://localhost:3000/auth/register
 ```
 
 ### Passo 2: Preencher formulário
-- **Email**: teste@example.com
+
+- **Email**: <teste@example.com>
 - **Senha**: TestPass123!
 - **Confirmar**: TestPass123!
 - **Tipo**: CANDIDATE (ou COMPANY)
 
 ### Passo 3: Submeter
+
 - Clicar "Criar Conta"
 
 ### Resultado Esperado ✅
+
 - ✅ Sem erro de CORS
 - ✅ Sem erro `net::ERR_FAILED`
 - ✅ Redirecionamento para `/candidate/dashboard` (ou `/company/dashboard`)
@@ -28,18 +32,22 @@ http://localhost:3000/auth/register
 ## 2️⃣ Testar Login
 
 ### Passo 1: Ir para login
+
 ```
 http://localhost:3000/auth/login
 ```
 
 ### Passo 2: Inserir credenciais
-- **Email**: teste@example.com
+
+- **Email**: <teste@example.com>
 - **Senha**: TestPass123!
 
 ### Passo 3: Submit
+
 - Clicar "Entrar"
 
 ### Resultado Esperado ✅
+
 - ✅ Login bem-sucedido
 - ✅ Redirecionamento automático ao dashboard
 - ✅ Cabeçalho mostra email
@@ -49,17 +57,20 @@ http://localhost:3000/auth/login
 ## 3️⃣ Testar Jobs Listing
 
 ### Passo 1: Ir para jobs
+
 ```
 http://localhost:3000/jobs
 ```
 
 ### Passo 2: Verificar listagem
+
 - [ ] Jobs aparecem em cards
 - [ ] Filters funcionam (level, contract type, location)
 - [ ] Search funciona
 - [ ] Paginação funciona
 
 ### Resultado Esperado ✅
+
 - Cards de jobs carregam sem erro CORS
 - Filtros funcionam
 
@@ -68,14 +79,17 @@ http://localhost:3000/jobs
 ## 4️⃣ Testar Job Detail
 
 ### Passo 1: Clique em um job
+
 - De `/jobs` clique em qualquer job card
 
 ### Passo 2: Validar detalhes
+
 - [ ] Job title, company, description carregam
 - [ ] Botão "Apply" visível
 - [ ] Cover letter form funciona
 
 ### Resultado Esperado ✅
+
 - Página de detalhe carrega sem CORS errors
 - Aplicar funciona
 
@@ -84,14 +98,17 @@ http://localhost:3000/jobs
 ## 5️⃣ Testar Applications (Candidate)
 
 ### Passo 1: Autenticar como candidato
+
 - Fazer login em `/auth/login`
 
 ### Passo 2: Ir para aplicações
+
 ```
 http://localhost:3000/candidate/applications
 ```
 
 ### Resultado Esperado ✅
+
 - Lista de aplicações carrega
 - Stats aparecem (total, under review, accepted, rejected)
 - Sem erros CORS
@@ -100,7 +117,7 @@ http://localhost:3000/candidate/applications
 
 ## 🔍 Debug Console (DevTools)
 
-### Se aparecer erro, abrir F12 e verificar:
+### Se aparecer erro, abrir F12 e verificar
 
 ```javascript
 // Ver CORS headers na Network tab
@@ -111,11 +128,11 @@ http://localhost:3000/candidate/applications
 // Access-Control-Allow-Headers: Content-Type, Authorization
 
 // Ver tokens
-localStorage.getItem('access_token')
-localStorage.getItem('refresh_token')
+localStorage.getItem("access_token");
+localStorage.getItem("refresh_token");
 
 // Ver user data
-localStorage.getItem('user')
+localStorage.getItem("user");
 ```
 
 ---
@@ -135,15 +152,17 @@ localStorage.getItem('user')
 
 ---
 
-## 🔴 Se ainda tiver CORS error:
+## 🔴 Se ainda tiver CORS error
 
 ### 1. Verificar Backend Status
+
 ```bash
 curl -i http://localhost:3001/health
 # Esperado: 200 OK com {"status":"ok"}
 ```
 
 ### 2. Verificar CORS Headers
+
 ```bash
 curl -i -X OPTIONS http://localhost:3001/auth/register \
   -H "Origin: http://localhost:3000" \
@@ -153,12 +172,14 @@ curl -i -X OPTIONS http://localhost:3001/auth/register \
 ```
 
 ### 3. Verificar .env Backend
+
 ```bash
 cat backend/.env | grep CORS
 # Esperado: CORS_ORIGIN="http://localhost:3000"
 ```
 
 ### 4. Reiniciar Backend
+
 ```bash
 # Terminal 1: Kill node
 taskkill /f /im node.exe

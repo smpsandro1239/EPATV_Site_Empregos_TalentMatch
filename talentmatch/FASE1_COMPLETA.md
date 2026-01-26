@@ -1,10 +1,11 @@
-# 🎉 TALENTMATCH - FASE 1 COMPLETA!
+# 🎉 TALENTMATCH - FASE 1 COMPLETA
 
 ## ✅ AUTENTICAÇÃO 100% IMPLEMENTADA
 
-### O que funciona agora:
+### O que funciona agora
 
 #### Backend (NestJS)
+
 - ✅ POST /auth/register - Criar conta (Candidate/Company)
 - ✅ POST /auth/login - Login com JWT
 - ✅ POST /auth/refresh - Renovar token
@@ -12,9 +13,10 @@
 - ✅ Password hashing com Argon2
 - ✅ JWT tokens (access + refresh)
 - ✅ CORS configurado
-- ✅ Swagger docs em http://localhost:3001/docs
+- ✅ Swagger docs em <http://localhost:3001/docs>
 
 #### Frontend (Next.js)
+
 - ✅ Página home com redirecionamento automático
 - ✅ Página de login funcional (/auth/login)
 - ✅ Página de registro com role selection (/auth/register)
@@ -30,28 +32,32 @@
 ## 🚀 COMO TESTAR
 
 ### 1. Abrir aplicação
+
 ```
 http://localhost:3000
 ```
 
 ### 2. Criar nova conta (Register)
+
 - Clique em "Register"
 - Selecione "Job Seeker (Candidate)" ou "Recruiter (Company)"
 - Preencha o formulário:
   - Name: Seu Nome
-  - Email: seu@email.com
+  - Email: <seu@email.com>
   - Password: MinhaPassword123
   - Confirm Password: MinhaPassword123
 - Clique "Sign Up"
 - Será redirecionado ao dashboard
 
 ### 3. Fazer Login
+
 - Clique em "Sign In"
-- Email: seu@email.com
+- Email: <seu@email.com>
 - Password: MinhaPassword123
 - Será redirecionado ao seu dashboard
 
 ### 4. Testar Logout
+
 - No header, clique no botão "Logout"
 - Será redirecionado para home
 
@@ -59,7 +65,8 @@ http://localhost:3000
 
 ## 📋 PRÓXIMOS PASSOS (Fase 1B)
 
-### Esta semana:
+### Esta semana
+
 1. **Candidate Profile** - CRUD de perfil, experiências, educação, skills
 2. **Company Profile** - CRUD de empresa
 3. **Job Posting** - CRUD de vagas
@@ -72,6 +79,7 @@ http://localhost:3000
 ## 📁 Estrutura de Ficheiros Alterados
 
 ### Backend
+
 ```
 /backend/src/modules/auth/
   ├── auth.service.ts (register, login, refreshToken)
@@ -84,6 +92,7 @@ http://localhost:3000
 ```
 
 ### Frontend
+
 ```
 /frontend/src/
 ├── app/
@@ -163,16 +172,16 @@ http://localhost:3000
 
 ## 📈 Progresso Total do Projeto
 
-| Fase | Status | Progress |
-|------|--------|----------|
-| Setup & Scaffolding | ✅ Completa | 100% |
-| **Autenticação** | **✅ Completa** | **100%** |
-| Candidate Profile | ⏳ Próximo | 0% |
-| Company Profile | ⏳ Próximo | 0% |
-| Job Posting | ⏳ Próximo | 0% |
-| Job Matching | 🔄 Planejado | 0% |
-| Messaging | 🔄 Planejado | 0% |
-| Admin | 🔄 Planejado | 0% |
+| Fase                | Status          | Progress |
+| ------------------- | --------------- | -------- |
+| Setup & Scaffolding | ✅ Completa     | 100%     |
+| **Autenticação**    | **✅ Completa** | **100%** |
+| Candidate Profile   | ⏳ Próximo      | 0%       |
+| Company Profile     | ⏳ Próximo      | 0%       |
+| Job Posting         | ⏳ Próximo      | 0%       |
+| Job Matching        | 🔄 Planejado    | 0%       |
+| Messaging           | 🔄 Planejado    | 0%       |
+| Admin               | 🔄 Planejado    | 0%       |
 
 **Total do projeto: ~20% completo**
 

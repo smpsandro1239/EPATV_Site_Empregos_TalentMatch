@@ -10,6 +10,7 @@
 ### ✅ Backend - 100% Implementado
 
 #### Services Implementados (Completos)
+
 1. **CandidatesService** - CRUD completo
    - ✅ createProfile, getProfile, updateProfile
    - ✅ addExperience, updateExperience, deleteExperience
@@ -38,6 +39,7 @@
    - ✅ getJobApplicationStats
 
 #### Controllers Implementados (Completos)
+
 - ✅ **CandidatesController** - 15 endpoints
 - ✅ **CompaniesController** - 18 endpoints
 - ✅ **JobsController** - 10 endpoints
@@ -46,6 +48,7 @@
 **Total de endpoints criados:** 55+
 
 #### Banco de Dados
+
 - ✅ Schema Prisma com 12+ tabelas
 - ✅ Relacionamentos configurados
 - ✅ Índices otimizados
@@ -72,20 +75,23 @@
 ## 🚀 INFRAESTRUTURA
 
 ### Docker Compose
+
 - ✅ PostgreSQL 16 (porta 5432)
 - ✅ Redis 7 (porta 6379)
 - ✅ Meilisearch (porta 7700)
 
 ### Servidores
+
 - ✅ Backend NestJS (porta 3001)
 - ✅ Frontend Next.js (porta 3000)
-- ✅ Swagger Docs (http://localhost:3001/docs)
+- ✅ Swagger Docs (<http://localhost:3001/docs>)
 
 ---
 
 ## 📋 TESTES REALIZADOS
 
 ### ✅ Testes Backend (Automatizados)
+
 - [x] Listagem de vagas (GET /jobs)
 - [x] Busca de vagas com filtros (GET /jobs/search)
 - [x] Detalhes de vaga (GET /jobs/:id)
@@ -94,6 +100,7 @@
 - [x] Tratamento de erros
 
 ### ⏳ Testes Frontend (Prontos para executar)
+
 - [ ] Páginas criadas e integradas
 - [ ] Formulários funcionando
 - [ ] Upload de arquivos
@@ -105,6 +112,7 @@
 ## 📦 DELIVERABLES
 
 ### Backend
+
 ```
 ✅ 4 Services completos
 ✅ 4 Controllers completos
@@ -116,6 +124,7 @@
 ```
 
 ### Documentação
+
 ```
 ✅ Guia de testes completo
 ✅ Exemplos de curl para cada endpoint
@@ -128,6 +137,7 @@
 ## 🔄 PRÓXIMOS PASSOS - PRIORIDADES
 
 ### HOJE/AMANHÃ (Crítico)
+
 1. **Implementar Frontend Pages**
    - [ ] `/candidate/profile` - Formulário + integração API
    - [ ] `/company/profile` - Formulário + integração API
@@ -150,6 +160,7 @@
    **Tempo estimado:** 2-3 horas
 
 ### PRÓXIMA SEMANA (Importante)
+
 4. **Upload de Arquivos**
    - [ ] CV upload
    - [ ] Foto de perfil
@@ -167,25 +178,27 @@
 
 ## 📊 STATUS POR MÓDULO
 
-| Módulo | Backend | Frontend | Testes | Status |
-|--------|---------|----------|--------|--------|
-| **Autenticação** | ✅ 100% | ✅ 100% | ✅ 100% | COMPLETO |
-| **Perfil Candidato** | ✅ 100% | ⏳ 0% | ⏳ 0% | PRONTO |
-| **Perfil Empresa** | ✅ 100% | ⏳ 0% | ⏳ 0% | PRONTO |
-| **Vagas** | ✅ 100% | ⏳ 0% | ⏳ 0% | PRONTO |
-| **Candidaturas** | ✅ 100% | ⏳ 0% | ⏳ 0% | PRONTO |
+| Módulo               | Backend | Frontend | Testes  | Status   |
+| -------------------- | ------- | -------- | ------- | -------- |
+| **Autenticação**     | ✅ 100% | ✅ 100%  | ✅ 100% | COMPLETO |
+| **Perfil Candidato** | ✅ 100% | ⏳ 0%    | ⏳ 0%   | PRONTO   |
+| **Perfil Empresa**   | ✅ 100% | ⏳ 0%    | ⏳ 0%   | PRONTO   |
+| **Vagas**            | ✅ 100% | ⏳ 0%    | ⏳ 0%   | PRONTO   |
+| **Candidaturas**     | ✅ 100% | ⏳ 0%    | ⏳ 0%   | PRONTO   |
 
 ---
 
 ## 🎓 CONHECIMENTOS ADQUIRIDOS
 
 ### Arquitetura
+
 - NestJS modular (Services, Controllers, Guards)
 - Next.js pages com API integration
 - Prisma ORM com relacionamentos complexos
 - JWT authentication com refresh tokens
 
 ### Padrões Implementados
+
 - CRUD operations
 - Error handling customizado
 - Validação de dados DTOs
@@ -208,6 +221,7 @@
 ## 📈 MÉTRICAS
 
 ### Código
+
 - **Backend files:** 50+
 - **Frontend files:** 40+
 - **DTOs:** 20+
@@ -215,6 +229,7 @@
 - **API endpoints:** 55+
 
 ### Performance (Alvo)
+
 - Login: <200ms ✅
 - Listagem vagas: <200ms ✅
 - Detalhes vaga: <200ms ✅
