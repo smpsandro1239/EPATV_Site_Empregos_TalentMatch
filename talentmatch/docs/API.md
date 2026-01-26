@@ -10,6 +10,7 @@ Production: `https://api.talentmatch.com`
 ## Autenticação
 
 Usar JWT no header:
+
 ```
 Authorization: Bearer <token>
 ```
@@ -19,9 +20,11 @@ Authorization: Bearer <token>
 ### Auth
 
 #### POST /auth/register
+
 Criar nova conta
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -31,6 +34,7 @@ Criar nova conta
 ```
 
 **Response:**
+
 ```json
 {
   "id": "user-123",
@@ -42,9 +46,11 @@ Criar nova conta
 ```
 
 #### POST /auth/login
+
 Fazer login
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -53,6 +59,7 @@ Fazer login
 ```
 
 **Response:**
+
 ```json
 {
   "access_token": "eyJ...",
@@ -61,9 +68,11 @@ Fazer login
 ```
 
 #### POST /auth/refresh
+
 Renovar access token
 
 **Response:**
+
 ```json
 {
   "access_token": "eyJ..."
@@ -73,9 +82,11 @@ Renovar access token
 ### Candidates
 
 #### GET /candidates/me
+
 Ver perfil do candidato
 
 **Response:**
+
 ```json
 {
   "id": "candidate-123",
@@ -90,22 +101,27 @@ Ver perfil do candidato
 ```
 
 #### PUT /candidates/me
+
 Atualizar perfil
 
 ### Companies
 
 #### GET /companies/me
+
 Ver perfil da empresa
 
 #### PUT /companies/me
+
 Atualizar perfil
 
 ### Jobs
 
 #### GET /jobs
+
 Listar vagas
 
 **Query params:**
+
 - `page`: Número da página
 - `limit`: Items por página
 - `location`: Localização
@@ -113,6 +129,7 @@ Listar vagas
 - `level`: JUNIOR, MID, SENIOR
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -130,20 +147,25 @@ Listar vagas
 ```
 
 #### POST /jobs
+
 Criar vaga (apenas empresas)
 
 #### PUT /jobs/:id
+
 Editar vaga
 
 #### POST /jobs/:id/publish
+
 Publicar vaga
 
 ### Applications
 
 #### POST /applications
+
 Candidatar-se a vaga
 
 **Request:**
+
 ```json
 {
   "jobId": "job-123",
@@ -152,17 +174,21 @@ Candidatar-se a vaga
 ```
 
 #### GET /applications/me
+
 Ver minhas candidaturas
 
 #### PUT /applications/:id/status
+
 Atualizar estado da candidatura
 
 ### Matching
 
 #### GET /matching/job/:jobId
+
 Candidatos recomendados para vaga
 
 **Response:**
+
 ```json
 {
   "candidates": [
@@ -181,6 +207,7 @@ Candidatos recomendados para vaga
 ```
 
 #### GET /matching/candidate/:candidateId
+
 Vagas recomendadas para candidato
 
 ## Códigos de Erro
@@ -220,6 +247,7 @@ API v1 atual. No futuro: `/api/v2`
 ## Changelog
 
 ### v1.0.0 (2025-01-20)
+
 - Endpoints iniciais
 - Auth
 - Candidates, Companies, Jobs

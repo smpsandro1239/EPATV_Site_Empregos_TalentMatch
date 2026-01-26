@@ -7,6 +7,7 @@ Todas as mudanças significativas neste projecto estão documentadas neste fiche
 ### ✨ Adicionado
 
 #### Backend
+
 - Módulo de Autenticação JWT com Passport
   - Registro de utilizadores com validação de email e senha
   - Login com geração de tokens de acesso e refresh
@@ -32,6 +33,7 @@ Todas as mudanças significativas neste projecto estão documentadas neste fiche
   - Skills (competências)
 
 #### Frontend
+
 - Páginas de Autenticação
   - Página de login (/auth/login)
   - Página de registo com seleção de role (/auth/register)
@@ -65,12 +67,14 @@ Todas as mudanças significativas neste projecto estão documentadas neste fiche
   - Dark mode ready
 
 ### 🔧 Configuração
+
 - Docker Compose para development
 - Variáveis de ambiente configuradas
 - TypeScript strict mode
 - ESLint e Prettier ready
 
 ### 📚 Documentação
+
 - README.md com instruções de setup
 - QUICKSTART.md
 - API.md com endpoints
@@ -88,6 +92,7 @@ Todas as mudanças significativas neste projecto estão documentadas neste fiche
 ### ✨ Adicionado
 
 #### Inicial Setup
+
 - Repositório criado
 - Estrutura de projeto definida
 - NestJS backend scaffolded
@@ -111,6 +116,7 @@ Este projeto segue [Semantic Versioning](https://semver.org/lang/pt_BR/):
 ## Próximas Versões Planeadas
 
 ### [1.1.0] - Candidate Profile (Fase 1B)
+
 - [ ] CRUD completo de perfil de candidato
 - [ ] Adicionar experiências de trabalho
 - [ ] Adicionar educação
@@ -118,30 +124,35 @@ Este projeto segue [Semantic Versioning](https://semver.org/lang/pt_BR/):
 - [ ] Upload de CV em PDF
 
 ### [1.2.0] - Company Profile (Fase 1C)
+
 - [ ] CRUD completo de perfil de empresa
 - [ ] Publicação de ofertas de trabalho
 - [ ] Gestão de vagas
 - [ ] Analytics básico
 
 ### [2.0.0] - Job Matching (Fase 2)
+
 - [ ] Algoritmo de matching
 - [ ] Recomendações de trabalho
 - [ ] Recomendações de candidatos
 - [ ] Scoring de compatibilidade
 
 ### [2.5.0] - AI Integration (Fase 3)
+
 - [ ] Análise de CV com IA
 - [ ] Matching inteligente
 - [ ] Sugestões automáticas
 - [ ] Chatbot de suporte
 
 ### [3.0.0] - Messaging & Real-time (Fase 4)
+
 - [ ] Sistema de mensagens
 - [ ] Notificações em tempo real
 - [ ] WebSockets
 - [ ] Email notifications
 
 ### [4.0.0] - Admin & Advanced (Fase 5)
+
 - [ ] Admin dashboard
 - [ ] User management
 - [ ] Reports e analytics avançado
@@ -152,9 +163,9 @@ Este projeto segue [Semantic Versioning](https://semver.org/lang/pt_BR/):
 
 ## Histórico de Deploy
 
-| Versão | Data | Ambiente | Status |
-|--------|------|----------|--------|
-| 1.0.0 | 21-01-2026 | Local | ✅ Completo |
+| Versão | Data       | Ambiente | Status      |
+| ------ | ---------- | -------- | ----------- |
+| 1.0.0  | 21-01-2026 | Local    | ✅ Completo |
 
 ---
 

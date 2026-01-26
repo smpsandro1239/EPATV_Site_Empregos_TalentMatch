@@ -3,6 +3,7 @@
 ## ✅ RESOLVIDO
 
 ### 1. Infraestrutura & Setup
+
 - ✅ Projeto NestJS criado e configurado
 - ✅ Projeto Next.js criado e configurado
 - ✅ Docker e Docker Compose configurados
@@ -11,10 +12,11 @@
 - ✅ Migração inicial criada e aplicada
 - ✅ Variáveis de ambiente (.env) configuradas
 - ✅ CORS configurado entre frontend e backend
-- ✅ Frontend rodando em http://localhost:3000
-- ✅ Backend rodando em http://localhost:3001
+- ✅ Frontend rodando em <http://localhost:3000>
+- ✅ Backend rodando em <http://localhost:3001>
 
 ### 2. Estrutura de Projeto
+
 - ✅ Pastas de módulos criadas (auth, users, candidates, companies, etc)
 - ✅ Controllers scaffold criados
 - ✅ Services scaffold criados
@@ -25,6 +27,7 @@
 - ✅ Swagger documentação inicializada
 
 ### 3. Frontend - Estrutura Base
+
 - ✅ Página inicial (/) com Layout
 - ✅ Layout.tsx com metadata
 - ✅ Tailwind CSS configurado
@@ -33,6 +36,7 @@
 - ✅ Ambiente de desenvolvimento pronto
 
 ### 4. Database & ORM
+
 - ✅ Prisma instalado e configurado
 - ✅ Schema.prisma com todos os modelos:
   - User (base para todos)
@@ -52,6 +56,7 @@
 ## ✅ IMPLEMENTADO - FASE 1 AUTENTICAÇÃO
 
 ### Backend - Autenticação (COMPLETO)
+
 - ✅ AuthService: register(), login(), refreshToken(), validateUser()
 - ✅ AuthController: /auth/register, /auth/login, /auth/refresh, /auth/me
 - ✅ JwtAuthGuard criado e funcional
@@ -61,6 +66,7 @@
 - ✅ Endpoints testados
 
 ### Frontend - Autenticação (COMPLETO)
+
 - ✅ API Client: register(), login(), refreshToken(), getCurrentUser()
 - ✅ AuthProvider Context: login, register, logout, user state
 - ✅ Página /auth/login com formulário funcional
@@ -77,6 +83,7 @@
 ### Backend - Fase 1 (Crítico)
 
 #### Autenticação
+
 - [x] Implementar `register()` com validações ✅
 - [x] Implementar `login()` com JWT ✅
 - [x] Implementar `refreshToken()` ✅
@@ -89,6 +96,7 @@
 - [ ] Testes E2E Auth endpoints
 
 #### Candidates Module
+
 - [x] CandidatesService - CRUD completo ✅
 - [x] Experiências (create, update, delete) ✅
 - [x] Educação (create, update, delete) ✅
@@ -99,6 +107,7 @@
 - [ ] Testes E2E
 
 #### Companies Module
+
 - [x] CompaniesService - CRUD completo ✅
 - [x] Company profile ✅
 - [ ] Logo upload
@@ -107,12 +116,14 @@
 - [ ] Testes unitários
 
 #### Jobs Module
+
 - [x] JobsService - CRUD completo ✅
 - [x] Job search/filter ✅
 - [x] Job posting workflow ✅
 - [ ] Testes unitários
 
 #### Applications Module
+
 - [x] ApplicationsService - CRUD ✅
 - [x] Status workflow (pending, reviewed, accepted, rejected) ✅
 - [x] Application tracking ✅
@@ -121,6 +132,7 @@
 ### Frontend - Fase 1 (Crítico)
 
 #### Pages
+
 - [x] /auth/login - página completa ✅
 - [x] /auth/register - página completa ✅
   - [x] Seleção de tipo (candidate vs company) ✅
@@ -131,6 +143,7 @@
 - [ ] /jobs/[id] - detalhe do emprego
 
 #### Componentes
+
 - [ ] Form Login
 - [ ] Form Register
 - [ ] Form Candidate Profile
@@ -141,6 +154,7 @@
 - [ ] Sidebar/Menu
 
 #### Serviços/Hooks
+
 - [x] API client configurado ✅
 - [x] useAuth hook ✅
 - [ ] useUser hook
@@ -150,12 +164,14 @@
 ### Fase 2 (Matching & AI)
 
 #### Backend
+
 - [ ] Embeddings module implementado (OpenAI)
 - [ ] Matching algorithm implementado
 - [ ] AI recommendations
 - [ ] Testes
 
 #### Frontend
+
 - [ ] Matching results page
 - [ ] Recomendações visuais
 - [ ] Match score display
@@ -163,16 +179,19 @@
 ### Fase 3 (Mensagens & Real-time)
 
 #### Backend
+
 - [ ] WebSocket (Socket.io)
 - [ ] Messages real-time
 - [ ] Notifications real-time
 
 #### Frontend
+
 - [ ] Chat interface
 - [ ] Real-time messages
 - [ ] Notifications panel
 
 ### Testes & Qualidade
+
 - [ ] Testes E2E (Cypress/Playwright)
 - [ ] Tests unitários backend (Jest)
 - [ ] Tests unitários frontend (Jest/React Testing)
@@ -181,6 +200,7 @@
 - [ ] Code coverage
 
 ### DevOps & Deployment
+
 - [ ] Build otimizado
 - [ ] Docker images
 - [ ] Kubernetes manifests (opcional)
@@ -194,6 +214,7 @@
 ## 📈 Roadmap Próximos Passos
 
 ### ✅ COMPLETO - Fase 1: Autenticação (16-17 Jan 2026)
+
 1. ✅ Backend: register() + login() + refreshToken()
 2. ✅ Frontend: Login form + Register form
 3. ✅ AuthProvider Context + useAuth hook
@@ -202,6 +223,7 @@
 6. ✅ Header com logout
 
 ### 🚀 PRÓXIMA - Fase 1B: Candidate Profile (Estimado: 2-3 dias)
+
 1. **Backend CandidatesService:**
    - CRUD (create, read, update, delete)
    - Experiências (add, edit, delete)
@@ -217,6 +239,7 @@
    - Confirmar schema de Candidate, Experience, Education, Skill
 
 ### FASE 1C: Company Profile & Job Posting (3-4 dias)
+
 1. **Backend:**
    - CompaniesService CRUD
    - JobsService CRUD
@@ -230,17 +253,20 @@
    - /jobs/[id] - Job detail page
 
 ### FASE 2: Matching & Applications (1-2 semanas)
+
 1. Implement matching algorithm
 2. Application workflow (apply, review, accept/reject)
 3. Embeddings + AI recommendations
 4. Smart job recommendations
 
 ### FASE 3: Real-time Messaging (1 semana)
+
 1. WebSocket setup (Socket.io)
 2. Chat interface
 3. Notifications
 
 ### FASE 4: Admin & Polish (1 semana)
+
 1. Admin dashboard
 2. Email notifications
 3. File uploads (CV, logo)
@@ -283,12 +309,13 @@ npm run dev
 ## 💡 O que foi implementado nesta sessão (21 Jan 2026)
 
 ### Backend ✅
+
 1. **AuthService completo:**
    - register() com Argon2 password hashing
    - login() com JWT generation
    - refreshToken() com validação
    - validateUser() para guards
-   - _generateTokens() helper
+   - \_generateTokens() helper
 
 2. **AuthController completo:**
    - POST /auth/register
@@ -302,6 +329,7 @@ npm run dev
    - JWT Strategy pronto
 
 ### Frontend ✅
+
 1. **API Client (services/api.ts):**
    - register(data)
    - login(data)
@@ -331,14 +359,14 @@ npm run dev
 5. **Layout atualizado:**
    - AuthProvider wrapper no RootLayout
 
-### Como testar agora:
+### Como testar agora
 
-1. Aceda a http://localhost:3000
+1. Aceda a <http://localhost:3000>
 2. Clique em "Register" ou "Sign up"
 3. Escolha "Job Seeker (Candidate)"
 4. Preencha os dados:
    - Name: João Silva
-   - Email: joao@example.com
+   - Email: <joao@example.com>
    - Password: Password123
 5. Clique "Sign Up"
 6. Será redirecionado para /candidate/dashboard

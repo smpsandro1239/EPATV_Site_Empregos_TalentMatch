@@ -1,10 +1,11 @@
-# 🎉 TalentMatch - Projeto Criado!
+# 🎉 TalentMatch - Projeto Criado
 
 ## 📋 Resumo do Que Foi Criado
 
 Criei **100% da estrutura inicial** do projeto TalentMatch com:
 
 ### ✅ Backend NestJS Completo
+
 - 11 módulos prontos (Auth, Users, Candidates, Companies, Jobs, Applications, Messages, Matching, Embeddings, AI, + suporte)
 - Prisma ORM integrado
 - Schema database com 15 tabelas
@@ -12,17 +13,20 @@ Criei **100% da estrutura inicial** do projeto TalentMatch com:
 - Docker pronto
 
 ### ✅ Frontend Next.js Completo
+
 - Todas as páginas scaffold (Auth, Candidate, Company, Jobs, Admin, Notifications)
 - Tailwind CSS + TypeScript
 - Configurações prontas
 - Estrutura de componentes
 
 ### ✅ Infraestrutura
+
 - Docker Compose (PostgreSQL, Redis, Meilisearch)
 - Environment files
 - Variáveis de configuração
 
 ### ✅ Documentação Completa
+
 - README.md - Visão geral
 - QUICKSTART.md - Setup em 5 minutos
 - ARCHITECTURE.md - Arquitetura técnica
@@ -35,7 +39,7 @@ Criei **100% da estrutura inicial** do projeto TalentMatch com:
 
 ## 🚀 Começar Agora
 
-### 3 passos simples:
+### 3 passos simples
 
 ```bash
 # 1. Entrar no projeto
@@ -56,8 +60,8 @@ npm install
 npm run dev
 ```
 
-✅ Backend em: http://localhost:3000
-✅ Frontend em: http://localhost:3001
+✅ Backend em: <http://localhost:3000>
+✅ Frontend em: <http://localhost:3001>
 
 ---
 
@@ -91,18 +95,18 @@ talentmatch/
 
 ## 📊 O que está pronto
 
-| Componente | Status |
-|-----------|--------|
-| Estrutura backend | ✅ 100% |
-| Estrutura frontend | ✅ 100% |
-| Database schema | ✅ 100% |
-| Docker setup | ✅ 100% |
-| Configurações | ✅ 100% |
-| Documentação | ✅ 100% |
-| Segurança base | ✅ 100% |
-| Endpoints | ⏳ A implementar |
-| UI/UX completa | ⏳ A implementar |
-| Testes | ⏳ A implementar |
+| Componente         | Status           |
+| ------------------ | ---------------- |
+| Estrutura backend  | ✅ 100%          |
+| Estrutura frontend | ✅ 100%          |
+| Database schema    | ✅ 100%          |
+| Docker setup       | ✅ 100%          |
+| Configurações      | ✅ 100%          |
+| Documentação       | ✅ 100%          |
+| Segurança base     | ✅ 100%          |
+| Endpoints          | ⏳ A implementar |
+| UI/UX completa     | ⏳ A implementar |
+| Testes             | ⏳ A implementar |
 
 ---
 
@@ -111,22 +115,26 @@ talentmatch/
 Todas as tarefas estão em `TASKS.md`:
 
 ### Fase 1 (Agora): Autenticação + Perfis
+
 1. [ ] Implementar Auth endpoints
 2. [ ] Criar UI login/register
 3. [ ] Perfil candidato
 4. [ ] Perfil empresa
 
 ### Fase 2: Vagas + Candidaturas
+
 1. [ ] CRUD vagas
 2. [ ] Candidaturas
 3. [ ] Filtros
 
 ### Fase 3: Matching Inteligente
+
 1. [ ] Scoring
 2. [ ] Embeddings
 3. [ ] IA
 
 ### Fase 4: Notificações + Analytics
+
 1. [ ] Notificações
 2. [ ] Dashboards
 3. [ ] Admin panel
@@ -135,17 +143,17 @@ Todas as tarefas estão em `TASKS.md`:
 
 ## 💡 Ficheiros Importantes
 
-| Ficheiro | Ler Para |
-|----------|----------|
-| `QUICKSTART.md` | Começar em 5 min |
-| `docs/ARCHITECTURE.md` | Entender estrutura |
-| `TASKS.md` | Ver o que fazer |
-| `backend/prisma/schema.prisma` | Ver DB |
-| `docker-compose.yml` | Ver serviços |
+| Ficheiro                       | Ler Para           |
+| ------------------------------ | ------------------ |
+| `QUICKSTART.md`                | Começar em 5 min   |
+| `docs/ARCHITECTURE.md`         | Entender estrutura |
+| `TASKS.md`                     | Ver o que fazer    |
+| `backend/prisma/schema.prisma` | Ver DB             |
+| `docker-compose.yml`           | Ver serviços       |
 
 ---
 
-## ✨ Tudo Pronto!
+## ✨ Tudo Pronto
 
 O projeto está **100% estruturado** e **100% documentado**.
 

@@ -9,6 +9,7 @@
 ## 🎯 FASE 1B - PERFIS & VAGAS
 
 ### Backend Implementation
+
 - ✅ CandidatesModule (15 endpoints)
   - ✅ createProfile, getProfile, updateProfile
   - ✅ addExperience, getExperiences, updateExperience, deleteExperience
@@ -36,6 +37,7 @@
   - ✅ getJobApplicationCount
 
 ### API Documentation
+
 - ✅ PHASE_1B_TESTS.md
   - ✅ 15+ curl examples (um para cada endpoint crítico)
   - ✅ 7 critical test cases
@@ -58,6 +60,7 @@
   - ✅ Key learnings
 
 ### Database
+
 - ✅ Prisma Schema complete
   - ✅ User table
   - ✅ CandidateProfile table + relationships
@@ -75,6 +78,7 @@
   - ✅ Foreign keys configured
 
 ### Infrastructure
+
 - ✅ Docker Compose
   - ✅ PostgreSQL 16-alpine running
   - ✅ Redis 7-alpine running
@@ -123,22 +127,23 @@
 
 ## 📊 Code Metrics
 
-| Metric | Value |
-|--------|-------|
-| API Endpoints | 55+ |
-| Controllers | 4 |
-| Services | 4 |
-| DTOs/Interfaces | 20+ |
-| Database Tables | 12+ |
-| Routes Mapped | 60+ |
+| Metric                | Value   |
+| --------------------- | ------- |
+| API Endpoints         | 55+     |
+| Controllers           | 4       |
+| Services              | 4       |
+| DTOs/Interfaces       | 20+     |
+| Database Tables       | 12+     |
+| Routes Mapped         | 60+     |
 | Lines of Backend Code | 10,000+ |
-| Documentation Lines | 1,665+ |
+| Documentation Lines   | 1,665+  |
 
 ---
 
 ## ✨ Features Implemented
 
 ### For Candidates
+
 - ✅ Register and login
 - ✅ Create profile (name, location, headline, about, CV)
 - ✅ Add/edit/delete experiences
@@ -153,6 +158,7 @@
 - ✅ See jobs matching skills
 
 ### For Companies
+
 - ✅ Register and login
 - ✅ Create company profile (name, location, website, industry, size, description)
 - ✅ Create job postings
@@ -165,6 +171,7 @@
 - ✅ Search candidates
 
 ### For Admin (Ready for Phase 2)
+
 - ⏳ Admin dashboard
 - ⏳ User management
 - ⏳ Job moderation
@@ -175,6 +182,7 @@
 ## 🧪 Testing Status
 
 ### Backend Tests (Manual - Curl)
+
 - ✅ Candidate registration
 - ✅ Candidate profile CRUD
 - ✅ Experience CRUD
@@ -192,6 +200,7 @@
 - ✅ Route protection (JWT)
 
 ### Frontend Tests (Ready to implement)
+
 - ⏳ Component rendering
 - ⏳ Form validation
 - ⏳ API integration
@@ -204,6 +213,7 @@
 ## 📈 Next Steps (Ordered by Priority)
 
 ### Phase 1: Frontend Pages (6-8 hours)
+
 1. ☐ JobCard component
 2. ☐ JobList component
 3. ☐ /jobs listing page
@@ -217,18 +227,21 @@
 **Reference:** FRONTEND_QUICKSTART.md
 
 ### Phase 2: Testing (2-3 hours)
+
 10. ☐ Postman testing of all 55+ endpoints
 11. ☐ Frontend integration testing
 12. ☐ E2E tests with Cypress
 13. ☐ Performance benchmarking
 
 ### Phase 3: Features (4-6 hours)
+
 14. ☐ CV file upload
 15. ☐ Profile photo upload
 16. ☐ Company logo upload
 17. ☐ Improve UI/UX
 
 ### Phase 4: Production (3-5 days)
+
 18. ☐ Deploy to staging
 19. ☐ Final testing in staging
 20. ☐ Deploy to production
@@ -238,6 +251,7 @@
 ## 💻 Running the Project
 
 ### Start Docker Services
+
 ```bash
 cd talentmatch
 docker-compose up -d
@@ -245,6 +259,7 @@ docker-compose up -d
 ```
 
 ### Start Backend
+
 ```bash
 cd backend
 npm run start:dev
@@ -253,6 +268,7 @@ npm run start:dev
 ```
 
 ### Start Frontend
+
 ```bash
 cd frontend
 npm run dev
@@ -260,6 +276,7 @@ npm run dev
 ```
 
 ### Test API
+
 ```bash
 # List jobs
 curl http://localhost:3001/jobs
@@ -275,6 +292,7 @@ curl "http://localhost:3001/jobs/search?query=backend&level=SENIOR"
 ## 🎓 Knowledge Base
 
 ### What Was Learned
+
 - ✅ NestJS modular architecture
 - ✅ Prisma ORM with relationships
 - ✅ JWT authentication patterns
@@ -287,6 +305,7 @@ curl "http://localhost:3001/jobs/search?query=backend&level=SENIOR"
 - ✅ Project documentation
 
 ### Resources Created
+
 - ✅ Code templates (Service, Hook, Component)
 - ✅ API examples (15+ curl commands)
 - ✅ Architecture diagrams (in docs)
@@ -299,6 +318,7 @@ curl "http://localhost:3001/jobs/search?query=backend&level=SENIOR"
 ## 🏆 Summary
 
 ### Completed
+
 ✅ **Fase 1:** Autenticação (100%)
 ✅ **Fase 1B:** Perfis & Vagas (100%)
 ✅ **Backend:** 55+ endpoints
@@ -307,11 +327,13 @@ curl "http://localhost:3001/jobs/search?query=backend&level=SENIOR"
 ✅ **Documentação:** 1,600+ linhas
 
 ### Ready to Start
+
 ⏳ **Frontend:** Pages e components
 ⏳ **Testing:** E2E tests
 ⏳ **Fase 2:** Matching & IA
 
 ### Timeline
+
 - **Completed:** Jan 15-22 (8 dias)
 - **Next:** Jan 23-30 (8 dias)
 - **Total to Production:** ~2 semanas

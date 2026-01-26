@@ -1,4 +1,4 @@
-# ✅ TalentMatch - Projeto Criado com Sucesso!
+# ✅ TalentMatch - Projeto Criado com Sucesso
 
 ## 📦 O que foi criado
 
@@ -21,6 +21,7 @@ talentmatch/
 ### 🏗️ Stack Implementada
 
 **Frontend:**
+
 - ✅ Next.js 15 + TypeScript
 - ✅ Tailwind CSS + shadcn/ui
 - ✅ React Hook Form + Zod
@@ -28,6 +29,7 @@ talentmatch/
 - ✅ Axios (API client)
 
 **Backend:**
+
 - ✅ NestJS + TypeScript
 - ✅ Prisma ORM
 - ✅ PostgreSQL (com pgvector)
@@ -37,6 +39,7 @@ talentmatch/
 - ✅ Swagger/OpenAPI
 
 **Infraestrutura:**
+
 - ✅ Docker Compose
 - ✅ Environment files
 - ✅ TypeScript configs
@@ -45,6 +48,7 @@ talentmatch/
 ### 📊 Conteúdo Criado
 
 #### Backend (10 módulos)
+
 1. **Auth** - Autenticação
 2. **Users** - Gestão utilizadores
 3. **Candidates** - Perfis candidatos
@@ -58,6 +62,7 @@ talentmatch/
 11. **AI** - Serviços de IA
 
 #### Frontend (7 áreas)
+
 - Auth (Login/Register)
 - Candidate (Profile, Applications, Recommendations)
 - Company (Profile, Jobs, Candidates)
@@ -67,6 +72,7 @@ talentmatch/
 - Home
 
 #### Documentação
+
 - 📖 ARCHITECTURE.md - Visão técnica
 - 📖 API.md - Documentação endpoints
 - 📖 DEPLOYMENT.md - Guia deploy
@@ -75,6 +81,7 @@ talentmatch/
 - 📖 QUICKSTART.md - Setup rápido
 
 #### Database
+
 - ✅ Schema Prisma completo (15 modelos)
 - ✅ Enums (UserRole, JobStatus, etc.)
 - ✅ Relações e índices otimizados
@@ -85,12 +92,14 @@ talentmatch/
 ## 🚀 Como Começar
 
 ### 1️⃣ Iniciar serviços (Docker)
+
 ```bash
 cd talentmatch
 docker-compose up -d
 ```
 
 ### 2️⃣ Setup Backend
+
 ```bash
 cd backend
 npm install
@@ -99,6 +108,7 @@ npm run start:dev
 ```
 
 ### 3️⃣ Setup Frontend
+
 ```bash
 cd frontend
 npm install
@@ -106,33 +116,38 @@ npm run dev
 ```
 
 ✅ **Pronto!**
-- Backend: http://localhost:3000
-- Frontend: http://localhost:3001
-- Docs API: http://localhost:3000/docs
+
+- Backend: <http://localhost:3000>
+- Frontend: <http://localhost:3001>
+- Docs API: <http://localhost:3000/docs>
 
 ---
 
 ## 📋 Próximos Passos
 
 ### Imediato (Esta semana)
+
 1. ✅ Projeto criado
 2. ⏳ Implementar autenticação (register/login)
 3. ⏳ Criar DTOs e validações
 4. ⏳ Testes unitários
 
 ### Curto prazo (2-3 semanas)
+
 1. ⏳ Perfis de candidato e empresa
 2. ⏳ CRUD de vagas
 3. ⏳ Sistema de candidaturas
 4. ⏳ UI/UX das páginas principais
 
 ### Médio prazo (4-8 semanas)
+
 1. ⏳ Matching inteligente
 2. ⏳ Embeddings e IA
 3. ⏳ Notificações
 4. ⏳ Analytics
 
 ### Longo prazo (9-12 semanas)
+
 1. ⏳ Premium features
 2. ⏳ Monetização
 3. ⏳ Microserviços
@@ -143,6 +158,7 @@ npm run dev
 ## 🔑 Características do Projeto
 
 ### ✅ Pronto para Produção
+
 - Estrutura escalável
 - Padrões enterprise
 - Segurança integrada
@@ -150,6 +166,7 @@ npm run dev
 - Logging estruturado
 
 ### ✅ Documentação Completa
+
 - API docs (Swagger)
 - Architecture documentation
 - Setup guides
@@ -157,12 +174,14 @@ npm run dev
 - Task tracking
 
 ### ✅ Stack Moderno
+
 - TypeScript everywhere
 - Latest versions
 - Industry best practices
 - Performance optimized
 
 ### ✅ Developer Experience
+
 - Hot reload em dev
 - Type safety
 - Linting & formatting
@@ -173,15 +192,15 @@ npm run dev
 
 ## 📂 Ficheiros Importantes
 
-| Ficheiro | Descrição |
-|----------|-----------|
-| `README.md` | Guia geral do projeto |
-| `QUICKSTART.md` | Setup em 5 minutos |
-| `TASKS.md` | Lista de tarefas |
-| `docker-compose.yml` | Serviços (DB, Redis, Search) |
-| `backend/prisma/schema.prisma` | Schema do banco |
-| `backend/.env` | Variáveis backend |
-| `frontend/.env.local` | Variáveis frontend |
+| Ficheiro                       | Descrição                    |
+| ------------------------------ | ---------------------------- |
+| `README.md`                    | Guia geral do projeto        |
+| `QUICKSTART.md`                | Setup em 5 minutos           |
+| `TASKS.md`                     | Lista de tarefas             |
+| `docker-compose.yml`           | Serviços (DB, Redis, Search) |
+| `backend/prisma/schema.prisma` | Schema do banco              |
+| `backend/.env`                 | Variáveis backend            |
+| `frontend/.env.local`          | Variáveis frontend           |
 
 ---
 
@@ -247,6 +266,7 @@ O projeto **TalentMatch** está **100% pronto** para iniciar desenvolvimento!
 Toda a estrutura, documentação e configuração necessária foram criadas.
 
 Agora é hora de:
+
 1. ✅ Integrar no editor (VS Code)
 2. ⏳ Instalar dependências
 3. ⏳ Iniciar Docker

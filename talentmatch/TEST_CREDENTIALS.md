@@ -1,6 +1,6 @@
 # 🎯 TalentMatch - Credenciais de Teste
 
-## ✅ Projeto Lançado com Sucesso!
+## ✅ Projeto Lançado com Sucesso
 
 O TalentMatch está pronto para demonstração. Todos os servidores estão a correr e a base de dados foi alimentada com dados de teste.
 
@@ -9,14 +9,16 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 ## 📱 URLs de Acesso
 
 ### Frontend
-- **URL**: http://localhost:3000
+
+- **URL**: <http://localhost:3000>
 - **Status**: ✅ Running
-- **Nota**: Se a porta 3000 estiver ocupada, tente http://localhost:3002
+- **Nota**: Se a porta 3000 estiver ocupada, tente <http://localhost:3002>
 
 ### Backend API
-- **URL**: http://localhost:3001
-- **Health Check**: http://localhost:3001/health
-- **Swagger Docs**: http://localhost:3001/api/docs
+
+- **URL**: <http://localhost:3001>
+- **Health Check**: <http://localhost:3001/health>
+- **Swagger Docs**: <http://localhost:3001/api/docs>
 - **Status**: ✅ Running
 
 ---
@@ -28,7 +30,8 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 🔑 Password: TestPass123!
 ```
 
-### O que pode fazer como Candidato:
+### O que pode fazer como Candidato
+
 - ✅ Visualizar todas as vagas de emprego
 - ✅ Pesquisar e filtrar vagas por nível, contrato, localização
 - ✅ Ver detalhes completos de cada vaga
@@ -44,7 +47,8 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 🔑 Password: TestPass123!
 ```
 
-### O que pode fazer como Empresa:
+### O que pode fazer como Empresa
+
 - ✅ Visualizar todas as suas vagas
 - ✅ Ver candidatos que se candidataram
 - ✅ Acompanhar aplicações por status
@@ -54,9 +58,10 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 
 ## 📊 Dados de Teste Criados
 
-### Jobs Disponíveis:
+### Jobs Disponíveis
 
 #### 1. Senior Full Stack Developer
+
 - **Empresa**: TechCorp Portugal
 - **Localização**: Porto, Portugal
 - **Nível**: Senior
@@ -65,6 +70,7 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 - **Skills**: React, Node.js, PostgreSQL, TypeScript
 
 #### 2. Frontend Developer (React)
+
 - **Empresa**: TechCorp Portugal
 - **Localização**: Lisboa, Portugal
 - **Nível**: Mid
@@ -77,7 +83,8 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 ## 🚀 Fluxos de Teste Recomendados
 
 ### Fluxo 1: Candidato Visualizar e Candidatar
-1. Aceda a http://localhost:3000
+
+1. Aceda a <http://localhost:3000>
 2. Login com credenciais de **Candidato**
 3. Clique em "Procurar Vagas" ou "Browse Jobs"
 4. Veja a lista de vagas filtráveis
@@ -86,7 +93,8 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 7. Veja sua aplicação em "Minhas Candidaturas"
 
 ### Fluxo 2: Empresa Ver Candidatos
-1. Aceda a http://localhost:3000
+
+1. Aceda a <http://localhost:3000>
 2. Login com credenciais de **Empresa**
 3. Clique em "Minhas Vagas"
 4. Veja lista das suas vagas com contadores de aplicações
@@ -97,33 +105,39 @@ O TalentMatch está pronto para demonstração. Todos os servidores estão a cor
 ## 🔧 Comandos Úteis
 
 ### Ver Health Status do Backend
+
 ```bash
 curl http://localhost:3001/health
 ```
 
 ### Ver Documentação API (Swagger)
+
 ```bash
 Abrir: http://localhost:3001/api/docs
 ```
 
 ### Executar Seed novamente (recriar dados de teste)
+
 ```bash
 cd backend
 npm run prisma:seed
 ```
 
 ### Ver Banco de Dados (Prisma Studio)
+
 ```bash
 cd backend
 npm run prisma:studio
 ```
-Abre automaticamente em http://localhost:5555
+
+Abre automaticamente em <http://localhost:5555>
 
 ---
 
 ## 📋 Status de Implementação
 
 ### ✅ Completo
+
 - [x] Autenticação (Login/Registro)
 - [x] Listagem de Vagas com Paginação
 - [x] Busca e Filtros de Vagas
@@ -134,6 +148,7 @@ Abre automaticamente em http://localhost:5555
 - [x] Dados de Teste Inseridos ✅
 
 ### ⏳ Em Desenvolvimento
+
 - [ ] Edição de Perfil de Candidato
 - [ ] Edição de Perfil de Empresa
 - [ ] Criação de Novas Vagas
@@ -146,7 +161,9 @@ Abre automaticamente em http://localhost:5555
 ## ❓ Troubleshooting
 
 ### Problema: Porta 3000/3001 já ocupada
+
 **Solução**:
+
 ```bash
 # Matar todos os Node processes
 taskkill /f /im node.exe
@@ -156,13 +173,17 @@ taskkill /f /im node.exe
 ```
 
 ### Problema: Erro CORS
+
 **Solução**: Verificar se backend está a rodar em 3001
+
 ```bash
 curl http://localhost:3001/health
 ```
 
 ### Problema: Banco de Dados vazio
+
 **Solução**: Executar seed novamente
+
 ```bash
 cd backend
 npm run prisma:seed
@@ -173,6 +194,7 @@ npm run prisma:seed
 ## 📞 Suporte
 
 Para mais informações:
+
 - Consulte [API_REFERENCE.md](./docs/API_REFERENCE.md)
 - Veja [ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 - Leia [README.md](./README.md)

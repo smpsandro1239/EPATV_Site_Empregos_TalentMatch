@@ -36,8 +36,10 @@ PRÓXIMAS SEMANAS
 ## 🎯 FASES DO PROJETO
 
 ### ✅ FASE 1 - Autenticação (Completa)
+
 **Duration:** 1 dia | **Status:** DONE
 **Deliverables:**
+
 - ✅ Backend: AuthService, AuthController
 - ✅ Frontend: Login, Register pages
 - ✅ JWT authentication with refresh tokens
@@ -47,8 +49,10 @@ PRÓXIMAS SEMANAS
 ---
 
 ### ✅ FASE 1B - Perfis & Vagas (Completa)
+
 **Duration:** 1 dia | **Status:** DONE
 **Deliverables:**
+
 - ✅ Backend: 55+ endpoints
   - Candidates CRUD (15 endpoints)
   - Companies CRUD (18 endpoints)
@@ -63,8 +67,10 @@ PRÓXIMAS SEMANAS
 ---
 
 ### ⏳ FASE 2 - Matching & IA (Próxima)
+
 **Duration:** 5 dias | **Status:** READY TO START
 **Deliverables:**
+
 - [ ] Smart job recommendations (ML-based)
 - [ ] Candidate skill matching algorithm
 - [ ] Relevance scoring system
@@ -74,6 +80,7 @@ PRÓXIMAS SEMANAS
 - [ ] Match notifications
 
 **Tech Stack:**
+
 - Python/FastAPI for ML service
 - Meilisearch for vector search
 - TensorFlow/scikit-learn for embeddings
@@ -81,8 +88,10 @@ PRÓXIMAS SEMANAS
 ---
 
 ### ⏳ FASE 3 - Messaging & Notifications
+
 **Duration:** 3 dias | **Status:** PLANNED
 **Deliverables:**
+
 - [ ] Real-time messaging (WebSocket)
 - [ ] Message notifications
 - [ ] Push notifications
@@ -91,6 +100,7 @@ PRÓXIMAS SEMANAS
 - [ ] Comment system
 
 **Tech Stack:**
+
 - Socket.IO for real-time
 - Bull queue for background jobs
 - SendGrid for email
@@ -98,8 +108,10 @@ PRÓXIMAS SEMANAS
 ---
 
 ### ⏳ FASE 4 - Admin & Analytics
+
 **Duration:** 3 dias | **Status:** PLANNED
 **Deliverables:**
+
 - [ ] Admin dashboard
 - [ ] User management
 - [ ] Job moderation
@@ -108,6 +120,7 @@ PRÓXIMAS SEMANAS
 - [ ] Audit logs
 
 **Tech Stack:**
+
 - React admin dashboard
 - Chart.js for analytics
 - Winston for logging
@@ -117,6 +130,7 @@ PRÓXIMAS SEMANAS
 ## 💼 Features por Role
 
 ### 👤 Candidato (Candidate)
+
 ```
 ✅ CURRENT
 ├─ Registrar / Login
@@ -136,6 +150,7 @@ PRÓXIMAS SEMANAS
 ```
 
 ### 🏢 Empresa (Company)
+
 ```
 ✅ CURRENT
 ├─ Registrar / Login
@@ -156,6 +171,7 @@ PRÓXIMAS SEMANAS
 ```
 
 ### 👨‍💼 Admin (Admin)
+
 ```
 ⏳ COMING
 ├─ Dashboard geral
@@ -172,11 +188,13 @@ PRÓXIMAS SEMANAS
 ## 📱 Screens/Pages Roadmap
 
 ### Autenticação (✅ DONE)
+
 - ✅ Login
 - ✅ Register
 - ✅ Forgot Password (placeholder)
 
 ### Candidate Flow
+
 ```
 ✅ DONE
 ├─ Login
@@ -198,6 +216,7 @@ PRÓXIMAS SEMANAS
 ```
 
 ### Company Flow
+
 ```
 ✅ DONE
 ├─ Login
@@ -223,6 +242,7 @@ PRÓXIMAS SEMANAS
 ## 🔧 Technical Roadmap
 
 ### Backend
+
 ```
 ✅ DONE
 ├─ NestJS setup
@@ -246,6 +266,7 @@ PRÓXIMAS SEMANAS
 ```
 
 ### Frontend
+
 ```
 ✅ DONE
 ├─ Next.js setup
@@ -268,6 +289,7 @@ PRÓXIMAS SEMANAS
 ```
 
 ### Infrastructure
+
 ```
 ✅ DONE
 ├─ Docker Compose
@@ -287,26 +309,28 @@ PRÓXIMAS SEMANAS
 
 ## 📊 Estimated Effort
 
-| Phase | Duration | Start | End | Status |
-|-------|----------|-------|-----|--------|
-| Fase 1 | 1 day | Jan 15 | Jan 15 | ✅ |
-| Fase 1B | 1 day | Jan 21 | Jan 22 | ✅ |
-| Fase 2 | 5 days | Jan 23 | Jan 27 | ⏳ |
-| Fase 3 | 3 days | Jan 28 | Jan 30 | ⏳ |
-| Fase 4 | 3 days | Jan 31 | Feb 2 | ⏳ |
-| **Total** | **~13 days** | Jan 15 | Feb 2 | **90%** |
+| Phase     | Duration     | Start  | End    | Status  |
+| --------- | ------------ | ------ | ------ | ------- |
+| Fase 1    | 1 day        | Jan 15 | Jan 15 | ✅      |
+| Fase 1B   | 1 day        | Jan 21 | Jan 22 | ✅      |
+| Fase 2    | 5 days       | Jan 23 | Jan 27 | ⏳      |
+| Fase 3    | 3 days       | Jan 28 | Jan 30 | ⏳      |
+| Fase 4    | 3 days       | Jan 31 | Feb 2  | ⏳      |
+| **Total** | **~13 days** | Jan 15 | Feb 2  | **90%** |
 
 ---
 
 ## 🎯 Q1 2026 Goals
 
 ### January
+
 - ✅ Phase 1: Authentication
 - ✅ Phase 1B: Profiles & Jobs
 - ⏳ Phase 2: Matching (Week of Jan 23)
 - ⏳ Phase 3: Messaging (Week of Jan 28)
 
 ### February
+
 - [ ] Phase 4: Admin & Analytics
 - [ ] Performance optimization
 - [ ] Security audit
@@ -314,6 +338,7 @@ PRÓXIMAS SEMANAS
 - [ ] Beta testing program
 
 ### March
+
 - [ ] Production deployment
 - [ ] User onboarding
 - [ ] Marketing campaign
@@ -353,6 +378,7 @@ PRÓXIMAS SEMANAS
 ## 📈 Success Metrics
 
 ### Technical KPIs
+
 - API response time: <200ms
 - Database query time: <100ms
 - Frontend build size: <500KB
@@ -360,6 +386,7 @@ PRÓXIMAS SEMANAS
 - Uptime: >99.5%
 
 ### User KPIs
+
 - Registration conversion: >40%
 - Job application rate: >20%
 - User retention (7-day): >50%
@@ -398,18 +425,21 @@ PRÓXIMAS SEMANAS
 ## 🎓 Team Skills Development
 
 ### Backend
+
 - NestJS advanced patterns
 - Microservices architecture
 - Performance optimization
 - API security best practices
 
 ### Frontend
+
 - Advanced React patterns
 - Testing strategies (Jest, Cypress)
 - Performance optimization
 - State management
 
 ### DevOps
+
 - Docker & Kubernetes
 - CI/CD pipelines
 - Infrastructure as Code
@@ -420,12 +450,14 @@ PRÓXIMAS SEMANAS
 ## 💬 Feedback & Iteration
 
 **From Stakeholders:**
+
 - ✅ Implement core features first
 - ✅ Focus on stability over features
 - ✅ Prioritize security
 - ⏳ User experience improvements
 
 **From Users (Beta Testing):**
+
 - ⏳ Collect feedback weekly
 - ⏳ Implement quick fixes
 - ⏳ Plan larger improvements
@@ -435,11 +467,13 @@ PRÓXIMAS SEMANAS
 ## 📞 Contact & Support
 
 **Development Team:**
+
 - Lead: @sandro
 - Backend: @dev-backend
 - Frontend: @dev-frontend
 
 **Documentation:**
+
 - Confluence: [Link]
 - GitHub Wiki: [Link]
 - Slack: #talentmatch-dev

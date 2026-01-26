@@ -3,6 +3,7 @@
 ## Ambiente Local
 
 ### Requisitos
+
 - Node.js 16+
 - npm 8+
 - PostgreSQL 12+
@@ -33,6 +34,7 @@ cp .env.local.example .env.local
 ### Executar em Desenvolvimento
 
 **Terminal 1 - Backend:**
+
 ```bash
 cd talentmatch/backend
 npm run start:dev
@@ -40,6 +42,7 @@ npm run start:dev
 ```
 
 **Terminal 2 - Frontend:**
+
 ```bash
 cd talentmatch/frontend
 npm run dev
@@ -49,6 +52,7 @@ npm run dev
 ### Variáveis de Ambiente
 
 **Backend (.env):**
+
 ```env
 PORT=3001
 NODE_ENV=development
@@ -61,6 +65,7 @@ CORS_ORIGIN=http://localhost:3000
 ```
 
 **Frontend (.env.local):**
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3001
 NEXT_PUBLIC_APP_NAME=TalentMatch
@@ -97,14 +102,17 @@ talentmatch/
 ## Convenções de Código
 
 ### Naming
+
 - PascalCase: Classes, Componentes, Types/Interfaces
 - camelCase: Variáveis, funções, propriedades
 - UPPER_SNAKE_CASE: Constantes
 
 ### Commits
+
 Formato: `<tipo>: <descrição em português>`
 
 Tipos:
+
 - `feat`: Nova funcionalidade
 - `fix`: Correção de bug
 - `refactor`: Refatoração sem mudança de comportamento
@@ -114,6 +122,7 @@ Tipos:
 - `chore`: Tarefas de manutenção
 
 Exemplo:
+
 ```
 feat: adicionar autenticação JWT ao backend
 refactor: melhorar validação de formulários
@@ -121,12 +130,14 @@ fix: corrigir erro de token expirado
 ```
 
 ### TypeScript
+
 - Sempre use tipos explícitos
 - Evite `any`
 - Use interfaces para objetos públicos
 - Use types para aliases
 
 ### React/Next.js
+
 - Use functional components
 - Use hooks ao invés de HOC
 - Separe lógica em custom hooks
@@ -170,6 +181,7 @@ npm run test:e2e
 ## Debugging
 
 ### Backend
+
 ```bash
 # Com debugger do Node
 node --inspect-brk dist/main.js
@@ -178,6 +190,7 @@ node --inspect-brk dist/main.js
 ```
 
 ### Frontend
+
 - F12 para abrir DevTools
 - React DevTools extension
 - Redux DevTools (se usar Redux no futuro)
@@ -185,11 +198,13 @@ node --inspect-brk dist/main.js
 ## Performance
 
 ### Frontend
+
 - Code splitting automático (Next.js)
 - Image optimization (next/image)
 - Bundle analysis: `npm run analyze`
 
 ### Backend
+
 - Caching com Redis (preparado)
 - Database indexing (verificar schema.prisma)
 - Query optimization
@@ -197,6 +212,7 @@ node --inspect-brk dist/main.js
 ## Segurança
 
 ### Implemented
+
 - ✅ JWT authentication
 - ✅ Password hashing (Argon2)
 - ✅ CORS
@@ -204,6 +220,7 @@ node --inspect-brk dist/main.js
 - ✅ XSS prevention (sanitization)
 
 ### To Implement
+
 - [ ] Rate limiting
 - [ ] HTTPS/TLS
 - [ ] 2FA

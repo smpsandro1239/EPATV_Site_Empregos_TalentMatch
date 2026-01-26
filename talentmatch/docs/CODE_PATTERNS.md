@@ -3,6 +3,7 @@
 ## Convenções de Nomenclatura
 
 ### TypeScript/JavaScript
+
 - Classes: `PascalCase` - `UserService`
 - Interfaces: `PascalCase` - `IUserService`
 - Types: `PascalCase` - `UserType`
@@ -12,12 +13,14 @@
 - Métodos privados: `_camelCase` - `_validateEmail`
 
 ### React/Next.js
+
 - Componentes: `PascalCase` - `UserCard`
 - Hooks customizados: `useXxx` - `useAuth`
 - Páginas: `lowercase` - `/pages/auth/login`
 - Props interface: `{Component}Props` - `UserCardProps`
 
 ### Arquivos
+
 - Components: `PascalCase.tsx` - `Button.tsx`
 - Services: `lowercase.ts` - `auth.service.ts`
 - Utilities: `lowercase.ts` - `validators.ts`
@@ -41,6 +44,7 @@ src/
 ## TypeScript Best Practices
 
 ### ✅ Use tipos explícitos
+
 ```typescript
 // Bom
 function getName(user: User): string {
@@ -54,6 +58,7 @@ function getName(user: any) {
 ```
 
 ### ✅ Use interfaces para props públicas
+
 ```typescript
 // Bom
 interface ButtonProps {
@@ -62,13 +67,14 @@ interface ButtonProps {
 }
 
 // Evitar
-const Button = (props: any) => { }
+const Button = (props: any) => {};
 ```
 
 ### ✅ Use types para aliases
+
 ```typescript
 // Bom
-type UserRole = 'CANDIDATE' | 'COMPANY' | 'ADMIN';
+type UserRole = "CANDIDATE" | "COMPANY" | "ADMIN";
 
 // Evitar
 interface UserRole {
@@ -79,6 +85,7 @@ interface UserRole {
 ## React Best Practices
 
 ### ✅ Use functional components
+
 ```typescript
 // Bom
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
@@ -90,6 +97,7 @@ class UserCard extends React.Component { }
 ```
 
 ### ✅ Use hooks para lógica
+
 ```typescript
 // Bom
 const { user, login } = useAuth();
@@ -99,9 +107,10 @@ const user = useState(null)[0];
 ```
 
 ### ✅ Extraia lógica em custom hooks
+
 ```typescript
 // Bom
-const useFormValidation = (initialValues) => { };
+const useFormValidation = (initialValues) => {};
 
 // Evitar
 // Lógica inline em componente
@@ -110,6 +119,7 @@ const useFormValidation = (initialValues) => { };
 ## Async/Await
 
 ### ✅ Sempre use try/catch
+
 ```typescript
 try {
   const response = await fetch(url);
@@ -119,20 +129,25 @@ try {
 ```
 
 ### ✅ Não misture promises e async
+
 ```typescript
 // Bom
 const data = await fetchData();
 
 // Evitar
-fetchData().then(data => { });
+fetchData().then((data) => {});
 ```
 
 ## Erros
 
 ### ✅ Use classes customizadas
+
 ```typescript
 class ValidationError extends Error {
-  constructor(public field: string, message: string) {
+  constructor(
+    public field: string,
+    message: string,
+  ) {
     super(message);
   }
 }
@@ -141,14 +156,15 @@ class ValidationError extends Error {
 ## Testes
 
 ### ✅ Uma responsabilidade por teste
+
 ```typescript
 // Bom
-it('deveria validar email correto', () => {
-  expect(validateEmail('test@example.com')).toBe(true);
+it("deveria validar email correto", () => {
+  expect(validateEmail("test@example.com")).toBe(true);
 });
 
 // Evitar
-it('deveria fazer tudo', () => {
+it("deveria fazer tudo", () => {
   // múltiplas asserções
 });
 ```
@@ -156,6 +172,7 @@ it('deveria fazer tudo', () => {
 ## Commits
 
 ### Formato
+
 ```
 <tipo>: <descrição em português de portugal>
 
@@ -165,6 +182,7 @@ it('deveria fazer tudo', () => {
 ```
 
 ### Tipos
+
 - `feat`: Nova funcionalidade
 - `fix`: Correção de bug
 - `refactor`: Refatoração
@@ -173,6 +191,7 @@ it('deveria fazer tudo', () => {
 - `chore`: Tarefas de manutenção
 
 ### Exemplos
+
 ```
 feat: adiciona autenticação JWT
 

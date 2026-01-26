@@ -3,11 +3,13 @@
 ## ⚡ Setup em 5 minutos
 
 ### Passo 1: Entrar no projeto
+
 ```bash
 cd talentmatch
 ```
 
 ### Passo 2: Iniciar serviços (Docker)
+
 ```bash
 # Inicia PostgreSQL, Redis e Meilisearch
 docker-compose up -d
@@ -17,6 +19,7 @@ docker-compose ps
 ```
 
 ### Passo 3: Setup do Backend
+
 ```bash
 cd backend
 
@@ -37,6 +40,7 @@ npm run start:dev
 📚 Swagger docs: `http://localhost:3000/docs`
 
 ### Passo 4: Setup do Frontend (em outro terminal)
+
 ```bash
 cd frontend
 
@@ -52,11 +56,13 @@ npm run dev
 ## 🧪 Testar
 
 ### Health Check Backend
+
 ```bash
 curl http://localhost:3000/health
 ```
 
 Deve retornar:
+
 ```json
 {
   "status": "ok",
@@ -65,6 +71,7 @@ Deve retornar:
 ```
 
 ### Verificar Base de Dados
+
 ```bash
 cd backend
 npm run prisma:studio
@@ -75,7 +82,9 @@ Abre interface visual em: `http://localhost:5555`
 ## 📋 Variáveis de Ambiente
 
 ### Backend (.env)
+
 Criar arquivo `backend/.env`:
+
 ```
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/talentmatch"
 JWT_SECRET="dev-secret-key-change-in-prod"
@@ -89,11 +98,13 @@ PORT=3000
 ```
 
 ### Frontend (.env.local)
+
 Já criado automaticamente em `frontend/.env.local`
 
 ## 🐛 Troubleshooting
 
 ### Porta 5432 já em uso (PostgreSQL)
+
 ```bash
 # Mudar porta no docker-compose.yml
 # Ou parar container que usa a porta
@@ -101,13 +112,16 @@ docker stop <container-id>
 ```
 
 ### Erro de migração Prisma
+
 ```bash
 cd backend
 npm run prisma:migrate -- --name init --create-only
 ```
 
 ### Frontend não consegue conectar ao backend
+
 Verificar se `NEXT_PUBLIC_API_URL` em `.env.local` está correto:
+
 ```
 NEXT_PUBLIC_API_URL="http://localhost:3000"
 ```

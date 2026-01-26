@@ -1,6 +1,7 @@
 # Stack Tecnológico - TalentMatch
 
 ## Backend
+
 - **Framework**: NestJS 13+
 - **Runtime**: Node.js 16+
 - **Linguagem**: TypeScript
@@ -11,6 +12,7 @@
 - **API Docs**: Swagger/OpenAPI
 
 ## Frontend
+
 - **Framework**: Next.js 13 (App Router)
 - **Linguagem**: TypeScript
 - **UI**: React 18
@@ -20,12 +22,14 @@
 - **Package Manager**: npm
 
 ## DevOps
+
 - **Containerization**: Docker
 - **Orquestração**: Docker Compose
 - **CI/CD**: GitHub Actions (preparado)
 - **Deployment**: Heroku/AWS (preparado)
 
 ## Ferramentas
+
 - **VCS**: Git
 - **Code Quality**: ESLint, Prettier
 - **Testing**: Jest
@@ -33,11 +37,13 @@
 - **API Testing**: Postman, curl
 
 ## Database Schema
+
 - 9 Entidades principais
 - 15+ Relacionamentos
 - Migrations com Prisma
 
 ## Segurança
+
 - JWT com expiração
 - CORS configurado
 - Password hashing (Argon2)

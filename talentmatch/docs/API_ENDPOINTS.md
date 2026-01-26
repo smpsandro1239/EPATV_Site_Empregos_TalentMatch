@@ -3,6 +3,7 @@
 ## Autenticação
 
 ### Registo
+
 ```bash
 POST /auth/register
 Content-Type: application/json
@@ -26,6 +27,7 @@ Response: 201 Created
 ```
 
 ### Login
+
 ```bash
 POST /auth/login
 Content-Type: application/json
@@ -48,6 +50,7 @@ Response: 200 OK
 ```
 
 ### Utilizador Atual
+
 ```bash
 GET /auth/me
 Authorization: Bearer jwt-token
@@ -63,6 +66,7 @@ Response: 200 OK
 ```
 
 ### Renovar Token
+
 ```bash
 POST /auth/refresh
 Content-Type: application/json
@@ -81,6 +85,7 @@ Response: 200 OK
 ## Candidatos
 
 ### Obter Perfil
+
 ```bash
 GET /candidates/profile
 Authorization: Bearer jwt-token
@@ -100,6 +105,7 @@ Response: 200 OK
 ```
 
 ### Atualizar Perfil
+
 ```bash
 PUT /candidates/:id
 Authorization: Bearer jwt-token
@@ -115,6 +121,7 @@ Response: 200 OK
 ```
 
 ### Adicionar Experiência
+
 ```bash
 POST /candidates/:id/experiences
 Authorization: Bearer jwt-token
@@ -134,6 +141,7 @@ Response: 201 Created
 ## Empresas
 
 ### Obter Perfil
+
 ```bash
 GET /companies/profile
 Authorization: Bearer jwt-token
@@ -153,6 +161,7 @@ Response: 200 OK
 ## Trabalhos
 
 ### Listar Trabalhos
+
 ```bash
 GET /jobs?status=OPEN&level=SENIOR&location=Lisboa
 
@@ -174,6 +183,7 @@ Response: 200 OK
 ```
 
 ### Publicar Trabalho
+
 ```bash
 POST /jobs
 Authorization: Bearer jwt-token
@@ -194,6 +204,7 @@ Response: 201 Created
 ## Candidaturas
 
 ### Candidatar a Trabalho
+
 ```bash
 POST /applications
 Authorization: Bearer jwt-token
@@ -214,6 +225,7 @@ Response: 201 Created
 ```
 
 ### Minhas Candidaturas
+
 ```bash
 GET /applications/my
 Authorization: Bearer jwt-token
@@ -234,6 +246,7 @@ Response: 200 OK
 ## Matching
 
 ### Obter Compatibilidades
+
 ```bash
 GET /matching/candidates/:candidateId/matches
 Authorization: Bearer jwt-token
@@ -253,6 +266,7 @@ Response: 200 OK
 ## Mensagens
 
 ### Enviar Mensagem
+
 ```bash
 POST /messages
 Authorization: Bearer jwt-token
@@ -267,6 +281,7 @@ Response: 201 Created
 ```
 
 ### Obter Conversas
+
 ```bash
 GET /messages/conversations
 Authorization: Bearer jwt-token
