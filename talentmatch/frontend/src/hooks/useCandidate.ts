@@ -14,6 +14,7 @@ interface UseCandidateReturn {
   createProfile: (data: Partial<CandidateProfile>) => Promise<CandidateProfile | null>;
   updateProfile: (id: string, data: Partial<CandidateProfile>) => Promise<CandidateProfile | null>;
   getProfile: (id: string) => Promise<CandidateProfile | null>;
+  getProfileByUserId: (userId: string) => Promise<CandidateProfile | null>;
   addExperience: (profileId: string, data: Partial<CandidateExperience>) => Promise<void>;
   updateExperience: (expId: string, data: Partial<CandidateExperience>) => Promise<void>;
   deleteExperience: (expId: string) => Promise<void>;
@@ -39,6 +40,24 @@ export const useCandidate = (): UseCandidateReturn => {
     setError(null);
     try {
       const data = await candidateService.getProfile(id);
+      setProfile(data);
+      setExperiences(data.experiences || []);
+      setEducations(data.educations || []);
+      setSkills(data.skills || []);
+      return data;
+    } catch (err: any) {
+      setError(err.message);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const getProfileByUserId = useCallback(async (userId: string): Promise<CandidateProfile | null> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await candidateService.getProfileByUserId(userId);
       setProfile(data);
       setExperiences(data.experiences || []);
       setEducations(data.educations || []);
@@ -170,6 +189,7 @@ export const useCandidate = (): UseCandidateReturn => {
     createProfile,
     updateProfile,
     getProfile,
+    getProfileByUserId,
     addExperience,
     updateExperience,
     deleteExperience,

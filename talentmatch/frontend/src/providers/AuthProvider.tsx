@@ -3,6 +3,7 @@
 
 import { getAuthToken, getUserId, getUserRole, removeAuthToken } from '@/services/auth.service';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { useCandidate } from '@/hooks/useCandidate';
 
 interface AuthUser {
   id: string;
@@ -23,6 +24,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
+  const { getProfileByUserId, profile, error } = useCandidate();
 
   useEffect(() => {
     const userId = getUserId();
@@ -30,8 +32,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const token = getAuthToken();
 
     if (userId && role && token) {
-      // In a real app, you'd probably verify the token with the backend here
       setUser({ id: userId, role, email: localStorage.getItem('userEmail') || '' });
+      if (role === 'CANDIDATE') {
+        getProfileByUserId(userId);
+      }
     }
   }, []);
 
@@ -41,6 +45,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('userRole', role);
     localStorage.setItem('userEmail', email);
     setUser({ id: userId, role, email });
+    if (role === 'CANDIDATE') {
+      getProfileByUserId(userId);
+    }
   };
 
   const logout = () => {
@@ -55,9 +62,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return !!getAuthToken();
   };
 
+  const register = async (email: string, password: string, name: string, role: string) => {
+    // TODO: Implement registration logic
+    console.log('Registering...', { email, password, name, role });
+  };
+
 
   return (
-    <AuthContext.Provider value={{ user, authToken: getAuthToken(), login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, authToken: getAuthToken(), login, register, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
