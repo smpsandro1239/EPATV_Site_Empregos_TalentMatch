@@ -17,6 +17,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [improving, setImproving] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -72,6 +73,35 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleAiImproveHeadline = async () => {
+    if (!formData.about) {
+      toast.error('Escreve algo sobre ti primeiro!');
+      return;
+    }
+
+    try {
+      setImproving(true);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ai/improve-headline`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ headline: formData.headline, about: formData.about }),
+      });
+
+      if (!response.ok) throw new Error('Falha ao melhorar headline');
+
+      const data = await response.json();
+      setFormData(prev => ({ ...prev, headline: data.headline }));
+      toast.success('Headline melhorada com IA!');
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setImproving(false);
+    }
   };
 
   const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -200,7 +230,17 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
 
         {/* Headline */}
         <div>
-          <label htmlFor="headline" className="block text-sm font-medium text-gray-700 mb-2">Professional Headline</label>
+          <div className="flex justify-between items-center mb-2">
+            <label htmlFor="headline" className="block text-sm font-medium text-gray-700">Título Profissional</label>
+            <button
+              type="button"
+              onClick={handleAiImproveHeadline}
+              disabled={improving}
+              className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition font-bold"
+            >
+              {improving ? 'A melhorar...' : '✨ Sugerir com IA'}
+            </button>
+          </div>
           <input
             id="headline"
             type="text"
@@ -208,7 +248,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
             value={formData.headline}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-            placeholder="e.g., Senior Software Engineer"
+            placeholder="ex: Engenheiro de Software Sénior"
           />
         </div>
 

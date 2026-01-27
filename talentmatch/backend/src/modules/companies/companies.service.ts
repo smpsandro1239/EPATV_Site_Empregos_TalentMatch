@@ -312,6 +312,40 @@ export class CompaniesService {
   }
 
   // Application Management
+  // Reviews
+  async addReview(companyId: string, candidateId: string, rating: number, comment?: string) {
+    return this._prisma.review.upsert({
+      where: {
+        companyId_candidateId: {
+          companyId,
+          candidateId,
+        },
+      },
+      update: {
+        rating,
+        comment,
+      },
+      create: {
+        companyId,
+        candidateId,
+        rating,
+        comment,
+      },
+    });
+  }
+
+  async getCompanyReviews(companyId: string) {
+    return this._prisma.review.findMany({
+      where: { companyId },
+      include: {
+        candidate: {
+          select: { name: true },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   async getCompanyApplications(companyId: string, status?: string, limit: number = 20, offset: number = 0) {
     const where: any = {
       job: {

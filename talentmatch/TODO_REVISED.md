@@ -46,10 +46,16 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 - [x] **Qualidade**: Implementação de testes unitários base no Backend.
 - [x] **Estabilidade**: Tratamento de erros global (ErrorBoundary) e consistência linguística (PT-PT).
 
-## 🚀 Fase 8: Produção & Expansão (Próximo)
-- [ ] **Infraestrutura**: Configuração de CI/CD para Deploy automático.
-- [ ] **Funcionalidade**: Matching semântico avançado com IA (OpenAI Embeddings).
+## ✅ Fase 8: IA & Funcionalidades Avançadas (Concluído)
+- [x] **IA**: Integração base com OpenAI (Assistente de descrições).
+- [x] **IA**: Infraestrutura para Embeddings e Matching Semântico.
+- [x] **Funcionalidade**: Sistema de Reviews/Avaliações para empresas.
+
+## 🔄 Fase 9: Produção & DevOps (Em Progresso)
+- [x] **Infraestrutura**: Configuração de CI/CD (GitHub Actions).
 - [ ] **Funcionalidade**: Exportação de currículos e relatórios de vagas.
+- [ ] **Email**: Integração real com Resend/Postmark.
+- [ ] **Storage**: Integração com AWS S3 para ficheiros.
 
 ---
 *Atualizado em: 24 de Janeiro de 2026*

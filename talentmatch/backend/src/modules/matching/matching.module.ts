@@ -2,10 +2,12 @@ import { PrismaModule } from '@database/prisma/prisma.module';
 import { Module } from '@nestjs/common';
 import { MatchingController } from './matching.controller';
 import { MatchingService } from './matching.service';
+import { EmbeddingsModule } from '@modules/embeddings/embeddings.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, EmbeddingsModule],
   controllers: [MatchingController],
   providers: [MatchingService],
+  exports: [MatchingService],
 })
 export class MatchingModule {}

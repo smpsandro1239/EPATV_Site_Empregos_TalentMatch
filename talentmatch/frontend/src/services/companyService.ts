@@ -127,4 +127,14 @@ export const companyService = {
     const { data } = await axiosInstance.post(`/companies/jobs/${jobId}/close`);
     return data;
   },
+
+  async addReview(companyId: string, rating: number, comment?: string): Promise<any> {
+    const { data } = await axiosInstance.post(`/companies/${companyId}/reviews`, { rating, comment });
+    return data;
+  },
+
+  async getReviews(companyId: string): Promise<any[]> {
+    const { data } = await axiosInstance.get(`/companies/${companyId}/reviews`);
+    return data;
+  },
 };

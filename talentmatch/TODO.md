@@ -48,7 +48,16 @@
 ### Quality & Performance
 - [x] Polishing: Design refinements and animations (Framer Motion).
 - [x] Stability: Global error handling (ErrorBoundary) and language consistency.
-- [ ] Testing: Implementation of Unit and E2E tests for critical paths (Backend Spec tests started).
+- [x] Testing: Unit tests for critical paths in the backend.
+
+### Advanced Features (Done)
+- [x] AI Integration: OpenAI assistance for Job Descriptions.
+- [x] AI Infrastructure: Embeddings and Semantic Matching base.
+- [x] Rating System: Company reviews and ratings.
+
+### DevOps & Next Steps (In Progress)
+- [x] CI/CD: GitHub Actions basic workflows.
+- [ ] Real Email: Resend/Postmark integration.
 
 ---
-*Last update: January 24, 2026*
+*Last update: January 27, 2026*

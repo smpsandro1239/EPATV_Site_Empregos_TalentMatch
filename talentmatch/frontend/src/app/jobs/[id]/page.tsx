@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/Header';
+import ReviewsSection from '@/components/company/ReviewsSection';
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
@@ -304,6 +305,10 @@ export default function JobDetailPage() {
                     Visitar website da empresa →
                   </a>
                 )}
+
+                <div className="mt-8 border-t pt-8">
+                  <ReviewsSection companyId={job.company.id} />
+                </div>
               </div>
             </div>
 

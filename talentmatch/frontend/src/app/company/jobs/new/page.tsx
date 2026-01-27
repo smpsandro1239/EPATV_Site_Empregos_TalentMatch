@@ -5,6 +5,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function NewJobPage() {
   const { user, isLoading } = useAuth();
@@ -12,6 +13,7 @@ export default function NewJobPage() {
   const [companyId, setCompanyId] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [improving, setImproving] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -62,6 +64,35 @@ export default function NewJobPage() {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleAiImprove = async () => {
+    if (!formData.description) {
+      toast.error('Escreve uma descrição primeiro!');
+      return;
+    }
+
+    try {
+      setImproving(true);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ai/improve-job-description`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ description: formData.description }),
+      });
+
+      if (!response.ok) throw new Error('Falha ao melhorar descrição');
+
+      const data = await response.json();
+      setFormData(prev => ({ ...prev, description: data.description }));
+      toast.success('Descrição melhorada com IA!');
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setImproving(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -180,9 +211,19 @@ export default function NewJobPage() {
                 </div>
 
                 <div className="mt-6">
-                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                    Job Description *
-                  </label>
+                  <div className="flex justify-between items-center mb-2">
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                      Descrição da Vaga *
+                    </label>
+                    <button
+                      type="button"
+                      onClick={handleAiImprove}
+                      disabled={improving}
+                      className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition font-bold"
+                    >
+                      {improving ? 'A melhorar...' : '✨ Melhorar com IA'}
+                    </button>
+                  </div>
                   <textarea
                     id="description"
                     name="description"
@@ -191,7 +232,7 @@ export default function NewJobPage() {
                     required
                     rows={6}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    placeholder="Describe the role, team, and what the candidate will be doing..."
+                    placeholder="Descreve a função, a equipa e o que o candidato irá fazer..."
                   />
                 </div>
               </div>
