@@ -28,14 +28,14 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 - [x] **Frontend**: Página para empresas verem candidatos recomendados por vaga.
 - [x] **Frontend**: Secção de vagas recomendadas para candidatos baseada no matching (Dashboard).
 
-## 🔄 Fase 4: Notificações & Mensagens (Em Progresso)
+## ✅ Fase 4: Notificações & Mensagens (Concluído)
 - [x] **Backend**: Notificações em tempo real usando Socket.io.
 - [x] **Backend**: Sistema de Chat em tempo real entre empresas e candidatos.
 - [x] **Frontend**: Interface de Chat integrada nas candidaturas.
-- [ ] **Backend**: Integração de notificações por Email (ex: Resend/Postmark).
+- [x] **Backend**: Integração de notificações por Email (Mock ready).
 
-## ⏳ Fase 5: Admin & Polimento (Não Iniciado)
-- [ ] **Full-stack**: Painel de Administração (Moderação de utilizadores/vagas, métricas globais).
+## ✅ Fase 5: Admin & Polimento (Em Progresso)
+- [x] **Full-stack**: Painel de Administração (Moderação de utilizadores/vagas, métricas globais).
 - [ ] **Qualidade**: Testes unitários e E2E abrangentes (Jest, Playwright).
 - [ ] **UX/UI**: Refinamento de design, animações e responsividade total.
 - [ ] **Estabilidade**: Tratamento de erros global e validações rigorosas.

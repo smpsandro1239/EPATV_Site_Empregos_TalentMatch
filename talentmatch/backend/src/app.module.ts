@@ -1,4 +1,5 @@
 import { PrismaModule } from '@database/prisma/prisma.module';
+import { AdminModule } from '@modules/admin/admin.module';
 import { AiModule } from '@modules/ai/ai.module';
 import { ApplicationsModule } from '@modules/applications/applications.module';
 import { AuthModule } from '@modules/auth/auth.module';
@@ -8,6 +9,7 @@ import { EmbeddingsModule } from '@modules/embeddings/embeddings.module';
 import { JobsModule } from '@modules/jobs/jobs.module';
 import { MatchingModule } from '@modules/matching/matching.module';
 import { MessagesModule } from '@modules/messages/messages.module';
+import { NotificationsModule } from '@modules/notifications/notifications.module';
 import { SkillsModule } from '@modules/skills/skills.module';
 import { UploadsModule } from '@modules/uploads/uploads.module';
 import { UsersModule } from '@modules/users/users.module';
@@ -32,11 +34,13 @@ import { AppService } from './app.service';
     AuthModule,
     UsersModule,
     CandidatesModule,
+    AdminModule,
     CompaniesModule,
     SkillsModule,
     JobsModule,
     ApplicationsModule,
     MessagesModule,
+    NotificationsModule,
     MatchingModule,
     EmbeddingsModule,
     AiModule,

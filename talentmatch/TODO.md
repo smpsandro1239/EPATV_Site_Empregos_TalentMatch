@@ -34,16 +34,16 @@
 ### Core Features
 - [x] **Real-time Notifications**: Socket.io integration for instant alerts.
 - [x] **Messaging System**: Chat functionality between candidates and companies.
+- [x] Admin Panel: Global management of users, jobs, and platform metrics.
 
 ---
 
 ## 🔴 Pending / Future Phases
 
 ### Notifications & Communication
-- [ ] **Email Integration**: Automated emails for application status updates.
+- [x] Email Integration: Automated emails for application status updates (Mock).
 
-### Admin & Quality
-- [ ] **Admin Panel**: Global management of users, jobs, and platform metrics.
+### Quality & Performance
 - [ ] **Testing**: Implementation of Unit and E2E tests for critical paths.
 - [ ] **Polishing**: UI/UX refinements and comprehensive error handling.
 
