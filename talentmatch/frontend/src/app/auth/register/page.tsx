@@ -4,6 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -44,9 +45,12 @@ export default function RegisterPage() {
 
     try {
       await register(formData.email, formData.password, formData.name, formData.role);
+      toast.success('Conta criada com sucesso!');
       router.push(formData.role === 'CANDIDATE' ? '/candidate' : '/company');
     } catch (err: any) {
-      setError(err.message || 'Failed to register');
+      const msg = err.message || 'Falha ao criar conta';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

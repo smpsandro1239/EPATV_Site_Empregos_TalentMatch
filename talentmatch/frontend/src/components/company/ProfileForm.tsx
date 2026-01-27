@@ -3,6 +3,7 @@
 import { apiClient } from '@/services/api';
 import { companyService } from '@/services/companyService';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 interface CompanyProfile {
   id: string;
@@ -66,10 +67,13 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       setError('');
       const { url } = await apiClient.uploadFile('/uploads/logo', file);
       setFormData(prev => ({ ...prev, logoUrl: `${process.env.NEXT_PUBLIC_API_URL}${url}` }));
+      toast.success('Logótipo carregado!');
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
-      setError(err.message || 'Erro no upload do logótipo');
+      const msg = err.message || 'Erro no upload do logótipo';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setUploading(false);
     }
@@ -88,11 +92,14 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
         setProfile(created);
         setFormData(created);
       }
+      toast.success('Perfil atualizado!');
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
       setError('');
     } catch (err: any) {
-      setError(err.message || 'Failed to save profile');
+      const msg = err.message || 'Erro ao guardar perfil';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setSaving(false);
     }

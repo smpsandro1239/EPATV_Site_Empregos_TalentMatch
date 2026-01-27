@@ -34,10 +34,14 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 - [x] **Frontend**: Interface de Chat integrada nas candidaturas.
 - [x] **Backend**: Integração de notificações por Email (Mock ready).
 
-## ✅ Fase 5: Admin & Polimento (Em Progresso)
+## ✅ Fase 5: Admin & Polimento (Concluído)
 - [x] **Full-stack**: Painel de Administração (Moderação de utilizadores/vagas, métricas globais).
+
+## ✅ Fase 6: Refinamento & UX (Em Progresso)
+- [x] **Frontend**: Sistema de Notificações Internas (Sino no Header e Página Dedicada).
+- [x] **UX/UI**: Feedback visual melhorado com Toasts (Sucesso/Erro).
+- [ ] **UX/UI**: Refinamento de design e animações (Framer Motion).
 - [ ] **Qualidade**: Testes unitários e E2E abrangentes (Jest, Playwright).
-- [ ] **UX/UI**: Refinamento de design, animações e responsividade total.
 - [ ] **Estabilidade**: Tratamento de erros global e validações rigorosas.
 
 ---

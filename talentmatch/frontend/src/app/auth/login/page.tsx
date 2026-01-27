@@ -4,6 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,9 +21,12 @@ export default function LoginPage() {
 
     try {
       await login(email, password);
+      toast.success('Bem-vindo de volta!');
       router.push('/candidate');
     } catch (err: any) {
-      setError(err.message || 'Failed to login');
+      const msg = err.message || 'Falha ao iniciar sessão';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { CandidateProfileDetail } from '@/types/candidate'; // Import the shared interface
 import { apiClient } from '@/services/api';
+import { toast } from 'react-hot-toast';
 
 interface ProfileFormProps {
   token: string;
@@ -82,10 +83,13 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
       setError('');
       const { url } = await apiClient.uploadFile('/uploads/cv', file);
       setFormData(prev => ({ ...prev, cvUrl: `${process.env.NEXT_PUBLIC_API_URL}${url}` }));
+      toast.success('CV carregado!');
       setSuccess('CV carregado com sucesso!');
       setTimeout(() => setSuccess(''), 3000);
     } catch (err: any) {
-      setError(err.message || 'Erro no upload do CV');
+      const msg = err.message || 'Erro no upload do CV';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setUploading(false);
     }
@@ -128,10 +132,13 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
 
       const result = await response.json();
       setProfile(result);
+      toast.success('Perfil atualizado!');
       setSuccess('Profile updated successfully!');
       setTimeout(() => setSuccess(''), 3000);
     } catch (err: any) {
-      setError(err.message || 'Failed to save profile');
+      const msg = err.message || 'Erro ao guardar perfil';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setSaving(false);
     }

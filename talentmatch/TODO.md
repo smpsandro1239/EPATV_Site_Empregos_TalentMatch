@@ -35,6 +35,8 @@
 - [x] **Real-time Notifications**: Socket.io integration for instant alerts.
 - [x] **Messaging System**: Chat functionality between candidates and companies.
 - [x] Admin Panel: Global management of users, jobs, and platform metrics.
+- [x] In-app Notifications: Internal alert system with UI.
+- [x] User Feedback: Toast notifications for all main actions.
 
 ---
 
@@ -45,7 +47,7 @@
 
 ### Quality & Performance
 - [ ] **Testing**: Implementation of Unit and E2E tests for critical paths.
-- [ ] **Polishing**: UI/UX refinements and comprehensive error handling.
+- [ ] Polishing: Design refinements and animations.
 
 ---
 *Last update: January 24, 2026*

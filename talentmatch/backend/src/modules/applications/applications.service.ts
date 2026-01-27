@@ -74,6 +74,14 @@ export class ApplicationsService {
         application.job.company.user.email
     );
 
+    // In-app notification
+    await this.notificationsService.createNotification(
+        application.job.company.userId,
+        'application',
+        'Nova Candidatura',
+        `${application.candidate.name} candidatou-se à vaga "${application.job.title}".`
+    );
+
     return application;
   }
 
@@ -164,6 +172,14 @@ export class ApplicationsService {
         application.candidate.user.email,
         application.job.title,
         dto.status
+    );
+
+    // In-app notification
+    await this.notificationsService.createNotification(
+        application.candidate.userId,
+        'status',
+        'Atualização de Candidatura',
+        `O estado da sua candidatura à vaga "${application.job.title}" mudou para ${dto.status}.`
     );
 
     return application;
