@@ -7,5 +7,6 @@ import { EmbeddingsService } from './embeddings.service';
   imports: [PrismaModule],
   controllers: [EmbeddingsController],
   providers: [EmbeddingsService],
+  exports: [EmbeddingsService],
 })
 export class EmbeddingsModule {}

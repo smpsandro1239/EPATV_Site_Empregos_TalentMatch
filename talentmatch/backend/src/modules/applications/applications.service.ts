@@ -1,4 +1,5 @@
 import { PrismaService } from '@database/prisma/prisma.service';
+import { NotificationsService } from '@modules/notifications/notifications.service';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 
 export interface CreateApplicationDto {
@@ -15,7 +16,10 @@ export interface UpdateApplicationStatusDto {
 
 @Injectable()
 export class ApplicationsService {
-  constructor(private _prisma: PrismaService) {}
+  constructor(
+    private _prisma: PrismaService,
+    private notificationsService: NotificationsService,
+  ) {}
 
   // Create Application
   async createApplication(dto: CreateApplicationDto) {
@@ -49,7 +53,7 @@ export class ApplicationsService {
       throw new NotFoundException('Candidate not found');
     }
 
-    return this._prisma.application.create({
+    const application = await this._prisma.application.create({
       data: {
         candidateId: dto.candidateId,
         jobId: dto.jobId,
@@ -58,10 +62,27 @@ export class ApplicationsService {
         status: 'SUBMITTED',
       },
       include: {
-        job: true,
+        job: { include: { company: { include: { user: { select: { email: true } } } } } },
         candidate: true,
       },
     });
+
+    // Notify company
+    await this.notificationsService.notifyNewApplication(
+        application.candidate.name,
+        application.job.title,
+        application.job.company.user.email
+    );
+
+    // In-app notification
+    await this.notificationsService.createNotification(
+        application.job.company.userId,
+        'application',
+        'Nova Candidatura',
+        `${application.candidate.name} candidatou-se à vaga "${application.job.title}".`
+    );
+
+    return application;
   }
 
   // Get Application
@@ -135,16 +156,33 @@ export class ApplicationsService {
 
   // Update Application Status
   async updateApplicationStatus(applicationId: string, dto: UpdateApplicationStatusDto) {
-    return this._prisma.application.update({
+    const application = await this._prisma.application.update({
       where: { id: applicationId },
       data: {
         status: dto.status as any,
       },
       include: {
         job: true,
-        candidate: true,
+        candidate: { include: { user: { select: { email: true } } } },
       },
     });
+
+    // Notify candidate
+    await this.notificationsService.notifyStatusChange(
+        application.candidate.user.email,
+        application.job.title,
+        dto.status
+    );
+
+    // In-app notification
+    await this.notificationsService.createNotification(
+        application.candidate.userId,
+        'status',
+        'Atualização de Candidatura',
+        `O estado da sua candidatura à vaga "${application.job.title}" mudou para ${dto.status}.`
+    );
+
+    return application;
   }
 
   // Count Applications for Job

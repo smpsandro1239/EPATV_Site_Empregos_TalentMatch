@@ -3,9 +3,11 @@
 import Link from 'next/link';
 import { useAuth } from '@/providers/AuthProvider';
 import { useRouter } from 'next/navigation';
+import { useNotifications } from '@/hooks/useNotifications';
 
 export default function Header() {
   const { user, logout } = useAuth();
+  const { unreadCount } = useNotifications();
   const router = useRouter();
 
   const handleLogout = () => {
@@ -27,7 +29,7 @@ export default function Header() {
         <nav className="flex items-center gap-6">
           {user.role === 'CANDIDATE' && (
             <>
-              <Link href="/candidate/dashboard" className="text-gray-700 hover:text-primary-600">
+              <Link href="/candidate" className="text-gray-700 hover:text-primary-600">
                 Dashboard
               </Link>
               <Link href="/candidate/profile" className="text-gray-700 hover:text-primary-600">
@@ -55,7 +57,7 @@ export default function Header() {
 
           {user.role === 'COMPANY' && (
             <>
-              <Link href="/company/dashboard" className="text-gray-700 hover:text-primary-600">
+              <Link href="/company" className="text-gray-700 hover:text-primary-600">
                 Dashboard
               </Link>
               <Link href="/company/profile" className="text-gray-700 hover:text-primary-600">
@@ -67,14 +69,24 @@ export default function Header() {
             </>
           )}
 
-          <div className="flex items-center gap-3 border-l border-gray-300 pl-6">
-            <span className="text-sm text-gray-600">{user.email}</span>
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-            >
-              Logout
-            </button>
+          <div className="flex items-center gap-6 border-l border-gray-300 pl-6">
+            <Link href="/notifications" className="relative text-gray-600 hover:text-primary-600">
+              <span className="text-2xl">🔔</span>
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                  {unreadCount}
+                </span>
+              )}
+            </Link>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-600 font-medium">{user.email}</span>
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition text-sm font-bold"
+              >
+                Sair
+              </button>
+            </div>
           </div>
         </nav>
       </div>

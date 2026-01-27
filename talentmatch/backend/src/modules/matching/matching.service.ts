@@ -1,5 +1,6 @@
 import { PrismaService } from '@database/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { EmbeddingsService } from '@modules/embeddings/embeddings.service';
 
 export interface MatchResult {
   id: string;
@@ -14,7 +15,10 @@ export interface MatchResult {
 
 @Injectable()
 export class MatchingService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private embeddingsService: EmbeddingsService,
+  ) {}
 
   /**
    * Calcula um score de matching entre um candidato e uma vaga (0-100)

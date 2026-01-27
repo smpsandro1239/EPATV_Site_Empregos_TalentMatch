@@ -1,20 +1,21 @@
 // src/providers/AuthProvider.tsx
 'use client';
 
-import { useCandidate } from '@/hooks/useCandidate';
-import { getAuthToken, getUserId, getUserRole, removeAuthToken } from '@/services/auth.service';
+import { apiClient } from '@/services/api';
+import { getAuthToken, getUserId, getUserRole, removeAuthToken, setAuthToken } from '@/services/auth.service';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface AuthUser {
   id: string;
   role: string;
-  email: string; // Assuming email is available, if not, adjust
+  email: string;
 }
 
 interface AuthContextType {
   user: AuthUser | null;
-  authToken?: string; // Add authToken here
-  login: (token: string, userId: string, role: string, email: string) => void;
+  authToken?: string;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string, role: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: () => boolean;
@@ -24,7 +25,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const { getProfileByUserId } = useCandidate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const userId = getUserId();
@@ -33,25 +34,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     if (userId && role && token) {
       setUser({ id: userId, role, email: localStorage.getItem('userEmail') || '' });
-      if (role === 'CANDIDATE') {
-        getProfileByUserId(userId);
-      }
     }
+    setIsLoading(false);
   }, []);
 
-  const login = (token: string, userId: string, role: string, email: string) => {
-    localStorage.setItem('token', token);
-    localStorage.setItem('userId', userId);
-    localStorage.setItem('userRole', role);
-    localStorage.setItem('userEmail', email);
-    setUser({ id: userId, role, email });
-    if (role === 'CANDIDATE') {
-      getProfileByUserId(userId);
-    }
+  const login = async (email: string, password: string) => {
+    const data = await apiClient.login({ email, password });
+
+    setAuthToken(data.access_token);
+    localStorage.setItem('refresh_token', data.refresh_token);
+    localStorage.setItem('userId', data.user.id);
+    localStorage.setItem('userRole', data.user.role);
+    localStorage.setItem('userEmail', data.user.email);
+
+    setUser({
+      id: data.user.id,
+      role: data.user.role,
+      email: data.user.email
+    });
   };
 
   const logout = () => {
     removeAuthToken();
+    localStorage.removeItem('refresh_token');
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
     localStorage.removeItem('userEmail');
@@ -63,13 +68,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const register = async (email: string, password: string, name: string, role: string) => {
-    // TODO: Implement registration logic
-    console.log('Registering...', { email, password, name, role });
+    const data = await apiClient.register({ email, password, name, role: role as any });
+
+    setAuthToken(data.access_token);
+    localStorage.setItem('refresh_token', data.refresh_token);
+    localStorage.setItem('userId', data.user.id);
+    localStorage.setItem('userRole', data.user.role);
+    localStorage.setItem('userEmail', data.user.email);
+
+    setUser({
+      id: data.user.id,
+      role: data.user.role,
+      email: data.user.email
+    });
   };
 
 
   return (
-    <AuthContext.Provider value={{ user, authToken: getAuthToken() ?? undefined, login, register, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, authToken: getAuthToken() ?? undefined, isLoading, login, register, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

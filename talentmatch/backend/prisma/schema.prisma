@@ -105,6 +105,7 @@ model CandidateProfile {
   applications       Application[]
   matchScores        MatchScore[]
   embeddings         Embedding[]
+  reviews            Review[]
 
   @@index([userId])
   @@index([location])
@@ -200,6 +201,7 @@ model Company {
   jobs        Job[]
   members     CompanyMember[]
   embeddings  Embedding[]
+  reviews     Review[]
 
   @@index([userId])
   @@index([name])
@@ -386,4 +388,22 @@ model AuditLog {
   @@index([userId])
   @@index([entityType])
   @@index([createdAt])
+}
+
+// ===== REVIEWS =====
+
+model Review {
+  id          String   @id @default(cuid())
+  companyId   String
+  candidateId String
+  rating      Int      // 1-5
+  comment     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company     Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  candidate   CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, candidateId])
+  @@index([companyId])
 }

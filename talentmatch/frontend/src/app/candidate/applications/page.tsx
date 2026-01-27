@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/Header';
+import Chat from '@/components/Chat';
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -34,12 +35,12 @@ const statusColors: { [key: string]: string } = {
 };
 
 const statusLabels: { [key: string]: string } = {
-  SUBMITTED: 'Submitted',
-  IN_REVIEW: 'In Review',
-  INTERVIEW: 'Interview',
-  OFFER: 'Offer',
-  HIRED: 'Hired',
-  REJECTED: 'Rejected',
+  SUBMITTED: 'Submetida',
+  IN_REVIEW: 'Em Revisão',
+  INTERVIEW: 'Entrevista',
+  OFFER: 'Proposta',
+  HIRED: 'Contratado',
+  REJECTED: 'Rejeitada',
 };
 
 export default function ApplicationsPage() {
@@ -48,6 +49,7 @@ export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeChat, setActiveChat] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoading && (!user || user.role !== 'CANDIDATE')) {
@@ -106,30 +108,30 @@ export default function ApplicationsPage() {
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">My Applications</h1>
-            <p className="text-lg text-gray-600">Track all your job applications in one place</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">As Minhas Candidaturas</h1>
+            <p className="text-lg text-gray-600">Acompanha todas as tuas candidaturas num só lugar</p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-gray-600 text-sm mb-1">Total Applications</p>
+              <p className="text-gray-600 text-sm mb-1">Total</p>
               <p className="text-3xl font-bold text-gray-900">{applications.length}</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-gray-600 text-sm mb-1">In Review</p>
+              <p className="text-gray-600 text-sm mb-1">Em Revisão</p>
               <p className="text-3xl font-bold text-yellow-600">
                 {applications.filter(a => a.status === 'IN_REVIEW').length}
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-gray-600 text-sm mb-1">Offers</p>
+              <p className="text-gray-600 text-sm mb-1">Propostas</p>
               <p className="text-3xl font-bold text-green-600">
                 {applications.filter(a => a.status === 'OFFER').length}
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-gray-600 text-sm mb-1">Rejected</p>
+              <p className="text-gray-600 text-sm mb-1">Rejeitadas</p>
               <p className="text-3xl font-bold text-red-600">
                 {applications.filter(a => a.status === 'REJECTED').length}
               </p>
@@ -198,13 +200,26 @@ export default function ApplicationsPage() {
                     </div>
                   </div>
 
-                  {application.job && (
-                    <Link
-                      href={`/jobs/${application.job.id}`}
-                      className="mt-4 inline-block text-primary-600 hover:text-primary-700 font-semibold"
+                  <div className="mt-4 flex gap-6 items-center">
+                    {application.job && (
+                      <Link
+                        href={`/jobs/${application.job.id}`}
+                        className="text-primary-600 hover:text-primary-700 font-semibold"
+                      >
+                        Ver Detalhes da Vaga →
+                      </Link>
+                    )}
+                    <button
+                        onClick={() => setActiveChat(activeChat === application.id ? null : application.id)}
+                        className="text-primary-600 hover:text-primary-700 font-semibold"
                     >
-                      View Job Details →
-                    </Link>
+                        {activeChat === application.id ? 'Fechar Chat' : 'Conversar com Empresa'}
+                    </button>
+                  </div>
+                  {activeChat === application.id && (
+                    <div className="mt-6 border-t pt-6">
+                        <Chat applicationId={application.id} />
+                    </div>
                   )}
                 </div>
               ))}
@@ -214,12 +229,12 @@ export default function ApplicationsPage() {
           {/* No Applications */}
           {!loading && applications.length === 0 && (
             <div className="bg-white rounded-lg shadow-md p-12 text-center">
-              <p className="text-lg text-gray-600 mb-6">You haven't applied to any jobs yet</p>
+              <p className="text-lg text-gray-600 mb-6">Ainda não te candidataste a nenhuma vaga.</p>
               <Link
                 href="/jobs"
                 className="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition"
               >
-                Browse Jobs
+                Procurar Vagas
               </Link>
             </div>
           )}

@@ -1,10 +1,59 @@
-// src/app/company/profile/page.tsx
+'use client';
 
-export default function CompanyProfile() {
+import Header from '@/components/Header';
+import CompanyProfileForm from '@/components/company/ProfileForm';
+import ReviewsSection from '@/components/company/ReviewsSection';
+import { useAuth } from '@/providers/AuthProvider';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+
+export default function CompanyProfilePage() {
+  const { user, isLoading, authToken } = useAuth();
+  const router = useRouter();
+  const [companyId, setCompanyId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user && authToken && user.role === 'COMPANY') {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies/by-user/${user.id}`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      }).then(res => res.json()).then(data => setCompanyId(data.id)).catch(() => {});
+    }
+  }, [user, authToken]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+
+  // Redirecionar se não estiver logado ou não for uma empresa
+  if (!user || user.role !== 'COMPANY') {
+    router.push('/auth/login');
+    return null;
+  }
+
+  if (!authToken) {
+    router.push('/auth/login');
+    return null;
+  }
+
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold">Company Profile</h1>
-      <p className="mt-4">Coming soon...</p>
-    </div>
+    <>
+      <Header />
+      <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 space-y-8">
+        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 sm:p-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">Perfil da Empresa</h1>
+          <CompanyProfileForm token={authToken} userId={user.id} />
+        </div>
+
+        {companyId && (
+          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 sm:p-8">
+            <ReviewsSection companyId={companyId} />
+          </div>
+        )}
+      </main>
+    </>
   );
 }

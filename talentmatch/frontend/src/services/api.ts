@@ -12,7 +12,7 @@ export const axiosInstance = axios.create({
 // Add request interceptor to include auth token
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -36,13 +36,13 @@ axiosInstance.interceptors.response.use(
             refresh_token: refreshToken,
           });
           const { access_token } = refreshResponse.data;
-          localStorage.setItem('access_token', access_token);
+          localStorage.setItem('token', access_token);
           // Retry the original request
           error.config.headers.Authorization = `Bearer ${access_token}`;
           return axiosInstance(error.config);
         } catch (refreshError) {
           // Refresh failed, redirect to login
-          localStorage.removeItem('access_token');
+          localStorage.removeItem('token');
           localStorage.removeItem('refresh_token');
           window.location.href = '/auth/login';
         }
@@ -134,6 +134,27 @@ class ApiClient {
 
     if (!response.ok) {
       throw new Error('Failed to get user');
+    }
+
+    return response.json();
+  }
+
+  async uploadFile(endpoint: string, file: File): Promise<{ url: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Upload failed');
     }
 
     return response.json();

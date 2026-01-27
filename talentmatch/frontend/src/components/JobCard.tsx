@@ -10,6 +10,8 @@ interface Job {
   remoteType: string;
   salaryMin?: number;
   salaryMax?: number;
+  matchScore?: number;
+  matchReason?: string;
   company: {
     id: string;
     name: string;
@@ -28,16 +30,26 @@ export default function JobCard({ job }: JobCardProps) {
       <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 h-full cursor-pointer">
         {/* Company Info */}
         <div className="flex items-start justify-between mb-4">
-          {job.company.logoUrl && (
-            <img
-              src={job.company.logoUrl}
-              alt={job.company.name}
-              className="w-12 h-12 rounded-lg object-cover"
-            />
+          <div className="flex gap-4">
+            {job.company.logoUrl && (
+              <img
+                src={job.company.logoUrl}
+                alt={job.company.name}
+                className="w-12 h-12 rounded-lg object-cover border"
+              />
+            )}
+            <div>
+              <span className="text-sm font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded">
+                {job.level}
+              </span>
+            </div>
+          </div>
+          {job.matchScore !== undefined && (
+            <div className="text-right">
+              <div className="text-xl font-bold text-green-600">{job.matchScore}%</div>
+              <div className="text-[10px] text-gray-500 uppercase font-bold">Match</div>
+            </div>
           )}
-          <span className="text-sm font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded">
-            {job.level}
-          </span>
         </div>
 
         {/* Job Title */}
@@ -54,28 +66,28 @@ export default function JobCard({ job }: JobCardProps) {
         {/* Job Details */}
         <div className="space-y-2 mb-4">
           <div className="flex items-center text-sm text-gray-600">
-            <span className="w-20">📍 Location:</span>
+            <span className="w-24 font-medium">📍 Local:</span>
             <span>{job.location}</span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
-            <span className="w-20">💼 Type:</span>
+            <span className="w-24 font-medium">💼 Contrato:</span>
             <span>{job.contractType}</span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
-            <span className="w-20">🌐 Remote:</span>
+            <span className="w-24 font-medium">🌐 Tipo:</span>
             <span>{job.remoteType}</span>
           </div>
           {job.salaryMin && job.salaryMax && (
             <div className="flex items-center text-sm text-gray-600">
-              <span className="w-20">💰 Salary:</span>
-              <span>${job.salaryMin.toLocaleString()} - ${job.salaryMax.toLocaleString()}</span>
+              <span className="w-24 font-medium">💰 Salário:</span>
+              <span>€{job.salaryMin.toLocaleString()} - €{job.salaryMax.toLocaleString()}</span>
             </div>
           )}
         </div>
 
         {/* Posted Date */}
         <p className="text-xs text-gray-500">
-          Posted {new Date(job.createdAt).toLocaleDateString()}
+          Publicada em {new Date(job.createdAt).toLocaleDateString()}
         </p>
       </div>
     </Link>

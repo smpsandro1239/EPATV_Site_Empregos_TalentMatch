@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGuards, BadRequestException } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CompaniesService } from './companies.service';
@@ -145,6 +145,32 @@ export class CompaniesController {
   }
 
   // Application Management
+  // Reviews
+  @Post(':id/reviews')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Add a review to a company' })
+  async addReview(
+    @Param('id') companyId: string,
+    @Request() req: any,
+    @Body('rating') rating: number,
+    @Body('comment') comment?: string,
+  ) {
+    // We need to find the candidateId for this user
+    const candidate = await (this.companiesService as any)._prisma.candidateProfile.findUnique({
+        where: { userId: req.user.userId }
+    });
+    if (!candidate) throw new BadRequestException('Only candidates can leave reviews');
+
+    return this.companiesService.addReview(companyId, candidate.id, rating, comment);
+  }
+
+  @Get(':id/reviews')
+  @ApiOperation({ summary: 'Get all reviews for a company' })
+  async getCompanyReviews(@Param('id') companyId: string) {
+    return this.companiesService.getCompanyReviews(companyId);
+  }
+
   @Get(':id/applications')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()

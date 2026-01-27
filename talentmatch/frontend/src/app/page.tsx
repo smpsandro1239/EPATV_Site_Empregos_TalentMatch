@@ -12,9 +12,9 @@ export default function Home() {
   useEffect(() => {
     if (!isLoading && user) {
       if (user.role === 'CANDIDATE') {
-        router.push('/candidate/dashboard');
+        router.push('/candidate');
       } else if (user.role === 'COMPANY') {
-        router.push('/company/dashboard');
+        router.push('/company');
       }
     }
   }, [user, isLoading, router]);
@@ -34,20 +34,20 @@ export default function Home() {
           TalentMatch
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Recruitment Platform with Intelligent Matching
+          Plataforma de Recrutamento com Matching Inteligente
         </p>
         <div className="flex gap-4 justify-center">
           <Link
             href="/auth/login"
-            className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition"
+            className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition shadow-lg"
           >
-            Login
+            Entrar
           </Link>
           <Link
             href="/auth/register"
-            className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition"
+            className="bg-white text-primary-600 border border-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition shadow-lg"
           >
-            Register
+            Registar
           </Link>
         </div>
       </div>

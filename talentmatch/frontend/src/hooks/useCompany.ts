@@ -31,7 +31,7 @@ export const useCompany = (): UseCompanyReturn => {
     setLoading(true);
     setError(null);
     try {
-      const data = await companyService.getProfile(id);
+      const data = await companyService.getProfileById(id);
       setCompany(data);
       return data;
     } catch (err: any) {

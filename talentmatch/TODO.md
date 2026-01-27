@@ -1,49 +1,63 @@
-# Project Todos for TalentMatch
+# Project Todos for TalentMatch (Updated)
 
-## Completed Tasks
+## 🟢 Completed Tasks
 
-- Started backend development server.
-- Tested backend API endpoints: `/jobs`, `/health`, `/companies`, `/candidates`.
-- Committed changes for basic API tests.
-- Updated frontend components: `JobCard.tsx`, `JobList.tsx`.
-- Developed frontend hooks and services.
-- Pushed changes to main branch.
-- **Refactored `Candidate` interface**: Added `id` property to `Candidate` interface in `talentmatch/frontend/src/types/candidate.ts`.
-- **Updated `CandidateDashboard` (`page.tsx`)**: Removed `any` casting for `candidateData.id` in `talentmatch/frontend/src/app/candidate/page.tsx`.
-- **Enhanced `QuickActions` component**: Added navigation logic to buttons in `talentmatch/frontend/src/components/candidate/QuickActions.tsx`.
-- **Refactored `RecentApplications` component**: Removed local `Application` interface and imported from shared types in `talentmatch/frontend/src/components/candidate/RecentApplications.tsx`.
-- **Refactored `RecommendedJobs` component**: Removed local `Job` interface and imported from shared types in `talentmatch/frontend/src/components/candidate/RecommendedJobs.tsx`.
-- **Analyzed `ApplicationsPage`**: Confirmed `talentmatch/frontend/src/app/candidate/applications/page.tsx` is well-developed.
+### Backend
+- **Authentication**: JWT-based system with Login, Register, Refresh, and Me endpoints.
+- **Roles**: RBAC implemented (CANDIDATE, COMPANY, ADMIN).
+- **Candidates**: CRUD for profiles, experiences, education, and skills.
+- **Companies**: CRUD for company profiles.
+- **Jobs**: CRUD for job postings and advanced filtering.
+- **Applications**: Full workflow for job applications.
+- **Matching**: Intelligent algorithm based on skills, location, level, and salary.
 
-## In Progress Tasks
+### Frontend
+- **Auth**: Functional Login and Register pages.
+- **Navigation**: Header with role-based links and logout.
+- **Candidate Dashboard**: Basic structure implemented.
+- **Candidate Profile**: Basic info editing form.
+- **Job Board**: Listing and detailed view of jobs.
+- **Job Creation**: Form for companies to post new jobs.
 
-- Analyzing existing frontend structure and routing for `frontend/src/app`.
-- Developing content for `/candidate/profile` and `/jobs`.
+---
 
-## Pending Tasks
+## 🟡 In Progress / Immediate Priority
 
-### Frontend Development
+### Frontend Integration
+- [x] **Candidate Profile**: Integrate Education, Experience, and Skills sections.
+- [x] **Company Profile**: Replace the current "Coming soon" placeholder with a functional profile editing form.
+- [x] **Dashboard Sync**: Replace placeholder data with real API calls for Recent Applications and Recommended Jobs.
+- [x] **Matching UI**: Display the match score and reasons in the candidate dashboard and company job detail.
+- [x] **Job Detail (Company)**: Page for companies to view specific job details and the list of matched candidates.
+- [x] **File Uploads**: Implement actual file storage for CVs and Company Logos.
 
-- Implement detailed content and functionality for the `/candidate/profile` page.
-- Implement detailed content and functionality for the `/jobs` listing page.
-- Develop content and functionality for other key pages (e.g., admin, company, job details, authentication pages).
-- Create a robust navigation system, considering different user roles.
+### Core Features
+- [x] **Real-time Notifications**: Socket.io integration for instant alerts.
+- [x] **Messaging System**: Chat functionality between candidates and companies.
+- [x] Admin Panel: Global management of users, jobs, and platform metrics.
+- [x] In-app Notifications: Internal alert system with UI.
+- [x] User Feedback: Toast notifications for all main actions.
 
-### Role & Permission Management
+---
 
-- Analyze and define roles (Admin, Candidate, Company) and their respective permissions for frontend access and backend interaction.
-- Implement frontend logic for role-based content display and access control.
+## 🔴 Pending / Future Phases
 
-### Workflow & User Experience
+### Notifications & Communication
+- [x] Email Integration: Automated emails for application status updates (Mock).
 
-- Verify and refine the user workflow for all roles (admin, candidate, company).
-- Ensure smooth navigation and logical flow between all pages after user login.
-- Implement login/logout functionality and secure session management.
+### Quality & Performance
+- [x] Polishing: Design refinements and animations (Framer Motion).
+- [x] Stability: Global error handling (ErrorBoundary) and language consistency.
+- [x] Testing: Unit tests for critical paths in the backend.
 
-### General
+### Advanced Features (Done)
+- [x] AI Integration: OpenAI assistance for Job Descriptions.
+- [x] AI Infrastructure: Embeddings and Semantic Matching base.
+- [x] Rating System: Company reviews and ratings.
 
-- Perform comprehensive testing of all new features and workflows.
-- Conduct code reviews to ensure quality and adherence to project conventions.
-- Address Phase 1B checklist items.
-- Database setup and migration for new features.
-- Deployment strategy for integrated frontend and backend.
+### DevOps & Next Steps (In Progress)
+- [x] CI/CD: GitHub Actions basic workflows.
+- [ ] Real Email: Resend/Postmark integration.
+
+---
+*Last update: January 27, 2026*
