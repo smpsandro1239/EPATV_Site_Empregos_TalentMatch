@@ -24,14 +24,14 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 ## 🔄 Fase 3: Matching & Candidaturas (Em Progresso)
 - [x] **Backend**: CRUD de Candidaturas e fluxo de estados (Submetido, Revisão, Aceite, Rejeitado).
 - [x] **Backend**: Algoritmo de Matching Inteligente (Skills, Localização, Nível, Salário).
-- [ ] **Frontend (Pendente)**: Exibir scores de matching na listagem geral de vagas para candidatos.
+- [x] **Frontend**: Exibir scores de matching na listagem geral de vagas para candidatos.
 - [x] **Frontend**: Página para empresas verem candidatos recomendados por vaga.
 - [x] **Frontend**: Secção de vagas recomendadas para candidatos baseada no matching (Dashboard).
 
-## ⏳ Fase 4: Notificações & Mensagens (Não Iniciado)
-- [ ] **Backend**: Notificações em tempo real usando Socket.io.
-- [ ] **Backend**: Sistema de Chat em tempo real entre empresas e candidatos.
-- [ ] **Frontend**: Interface de Chat e painel de notificações.
+## 🔄 Fase 4: Notificações & Mensagens (Em Progresso)
+- [x] **Backend**: Notificações em tempo real usando Socket.io.
+- [x] **Backend**: Sistema de Chat em tempo real entre empresas e candidatos.
+- [x] **Frontend**: Interface de Chat integrada nas candidaturas.
 - [ ] **Backend**: Integração de notificações por Email (ex: Resend/Postmark).
 
 ## ⏳ Fase 5: Admin & Polimento (Não Iniciado)

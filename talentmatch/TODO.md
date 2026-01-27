@@ -32,15 +32,14 @@
 - [x] **File Uploads**: Implement actual file storage for CVs and Company Logos.
 
 ### Core Features
-- [ ] **Real-time Notifications**: Socket.io integration for instant alerts.
+- [x] **Real-time Notifications**: Socket.io integration for instant alerts.
+- [x] **Messaging System**: Chat functionality between candidates and companies.
 
 ---
 
 ## 🔴 Pending / Future Phases
 
 ### Notifications & Communication
-- [ ] **Real-time Notifications**: Socket.io integration for instant alerts.
-- [ ] **Messaging System**: Chat functionality between candidates and companies.
 - [ ] **Email Integration**: Automated emails for application status updates.
 
 ### Admin & Quality

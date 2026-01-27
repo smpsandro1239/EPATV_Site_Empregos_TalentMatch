@@ -10,6 +10,8 @@ interface Job {
   remoteType: string;
   salaryMin?: number;
   salaryMax?: number;
+  matchScore?: number;
+  matchReason?: string;
   company: {
     id: string;
     name: string;
@@ -28,16 +30,26 @@ export default function JobCard({ job }: JobCardProps) {
       <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 h-full cursor-pointer">
         {/* Company Info */}
         <div className="flex items-start justify-between mb-4">
-          {job.company.logoUrl && (
-            <img
-              src={job.company.logoUrl}
-              alt={job.company.name}
-              className="w-12 h-12 rounded-lg object-cover"
-            />
+          <div className="flex gap-4">
+            {job.company.logoUrl && (
+              <img
+                src={job.company.logoUrl}
+                alt={job.company.name}
+                className="w-12 h-12 rounded-lg object-cover border"
+              />
+            )}
+            <div>
+              <span className="text-sm font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded">
+                {job.level}
+              </span>
+            </div>
+          </div>
+          {job.matchScore !== undefined && (
+            <div className="text-right">
+              <div className="text-xl font-bold text-green-600">{job.matchScore}%</div>
+              <div className="text-[10px] text-gray-500 uppercase font-bold">Match</div>
+            </div>
           )}
-          <span className="text-sm font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded">
-            {job.level}
-          </span>
         </div>
 
         {/* Job Title */}

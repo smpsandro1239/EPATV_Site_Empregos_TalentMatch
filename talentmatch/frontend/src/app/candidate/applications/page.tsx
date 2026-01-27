@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/Header';
+import Chat from '@/components/Chat';
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -48,6 +49,7 @@ export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeChat, setActiveChat] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoading && (!user || user.role !== 'CANDIDATE')) {
@@ -198,13 +200,26 @@ export default function ApplicationsPage() {
                     </div>
                   </div>
 
-                  {application.job && (
-                    <Link
-                      href={`/jobs/${application.job.id}`}
-                      className="mt-4 inline-block text-primary-600 hover:text-primary-700 font-semibold"
+                  <div className="mt-4 flex gap-6 items-center">
+                    {application.job && (
+                      <Link
+                        href={`/jobs/${application.job.id}`}
+                        className="text-primary-600 hover:text-primary-700 font-semibold"
+                      >
+                        Ver Detalhes da Vaga →
+                      </Link>
+                    )}
+                    <button
+                        onClick={() => setActiveChat(activeChat === application.id ? null : application.id)}
+                        className="text-primary-600 hover:text-primary-700 font-semibold"
                     >
-                      View Job Details →
-                    </Link>
+                        {activeChat === application.id ? 'Fechar Chat' : 'Conversar com Empresa'}
+                    </button>
+                  </div>
+                  {activeChat === application.id && (
+                    <div className="mt-6 border-t pt-6">
+                        <Chat applicationId={application.id} />
+                    </div>
                   )}
                 </div>
               ))}

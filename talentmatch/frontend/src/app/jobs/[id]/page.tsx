@@ -4,7 +4,9 @@ import Header from '@/components/Header';
 import { useAuth } from '@/providers/AuthProvider';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { matchingService } from '@/services/matchingService';
+import { useCandidate } from '@/hooks/useCandidate';
 
 interface JobDetail {
   id: string;
@@ -35,22 +37,18 @@ export default function JobDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { user } = useAuth();
+  const { profile, getProfileByUserId } = useCandidate();
   const jobId = params.id as string;
 
   const [job, setJob] = useState<JobDetail | null>(null);
+  const [matchInfo, setMatchInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [applying, setApplying] = useState(false);
   const [coverLetter, setCoverLetter] = useState('');
   const [appliedSuccessfully, setAppliedSuccessfully] = useState(false);
 
-  useEffect(() => {
-    if (jobId) {
-      fetchJobDetail();
-    }
-  }, [jobId]);
-
-  const fetchJobDetail = async () => {
+  const fetchJobDetail = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`);
@@ -58,6 +56,15 @@ export default function JobDetailPage() {
 
       const data = await response.json();
       setJob(data);
+
+      if (user?.role === 'CANDIDATE' && profile?.id) {
+        const recommended = await matchingService.getJobsForCandidate(profile.id);
+        const currentMatch = recommended.find(m => m.id === jobId);
+        if (currentMatch) {
+            setMatchInfo(currentMatch);
+        }
+      }
+
       setError('');
     } catch (err) {
       console.error('Error fetching job:', err);
@@ -66,7 +73,19 @@ export default function JobDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [jobId, user, profile]);
+
+  useEffect(() => {
+    if (jobId) {
+      fetchJobDetail();
+    }
+  }, [jobId, fetchJobDetail]);
+
+  useEffect(() => {
+    if (user?.id && user.role === 'CANDIDATE' && !profile) {
+      getProfileByUserId(user.id);
+    }
+  }, [user, profile, getProfileByUserId]);
 
   const handleApply = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,10 +185,23 @@ export default function JobDetailPage() {
                     <img
                       src={job.company.logoUrl}
                       alt={job.company.name}
-                      className="w-20 h-20 rounded-lg object-cover"
+                      className="w-20 h-20 rounded-lg object-cover border"
                     />
                   )}
                 </div>
+
+                {matchInfo && (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-green-800 font-bold text-lg">Compatibilidade Inteligente</h3>
+                      <p className="text-green-700 text-sm">{matchInfo.matchReason}</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-3xl font-black text-green-600">{matchInfo.matchScore}%</div>
+                      <div className="text-xs text-green-600 uppercase font-bold text-center">Score</div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Job Meta Info */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6 border-t border-b border-gray-200">

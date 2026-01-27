@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/Header';
+import Chat from '@/components/Chat';
 import { useAuth } from '@/providers/AuthProvider';
 import { matchingService, MatchResult } from '@/services/matchingService';
 import { useRouter } from 'next/navigation';
@@ -14,6 +15,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
   const [candidates, setCandidates] = useState<MatchResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeChat, setActiveChat] = useState<string | null>(null);
 
   const fetchJobDetails = useCallback(async () => {
     try {
@@ -133,8 +135,27 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                           }`}>
                             {candidate.applicationStatus}
                           </span>
-                          <button className="text-primary-600 hover:text-primary-700 font-medium">Ver Perfil Completo</button>
+                          <div className="flex gap-4">
+                            <button
+                                onClick={() => setActiveChat(candidate.applicationId || null)}
+                                className="text-primary-600 hover:text-primary-700 font-medium"
+                            >
+                                Chat
+                            </button>
+                            <button className="text-primary-600 hover:text-primary-700 font-medium">Ver Perfil Completo</button>
+                          </div>
                         </div>
+                        {activeChat === candidate.applicationId && (
+                            <div className="mt-4 border-t pt-4">
+                                <Chat applicationId={candidate.applicationId!} />
+                                <button
+                                    onClick={() => setActiveChat(null)}
+                                    className="mt-2 text-xs text-gray-500 hover:text-gray-700"
+                                >
+                                    Fechar Chat
+                                </button>
+                            </div>
+                        )}
                       </div>
                     ))}
                   </div>
