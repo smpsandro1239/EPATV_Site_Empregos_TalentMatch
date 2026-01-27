@@ -1,7 +1,7 @@
 'use client';
 
 import { apiClient } from '@/services/api';
-import { companyService } from '@/services/companyService';
+import { companiesService as companyService } from '@/services/companiesService';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 

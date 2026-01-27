@@ -26,6 +26,16 @@ export class AdminService {
       include: { company: { select: { name: true } } },
     });
 
+    // Dados para gráfico (vagas por mês - últimos 6 meses)
+    const months = [];
+    for (let i = 5; i >= 0; i--) {
+        const d = new Date();
+        d.setMonth(d.getMonth() - i);
+        months.push(d.toLocaleString('pt-PT', { month: 'short' }));
+    }
+
+    const jobsByMonth = months.map(m => ({ name: m, total: Math.floor(Math.random() * 50) + 10 })); // Mock data for now
+
     return {
       stats: {
         totalUsers,
@@ -36,6 +46,7 @@ export class AdminService {
       },
       recentUsers,
       recentJobs,
+      jobsByMonth,
     };
   }
 

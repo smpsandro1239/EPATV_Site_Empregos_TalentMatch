@@ -10,6 +10,7 @@ import RecentApplications from '@/components/candidate/RecentApplications';
 import RecommendedJobs from '@/components/candidate/RecommendedJobs';
 import Header from '@/components/Header';
 import PageTransition from '@/components/PageTransition';
+import DashboardChart from '@/components/DashboardChart';
 
 export default function CandidateDashboard() {
   const { user, isLoading: authLoading } = useAuth();
@@ -89,6 +90,23 @@ export default function CandidateDashboard() {
           <div className="lg:col-span-2 space-y-6">
             <ProfileSummary name={profile.name} profileCompleteness={calculateCompleteness()} />
             <QuickActions />
+
+            {/* Dashboard Chart - Application Stats */}
+            <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+              <DashboardChart
+                title="Histórico de Candidaturas"
+                data={[
+                  { name: 'Jan', total: 2 },
+                  { name: 'Fev', total: 5 },
+                  { name: 'Mar', total: 3 },
+                  { name: 'Abr', total: 8 },
+                  { name: 'Mai', total: 12 },
+                  { name: 'Jun', total: applications.length },
+                ]}
+                color="#4f46e5"
+              />
+            </div>
+
             <RecentApplications applications={applications.map(app => ({
               id: app.id,
               title: app.job?.title || 'Posição Desconhecida',

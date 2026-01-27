@@ -1,10 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MatchingService } from './matching.service';
 import { PrismaService } from '@database/prisma/prisma.service';
+import { EmbeddingsService } from '../embeddings/embeddings.service';
 
 describe('MatchingService', () => {
   let service: MatchingService;
   let prisma: PrismaService;
+
+  const mockEmbeddingsService = {
+    generateEmbedding: jest.fn().mockResolvedValue(new Array(1536).fill(0)),
+    calculateSimilarity: jest.fn().mockReturnValue(0.8),
+  };
 
   const mockPrismaService = {
     job: {
@@ -24,6 +30,7 @@ describe('MatchingService', () => {
       providers: [
         MatchingService,
         { provide: PrismaService, useValue: mockPrismaService },
+        { provide: EmbeddingsService, useValue: mockEmbeddingsService },
       ],
     }).compile();
 
@@ -39,7 +46,9 @@ describe('MatchingService', () => {
     it('should calculate a score correctly', async () => {
       // Since calculateMatchScore is private, we test it through public methods
       // or we can cast to any for direct testing of logic
-      const result = (service as any).calculateMatchScore(
+      const result = await (service as any).calculateMatchScore(
+        'candidate-id',
+        'job-id',
         ['React', 'Node.js'],
         ['React', 'Node.js', 'TypeScript'],
         'Lisboa',

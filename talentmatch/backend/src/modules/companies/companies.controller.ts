@@ -171,6 +171,14 @@ export class CompaniesController {
     return this.companiesService.getCompanyReviews(companyId);
   }
 
+  @Get(':id/stats')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get company dashboard statistics' })
+  async getCompanyStats(@Param('id') id: string) {
+    return this.companiesService.getCompanyStats(id);
+  }
+
   @Get(':id/applications')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()

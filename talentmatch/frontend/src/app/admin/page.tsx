@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
+import DashboardChart from '@/components/DashboardChart';
 
 export default function AdminDashboard() {
   const { user, isLoading } = useAuth();
@@ -84,6 +85,15 @@ export default function AdminDashboard() {
               <p className="text-gray-500 text-sm uppercase font-bold">Ações Pendentes</p>
               <p className="text-3xl font-bold">0</p>
             </div>
+          </div>
+
+          {/* Charts Section */}
+          <div className="mb-8">
+            <DashboardChart
+                data={stats.jobsByMonth}
+                title="Crescimento de Vagas (Últimos 6 meses)"
+                color="#10b981"
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

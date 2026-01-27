@@ -1,5 +1,6 @@
 import { PrismaService } from '@database/prisma/prisma.service';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { EmbeddingsService } from '@modules/embeddings/embeddings.service';
 
 export interface CreateCandidateProfileDto {
   userId: string;
@@ -45,7 +46,23 @@ export interface AddSkillDto {
 
 @Injectable()
 export class CandidatesService {
-  constructor(private _prisma: PrismaService) {}
+  constructor(
+    private _prisma: PrismaService,
+    private _embeddingsService: EmbeddingsService,
+  ) {}
+
+  private async updateCandidateEmbedding(candidateId: string) {
+    try {
+        const profile = await this.getProfile(candidateId);
+        const skills = profile.skills.map(s => s.skill.name).join(', ');
+        const experiences = profile.experiences.map(e => `${e.role} at ${e.companyName}`).join('; ');
+        const text = `${profile.headline || ''}. ${profile.about || ''}. Skills: ${skills}. Experience: ${experiences}`;
+
+        await this._embeddingsService.saveEmbedding('candidate', candidateId, text);
+    } catch (error) {
+        console.error('Falha ao atualizar embedding do candidato:', error);
+    }
+  }
 
   // Profil Candidato
   async createProfile(dto: CreateCandidateProfileDto) {
@@ -126,10 +143,13 @@ export class CandidatesService {
   }
 
   async updateProfile(candidateId: string, dto: UpdateCandidateProfileDto) {
-    return this._prisma.candidateProfile.update({
+    const profile = await this._prisma.candidateProfile.update({
       where: { id: candidateId },
       data: dto,
     });
+
+    await this.updateCandidateEmbedding(candidateId);
+    return profile;
   }
 
   // Experiência

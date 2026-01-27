@@ -2,20 +2,34 @@
 
 import { useAuth } from '@/providers/AuthProvider';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
+import { companiesService } from '@/services/companiesService';
+import DashboardChart from '@/components/DashboardChart';
 
 export default function CompanyDashboard() {
   const { user, isLoading } = useAuth();
   const router = useRouter();
+  const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
     if (!isLoading && (!user || user.role !== 'COMPANY')) {
       router.push('/auth/login');
+    } else if (user && user.role === 'COMPANY') {
+      loadStats();
     }
   }, [user, isLoading, router]);
+
+  const loadStats = async () => {
+    try {
+      const data = await companiesService.getDashboardStats();
+      setStats(data);
+    } catch (error) {
+      console.error('Erro ao carregar estatísticas:', error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -62,20 +76,42 @@ export default function CompanyDashboard() {
             <h3 className="text-sm font-semibold text-gray-600 mb-4">Estatísticas de Recrutamento</h3>
             <div className="space-y-4">
               <div>
-                <p className="text-3xl font-bold text-primary-600">0</p>
+                <p className="text-3xl font-bold text-primary-600">{stats?.activeJobs || 0}</p>
                 <p className="text-sm text-gray-600">Vagas Ativas</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-primary-600">0</p>
+                <p className="text-3xl font-bold text-primary-600">{stats?.totalApplications || 0}</p>
                 <p className="text-sm text-gray-600">Candidaturas</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-primary-600">0</p>
-                <p className="text-sm text-gray-600">Contratados</p>
+                <p className="text-3xl font-bold text-primary-600">{stats?.interviewsScheduled || 0}</p>
+                <p className="text-sm text-gray-600">Entrevistas</p>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Charts Section */}
+        {stats?.chartData && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <DashboardChart
+                data={stats.chartData}
+                title="Candidaturas por Mês"
+                dataKey="applications"
+                color="#2563eb"
+              />
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <DashboardChart
+                data={stats.chartData}
+                title="Visualizações de Vagas"
+                dataKey="views"
+                color="#10b981"
+              />
+            </div>
+          </div>
+        )}
 
         {/* Quick Actions */}
         <div className="bg-white rounded-lg shadow-lg p-6">

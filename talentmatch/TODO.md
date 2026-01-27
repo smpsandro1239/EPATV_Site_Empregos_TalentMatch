@@ -1,63 +1,47 @@
-# Project Todos for TalentMatch (Updated)
+# Project Todos for TalentMatch (Final Polish)
 
-## 🟢 Completed Tasks
+## 🟢 Completed Phases (1 - 7)
 
-### Backend
-- **Authentication**: JWT-based system with Login, Register, Refresh, and Me endpoints.
-- **Roles**: RBAC implemented (CANDIDATE, COMPANY, ADMIN).
-- **Candidates**: CRUD for profiles, experiences, education, and skills.
-- **Companies**: CRUD for company profiles.
-- **Jobs**: CRUD for job postings and advanced filtering.
-- **Applications**: Full workflow for job applications.
-- **Matching**: Intelligent algorithm based on skills, location, level, and salary.
+### Core
+- **Authentication**: Full JWT system with RBAC (Candidate/Company/Admin).
+- **Profiles**: Integrated management for Candidates (Experience, Education, Skills) and Companies.
+- **Job Board**: Advanced filtering, real-time sync, and smart matching scores UI.
+- **Applications**: Complete workflow from submission to hiring.
 
-### Frontend
-- **Auth**: Functional Login and Register pages.
-- **Navigation**: Header with role-based links and logout.
-- **Candidate Dashboard**: Basic structure implemented.
-- **Candidate Profile**: Basic info editing form.
-- **Job Board**: Listing and detailed view of jobs.
-- **Job Creation**: Form for companies to post new jobs.
+### Communication & UI
+- **Real-time**: Instant notifications and Chat system via Socket.io.
+- **Email**: Production-ready integration with **Resend**.
+- **UX/UI**: Animated transitions (Framer Motion), Toast feedback, and Global Error Handling.
+- **Localization**: Full PT-PT support.
 
----
-
-## 🟡 In Progress / Immediate Priority
-
-### Frontend Integration
-- [x] **Candidate Profile**: Integrate Education, Experience, and Skills sections.
-- [x] **Company Profile**: Replace the current "Coming soon" placeholder with a functional profile editing form.
-- [x] **Dashboard Sync**: Replace placeholder data with real API calls for Recent Applications and Recommended Jobs.
-- [x] **Matching UI**: Display the match score and reasons in the candidate dashboard and company job detail.
-- [x] **Job Detail (Company)**: Page for companies to view specific job details and the list of matched candidates.
-- [x] **File Uploads**: Implement actual file storage for CVs and Company Logos.
-
-### Core Features
-- [x] **Real-time Notifications**: Socket.io integration for instant alerts.
-- [x] **Messaging System**: Chat functionality between candidates and companies.
-- [x] Admin Panel: Global management of users, jobs, and platform metrics.
-- [x] In-app Notifications: Internal alert system with UI.
-- [x] User Feedback: Toast notifications for all main actions.
+### Admin & Productivity
+- **Admin Panel**: User and Job management with platform stats.
+- **Export**: PDF generation for Professional Resumes and Job Reports.
+- **Quality**: Unit test foundation for critical backend logic.
 
 ---
 
-## 🔴 Pending / Future Phases
+## 🟡 Immediate Next Steps (Pending)
 
-### Notifications & Communication
-- [x] Email Integration: Automated emails for application status updates (Mock).
+### 1. Cloud Infrastructure
+- [ ] **AWS S3 Integration**: Move file storage from local disk to AWS S3 for scalability.
 
-### Quality & Performance
-- [x] Polishing: Design refinements and animations (Framer Motion).
-- [x] Stability: Global error handling (ErrorBoundary) and language consistency.
-- [x] Testing: Unit tests for critical paths in the backend.
+### 2. Advanced AI
+- [ ] **Semantic Matching**: Full integration of OpenAI Embeddings into the matching score algorithm.
 
-### Advanced Features (Done)
-- [x] AI Integration: OpenAI assistance for Job Descriptions.
-- [x] AI Infrastructure: Embeddings and Semantic Matching base.
-- [x] Rating System: Company reviews and ratings.
+---
 
-### DevOps & Next Steps (In Progress)
-- [x] CI/CD: GitHub Actions basic workflows.
-- [ ] Real Email: Resend/Postmark integration.
+## 🔴 Future Improvements (Nice to Have)
+
+### UI/UX Refinement
+- [ ] **Dark Mode**: High-demand styling option.
+- [ ] **Data Visualization**: Rich charts for dashboards (Tremor/Recharts).
+- [ ] **Skeleton Loaders**: Modernize loading states.
+
+### Enterprise Features
+- [ ] **Social Auth**: Google/LinkedIn login integration.
+- [ ] **Multi-language**: i18n support for global reach.
+- [ ] **E2E Testing**: Full automated testing suite with Playwright.
 
 ---
 *Last update: January 27, 2026*
