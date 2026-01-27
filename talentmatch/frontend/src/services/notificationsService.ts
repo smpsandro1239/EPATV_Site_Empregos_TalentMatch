@@ -25,4 +25,8 @@ export const notificationsService = {
     const response = await axiosInstance.put(`/notifications/${id}/read`);
     return response.data;
   },
+
+  markAllAsRead: async (): Promise<void> => {
+    await axiosInstance.put('/notifications/mark-all-read');
+  },
 };

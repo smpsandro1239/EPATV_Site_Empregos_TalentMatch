@@ -1,188 +1,60 @@
-# TalentMatch - Recruitment Platform
+# TalentMatch - Plataforma de Recrutamento Inteligente
 
-Uma plataforma de recrutamento moderna com matching inteligente entre candidatos e vagas.
+O TalentMatch é uma solução moderna de recrutamento que utiliza Inteligência Artificial para ligar os melhores talentos às empresas certas através de um algoritmo de matching híbrido.
 
-## 🚀 Começar
+## 🚀 Novas Funcionalidades (v1.0)
 
-### Pré-requisitos
+- **Matching IA**: Algoritmo que combina competências técnicas e análise semântica (OpenAI) para calcular o score de compatibilidade.
+- **Chat em Tempo Real**: Comunicação direta entre recrutadores e candidatos via WebSockets.
+- **Dashboards Dinâmicos**: Visualização de métricas e estatísticas com gráficos interativos.
+- **Gestão de Documentos**: Sistema de upload para CVs e logótipos com exportação para PDF.
+- **IA Assistant**: Geração automática de descrições de vagas otimizadas.
 
-- Node.js 18+
-- PostgreSQL 16
-- Redis 7
-- Docker & Docker Compose
+## 🛠️ Stack Tecnológico
 
-### Setup Rápido
-
-#### 1. Instalar dependências
-
-```bash
-# Backend
-cd backend
-npm install
-
-# Frontend
-cd ../frontend
-npm install
-```
-
-#### 2. Iniciar serviços com Docker
-
-```bash
-cd ..
-docker-compose up -d
-```
-
-Verificar status:
-
-```bash
-docker-compose ps
-```
-
-#### 3. Setup do banco de dados
-
-```bash
-cd backend
-
-# Criar migração
-npm run prisma:migrate
-
-# Gerar Prisma Client
-npm run prisma:generate
-```
-
-#### 4. Iniciar o backend
-
-```bash
-npm run start:dev
-```
-
-Backend estará em: `http://localhost:3000`
-Docs Swagger: `http://localhost:3000/docs`
-
-#### 5. Iniciar o frontend
-
-```bash
-cd ../frontend
-npm run dev
-```
-
-Frontend estará em: `http://localhost:3001`
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Recharts.
+- **Backend**: NestJS, Prisma ORM, PostgreSQL, Socket.io.
+- **IA/Serviços**: OpenAI API (Embeddings & GPT-4), Resend (E-mail).
+- **Infraestrutura**: Docker, Redis (Cache/WebSockets).
 
 ## 📁 Estrutura do Projeto
 
 ```text
 /talentmatch
-├── backend/                # NestJS Backend
+├── backend/                # API NestJS
 │   ├── src/
-│   │   ├── config/        # Global configuration
-│   │   ├── common/        # Shared utilities (guards, pipes, etc)
-│   │   ├── modules/       # Feature modules
-│   │   ├── database/      # Prisma
-│   │   └── infra/         # External services (mail, storage)
-│   ├── prisma/
-│   │   └── schema.prisma
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── frontend/              # Next.js Frontend
+│   │   ├── modules/       # Auth, Jobs, Matching (IA), Chat, Notifications
+│   │   └── database/      # Prisma & PostgreSQL
+├── frontend/              # App Next.js
 │   ├── src/
-│   │   ├── app/          # Pages & routes
-│   │   ├── components/   # UI components
-│   │   ├── services/     # API services
-│   │   ├── hooks/        # React hooks
-│   │   └── types/        # TypeScript types
-│   ├── package.json
-│   └── tsconfig.json
-│
-└── docker-compose.yml     # Services (PostgreSQL, Redis, Meilisearch)
+│   │   ├── app/          # Dashboards (Admin, Company, Candidate)
+│   │   ├── components/   # UI & Gráficos
+│   │   └── services/     # Integração API & Sockets
+└── docker-compose.yml     # PostgreSQL, Redis, Meilisearch
 ```
 
-## 🔑 Configuração de Ambiente
+## ⚙️ Configuração
 
 ### Backend (.env)
-
 ```bash
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/talentmatch"
-JWT_SECRET="your-secret-key"
-REDIS_HOST="localhost"
+JWT_SECRET="seu_secret"
 OPENAI_API_KEY="sk-..."
+RESEND_API_KEY="re_..."
 ```
 
 ### Frontend (.env.local)
-
 ```bash
-NEXT_PUBLIC_API_URL="http://localhost:3000"
+NEXT_PUBLIC_API_URL="http://localhost:3001"
 ```
 
-## 📚 Documentação
+## 📊 Status das Fases
 
-- [Backend API Docs](/backend/docs/API.md)
-- [Database Schema](/backend/prisma/schema.prisma)
-- [Architecture](/docs/ARCHITECTURE.md)
-- [Deployment Guide](/docs/DEPLOYMENT.md)
+- [x] **Fase 1: Fundações** (Auth & Perfis) - **100%**
+- [x] **Fase 2: Vagas & Candidaturas** - **100%**
+- [x] **Fase 3: Matching Inteligente & IA** - **100%**
+- [x] **Fase 4: Dashboards, Chat & Notificações** - **100%**
+- [ ] **Fase 5: Premium & Expansão** (Stripe, i18n) - **Em Planeamento**
 
-## 🛠️ Stack Técnico
-
-- **Frontend**: Next.js 15, TypeScript, Tailwind CSS, React Hook Form
-- **Backend**: NestJS, TypeScript, Prisma, PostgreSQL
-- **Search**: Meilisearch
-- **Cache**: Redis
-- **Auth**: JWT + Refresh Tokens
-- **IA**: OpenAI Embeddings
-- **Infra**: Docker, Docker Compose
-
-## 📊 Fases do Desenvolvimento
-
-### ✅ Fase 1: Fundações (Auth + Perfis)
-
-- Autenticação
-- Perfis de candidato e empresa
-- Roles e permissões
-
-### 🔄 Fase 2: Vagas + Candidaturas
-
-- CRUD de vagas
-- Sistema de candidaturas
-- Listagens e filtros
-
-### 🔮 Fase 3: Matching Inteligente
-
-- Algoritmo de scoring
-- Embeddings semânticos
-- Recomendações
-
-### 📈 Fase 4: Notificações + Analytics
-
-- Sistema de notificações
-- Dashboards
-- Painel admin
-
-### 🚀 Fase 5: Premium + Monetização
-
-- Features premium
-- Sistema de pagamento
-- Multi-tenant
-
-## 📊 Status do Projeto
-
-**Desenvolvedor:** Sandro Pereira
-
-- **LinkedIn:** [https://linkedin.com/in/sandro-pereira-a5ab0236](https://linkedin.com/in/sandro-pereira-a5ab0236)
-- **Email:** <smpsandro1239@gmail.com>
-
-O projeto TalentMatch está em desenvolvimento ativo, com foco na criação de uma plataforma de recrutamento inteligente.
-
-## 🤝 Contribuindo
-
-1. Create a feature branch: `git checkout -b feature/amazing-feature`
-2. Commit changes: `git commit -m 'Add amazing feature'`
-3. Push branch: `git push origin feature/amazing-feature`
-4. Open a Pull Request
-
-## 📝 Licença
-
-Proprietary - Todos os direitos reservados
-
-## 📧 Suporte
-
-Para suporte, entre em contato com: <support@talentmatch.com>
+---
+Desenvolvido com foco em performance e inteligência artificial para o mercado de recrutamento moderno.

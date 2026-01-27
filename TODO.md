@@ -1,46 +1,50 @@
-# TalentMatch - TODO List & Status
+# TalentMatch - TODO List & Roadmap de Desenvolvimento
 
-Este documento regista o progresso das tarefas para a conclusão do projeto TalentMatch.
+Este documento detalha o progresso atual do projeto TalentMatch e as metas para o futuro.
 
-## 🟢 Concluído (✅)
+## 🟢 Concluído (✅) - Implementado nas últimas fases
 
 ### Backend (NestJS)
-- [x] **Autenticação & RBAC**: JWT, Roles (ADMIN, CANDIDATE, COMPANY).
-- [x] **Perfis**: CRUD para Candidatos e Empresas.
-- [x] **Vagas**: Gestão completa de anúncios de emprego.
-- [x] **Candidaturas**: Sistema de submissão e alteração de estado.
-- [x] **Matching Inteligente**:
-    - [x] Algoritmo híbrido (60% determinístico / 40% semântico).
-    - [x] Integração com OpenAI Embeddings.
-- [x] **Upload de Ficheiros**: Sistema para CVs e Logótipos (Multer).
-- [x] **Chat & Notificações**: Socket.io para mensagens em tempo real e notificações in-app.
-- [x] **Admin**: Estatísticas globais e moderação.
-- [x] **IA Assistant**: Melhoria de descrições e headlines via GPT-4.
-- [x] **Testes**: Suíte de testes unitários base para Auth, Jobs e Matching.
+- [x] **Matching Híbrido Avançado**: Integração de 60% lógica determinística (skills, localização, salário) com 40% matching semântico via OpenAI Embeddings.
+- [x] **Sistema de Chat em Tempo Real**: Implementação completa usando Socket.io com persistência em base de dados.
+- [x] **Centro de Notificações**: Notificações in-app (real-time) e integração base para e-mails via Resend.
+- [x] **Gestão de Ficheiros**: Upload real de CVs (PDF) e Logótipos de empresas usando Multer e armazenamento local seguro.
+- [x] **IA Assistant**: Rota para geração automática de descrições de vagas e headlines de candidatos usando GPT-4.
+- [x] **Moderação Admin**: Dashboards para gestão de utilizadores, moderação de vagas e visualização de métricas globais.
+- [x] **Testes Unitários**: Cobertura principal para serviços de Autenticação, Vagas e Matching.
 
 ### Frontend (Next.js)
-- [x] **UI/UX**: Design moderno com Tailwind CSS e Framer Motion.
-- [x] **Dashboards**:
-    - [x] Candidato: Resumo, candidaturas e recomendações.
-    - [x] Empresa: Gestão de vagas, candidatos e estatísticas (Charts).
-    - [x] Admin: Painel de controlo global com gráficos.
-- [x] **Feedback**: Notificações toast (react-hot-toast) e Error Boundaries.
-- [x] **Funcionalidades Extra**:
-    - [x] Exportação de CVs e Relatórios para PDF.
-    - [x] Filtros avançados de pesquisa.
+- [x] **Dashboards Interativos**:
+    - [x] Uso de **Recharts** para visualização de candidaturas e visualizações de vagas.
+    - [x] Painéis específicos para Admin, Empresa e Candidato.
+- [x] **Exportação de Dados**: Funcionalidade de download de CV em formato PDF e relatórios de vagas.
+- [x] **Experiência do Utilizador (UX)**:
+    - [x] Transições de página suaves com **Framer Motion**.
+    - [x] Sistema de feedback visual com **react-hot-toast**.
+    - [x] Tratamento de erros global com **ErrorBoundary**.
+- [x] **Localização**: Interface totalmente traduzida para Português (PT-PT).
 
-## 🟡 Em Progresso (🔄)
+## 🟡 Próximos Passos (Curto Prazo)
 
-- [ ] **Integração de Pagamentos**: Implementar Stripe para funcionalidades Premium.
-- [ ] **E-mails Transacionais**: Finalizar integração real com Resend (atualmente em mock).
-- [ ] **SEO & Performance**: Otimização de meta tags e Core Web Vitals.
+- [ ] **Integração com Stripe**: Implementar fluxos de subscrição para empresas (Planos Premium para maior visibilidade).
+- [ ] **Templates de E-mail**: Criar templates HTML profissionais para as notificações de e-mail (Boas-vindas, Nova Candidatura).
+- [ ] **Otimização de Pesquisa**: Integrar Meilisearch ou Algolia para pesquisa de vagas ultra-rápida.
 
-## 🔴 Pendente / Futuro (🚀)
+## 🔴 Melhorias Futuras & Sugestões (Roadmap 2.0)
 
-- [ ] **Aplicação Mobile**: Versão em React Native.
-- [ ] **Video Entrevistas**: Integração com WebRTC para entrevistas remotas.
-- [ ] **Multi-idioma (i18n)**: Suporte para Inglês e Espanhol.
+### 1. Funcionalidades Técnicas
+- [ ] **Entrevistas por Vídeo**: Integração de WebRTC para chamadas de vídeo diretamente na plataforma.
+- [ ] **Multi-idioma (i18n)**: Adicionar suporte para Inglês e Espanhol para expansão do mercado.
+- [ ] **App Mobile**: Desenvolvimento de aplicação nativa (React Native ou Flutter) para notificações push móveis.
+
+### 2. Inteligência Artificial (Avançado)
+- [ ] **Análise de Sentimento**: Analisar o tom das cartas de apresentação dos candidatos.
+- [ ] **Previsão Salarial**: Sugerir intervalos salariais baseados no mercado e nos requisitos da vaga.
+
+### 3. Analytics & SEO
+- [ ] **Dashboard de Retenção**: Métricas para empresas sobre o tempo médio de contratação.
+- [ ] **SEO Dinâmico**: Otimização automática de metatags para vagas públicas para indexação no Google Jobs.
 
 ---
-*Última atualização: Julho 2024*
-*Status: 90% Concluído*
+*Status Atual: ~92% Concluído*
+*Desenvolvido por Jules (AI Engineer) em colaboração com Sandro Pereira.*

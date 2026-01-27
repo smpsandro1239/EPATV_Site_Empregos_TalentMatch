@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 export default function NotificationsPage() {
   const { user, isLoading } = useAuth();
-  const { notifications, markAsRead } = useNotifications();
+  const { notifications, markAsRead, markAllAsRead, unreadCount } = useNotifications();
   const router = useRouter();
 
   useEffect(() => {
@@ -32,7 +32,17 @@ export default function NotificationsPage() {
       <Header />
       <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Notificações</h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">Notificações</h1>
+            {unreadCount > 0 && (
+              <button
+                onClick={markAllAsRead}
+                className="text-sm text-primary-600 hover:text-primary-700 font-semibold"
+              >
+                Marcar todas como lidas
+              </button>
+            )}
+          </div>
 
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {notifications.length === 0 ? (
