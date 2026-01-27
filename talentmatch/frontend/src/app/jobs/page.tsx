@@ -8,6 +8,8 @@ import { jobsService } from '@/services/jobsService';
 import { useEffect, useState, useCallback } from 'react';
 import { useCandidate } from '@/hooks/useCandidate';
 
+import PageTransition from '@/components/PageTransition';
+
 export default function JobsPage() {
   const { user } = useAuth();
   const { profile, getProfileByUserId } = useCandidate();
@@ -49,21 +51,23 @@ export default function JobsPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Explorar Vagas</h1>
-            <p className="text-lg text-gray-600">Encontra a tua próxima oportunidade profissional</p>
-          </div>
+      <PageTransition>
+        <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-8">
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Explorar Vagas</h1>
+              <p className="text-lg text-gray-600">Encontra a tua próxima oportunidade profissional</p>
+            </div>
 
-          <JobList
-            jobs={jobs}
-            loading={loading}
-            error={error}
-            onClearFilters={() => fetchJobs()}
-          />
-        </div>
-      </main>
+            <JobList
+              jobs={jobs}
+              loading={loading}
+              error={error}
+              onClearFilters={() => fetchJobs()}
+            />
+          </div>
+        </main>
+      </PageTransition>
     </>
   );
 }

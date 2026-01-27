@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import JobCard from './JobCard';
 
 interface Job {
@@ -45,24 +46,46 @@ export default function JobList({ jobs, loading, error, onClearFilters }: JobLis
   if (jobs.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-lg text-gray-600">No jobs found matching your criteria</p>
+        <p className="text-lg text-gray-600">Não foram encontradas vagas correspondentes aos teus critérios</p>
         {onClearFilters && (
           <button
             onClick={onClearFilters}
-            className="mt-4 text-primary-600 hover:text-primary-700 font-semibold"
+            className="mt-4 text-primary-600 hover:text-primary-700 font-semibold transition"
           >
-            Clear filters
+            Limpar filtros
           </button>
         )}
       </div>
     );
   }
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+    >
       {jobs.map((job) => (
-        <JobCard key={job.id} job={job} />
+        <motion.div key={job.id} variants={item}>
+          <JobCard job={job} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

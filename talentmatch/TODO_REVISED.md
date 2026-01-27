@@ -37,12 +37,19 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 ## ✅ Fase 5: Admin & Polimento (Concluído)
 - [x] **Full-stack**: Painel de Administração (Moderação de utilizadores/vagas, métricas globais).
 
-## ✅ Fase 6: Refinamento & UX (Em Progresso)
+## ✅ Fase 6: Refinamento & UX (Concluído)
 - [x] **Frontend**: Sistema de Notificações Internas (Sino no Header e Página Dedicada).
 - [x] **UX/UI**: Feedback visual melhorado com Toasts (Sucesso/Erro).
-- [ ] **UX/UI**: Refinamento de design e animações (Framer Motion).
-- [ ] **Qualidade**: Testes unitários e E2E abrangentes (Jest, Playwright).
-- [ ] **Estabilidade**: Tratamento de erros global e validações rigorosas.
+
+## ✅ Fase 7: Qualidade & Polimento Final (Concluído)
+- [x] **UX/UI**: Refinamento de design e animações (Framer Motion).
+- [x] **Qualidade**: Implementação de testes unitários base no Backend.
+- [x] **Estabilidade**: Tratamento de erros global (ErrorBoundary) e consistência linguística (PT-PT).
+
+## 🚀 Fase 8: Produção & Expansão (Próximo)
+- [ ] **Infraestrutura**: Configuração de CI/CD para Deploy automático.
+- [ ] **Funcionalidade**: Matching semântico avançado com IA (OpenAI Embeddings).
+- [ ] **Funcionalidade**: Exportação de currículos e relatórios de vagas.
 
 ---
 *Atualizado em: 24 de Janeiro de 2026*

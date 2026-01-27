@@ -16,7 +16,7 @@ interface RecentApplicationsProps {
 
 const RecentApplications = ({ applications }: RecentApplicationsProps) => (
   <div className="bg-white p-6 rounded-lg shadow">
-    <h3 className="text-xl font-semibold mb-4">Recent Applications</h3>
+    <h3 className="text-xl font-semibold mb-4">Candidaturas Recentes</h3>
     <ul className="space-y-4">
       {applications.map(app => (
         <li key={app.id} className="flex justify-between items-center">
@@ -35,8 +35,8 @@ const RecentApplications = ({ applications }: RecentApplicationsProps) => (
         </li>
       ))}
     </ul>
-    <Link href="/candidate/applications" className="text-blue-500 hover:underline mt-4 inline-block">
-      View all applications
+    <Link href="/candidate/applications" className="text-blue-600 hover:underline mt-4 inline-block font-medium">
+      Ver todas as candidaturas
     </Link>
   </div>
 );

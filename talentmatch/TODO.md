@@ -46,8 +46,9 @@
 - [x] Email Integration: Automated emails for application status updates (Mock).
 
 ### Quality & Performance
-- [ ] **Testing**: Implementation of Unit and E2E tests for critical paths.
-- [ ] Polishing: Design refinements and animations.
+- [x] Polishing: Design refinements and animations (Framer Motion).
+- [x] Stability: Global error handling (ErrorBoundary) and language consistency.
+- [ ] Testing: Implementation of Unit and E2E tests for critical paths (Backend Spec tests started).
 
 ---
 *Last update: January 24, 2026*

@@ -1,6 +1,7 @@
 import { AuthProvider } from '@/providers/AuthProvider';
 import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -16,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body>
-        <AuthProvider>
-          {children}
-          <Toaster position="bottom-right" />
-        </AuthProvider>
+        <ErrorBoundary>
+          <AuthProvider>
+            {children}
+            <Toaster position="bottom-right" />
+          </AuthProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

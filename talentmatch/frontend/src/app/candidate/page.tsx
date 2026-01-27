@@ -9,6 +9,7 @@ import QuickActions from '@/components/candidate/QuickActions';
 import RecentApplications from '@/components/candidate/RecentApplications';
 import RecommendedJobs from '@/components/candidate/RecommendedJobs';
 import Header from '@/components/Header';
+import PageTransition from '@/components/PageTransition';
 
 export default function CandidateDashboard() {
   const { user, isLoading: authLoading } = useAuth();
@@ -80,8 +81,9 @@ export default function CandidateDashboard() {
   return (
     <>
       <Header />
-      <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-3xl font-bold mb-6">Dashboard do Candidato</h1>
+      <PageTransition>
+        <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+          <h1 className="text-3xl font-bold mb-6">O Meu Painel</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
@@ -102,9 +104,10 @@ export default function CandidateDashboard() {
               company: job.company?.name || 'Empresa Desconhecida',
               matchScore: job.matchScore
             }))} />
+            </div>
           </div>
         </div>
-      </div>
+      </PageTransition>
     </>
   );
 }

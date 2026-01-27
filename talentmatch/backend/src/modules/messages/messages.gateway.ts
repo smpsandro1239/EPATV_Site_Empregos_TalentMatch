@@ -18,7 +18,7 @@ import { ConfigService } from '@nestjs/config';
 })
 export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
-  server: Server;
+  server!: Server;
 
   private connectedUsers: Map<string, string> = new Map(); // userId -> socketId
 

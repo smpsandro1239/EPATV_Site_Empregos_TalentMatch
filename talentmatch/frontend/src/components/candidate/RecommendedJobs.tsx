@@ -16,7 +16,7 @@ interface RecommendedJobsProps {
 
 const RecommendedJobs = ({ jobs }: RecommendedJobsProps) => (
     <div className="bg-white p-6 rounded-lg shadow">
-        <h3 className="text-xl font-semibold mb-4">Recommended Jobs</h3>
+        <h3 className="text-xl font-semibold mb-4">Vagas Recomendadas</h3>
         <ul className="space-y-4">
             {jobs.map(job => (
                 <li key={job.id} className="flex justify-between items-center">
@@ -29,14 +29,14 @@ const RecommendedJobs = ({ jobs }: RecommendedJobsProps) => (
                             </span>
                         )}
                     </div>
-                    <Link href={`/jobs/${job.id}`} className="text-blue-500 hover:underline">
-                        View
+                    <Link href={`/jobs/${job.id}`} className="text-blue-600 hover:underline font-medium">
+                        Ver
                     </Link>
                 </li>
             ))}
         </ul>
-        <Link href="/jobs" className="text-blue-500 hover:underline mt-4 inline-block">
-            Browse all jobs
+        <Link href="/jobs" className="text-blue-600 hover:underline mt-4 inline-block font-medium">
+            Ver todas as vagas
         </Link>
     </div>
 );

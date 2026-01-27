@@ -63,6 +63,7 @@
     "@types/jest": "^29.5.11",
     "@types/node": "^20.19.30",
     "@types/supertest": "^6.0.2",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "eslint": "^8.56.0",
@@ -86,6 +87,12 @@
       "ts"
     ],
     "rootDir": "src",
+    "moduleNameMapper": {
+      "^@database/(.*)$": "<rootDir>/database/$1",
+      "^@modules/(.*)$": "<rootDir>/modules/$1",
+      "^@common/(.*)$": "<rootDir>/common/$1",
+      "^@infra/(.*)$": "<rootDir>/infra/$1"
+    },
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

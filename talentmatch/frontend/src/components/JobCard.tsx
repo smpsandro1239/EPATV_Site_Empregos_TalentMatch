@@ -66,28 +66,28 @@ export default function JobCard({ job }: JobCardProps) {
         {/* Job Details */}
         <div className="space-y-2 mb-4">
           <div className="flex items-center text-sm text-gray-600">
-            <span className="w-20">📍 Location:</span>
+            <span className="w-24 font-medium">📍 Local:</span>
             <span>{job.location}</span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
-            <span className="w-20">💼 Type:</span>
+            <span className="w-24 font-medium">💼 Contrato:</span>
             <span>{job.contractType}</span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
-            <span className="w-20">🌐 Remote:</span>
+            <span className="w-24 font-medium">🌐 Tipo:</span>
             <span>{job.remoteType}</span>
           </div>
           {job.salaryMin && job.salaryMax && (
             <div className="flex items-center text-sm text-gray-600">
-              <span className="w-20">💰 Salary:</span>
-              <span>${job.salaryMin.toLocaleString()} - ${job.salaryMax.toLocaleString()}</span>
+              <span className="w-24 font-medium">💰 Salário:</span>
+              <span>€{job.salaryMin.toLocaleString()} - €{job.salaryMax.toLocaleString()}</span>
             </div>
           )}
         </div>
 
         {/* Posted Date */}
         <p className="text-xs text-gray-500">
-          Posted {new Date(job.createdAt).toLocaleDateString()}
+          Publicada em {new Date(job.createdAt).toLocaleDateString()}
         </p>
       </div>
     </Link>
