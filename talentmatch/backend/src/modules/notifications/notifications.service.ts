@@ -2,14 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '@database/prisma/prisma.service';
 import { MessagesGateway } from '@modules/messages/messages.gateway';
+import { Resend } from 'resend';
 
 @Injectable()
 export class NotificationsService {
+  private resend: Resend | null = null;
+
   constructor(
     private configService: ConfigService,
     private prisma: PrismaService,
     private gateway: MessagesGateway,
-  ) {}
+  ) {
+    const apiKey = this.configService.get('RESEND_API_KEY');
+    if (apiKey) {
+      this.resend = new Resend(apiKey);
+    }
+  }
 
   async createNotification(userId: string, type: string, title: string, body: string) {
     const notification = await this.prisma.notification.create({
@@ -46,19 +54,26 @@ export class NotificationsService {
   }
 
   async sendEmail(to: string, subject: string, body: string) {
-    const apiKey = this.configService.get('RESEND_API_KEY');
-
-    if (!apiKey) {
-      console.log('--- MOCK EMAIL ---');
+    if (!this.resend) {
+      console.log('--- MOCK EMAIL (Set RESEND_API_KEY for real emails) ---');
       console.log(`To: ${to}`);
       console.log(`Subject: ${subject}`);
       console.log(`Body: ${body}`);
-      console.log('------------------');
+      console.log('------------------------------------------------------');
       return;
     }
 
-    // Actual Resend implementation would go here
-    console.log(`Sending real email to ${to} via Resend...`);
+    try {
+      await this.resend.emails.send({
+        from: 'TalentMatch <onboarding@resend.dev>',
+        to,
+        subject,
+        html: `<p>${body}</p>`,
+      });
+      console.log(`Email enviado com sucesso para ${to}`);
+    } catch (error) {
+      console.error('Falha ao enviar email via Resend:', error);
+    }
   }
 
   async notifyNewApplication(candidateName: string, jobTitle: string, companyEmail: string) {

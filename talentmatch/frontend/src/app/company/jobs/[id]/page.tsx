@@ -7,6 +7,8 @@ import { matchingService, MatchResult } from '@/services/matchingService';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { exportToPdf } from '@/utils/pdfExport';
+import { toast } from 'react-hot-toast';
 
 export default function JobDetailPage({ params }: { params: { id: string } }) {
   const { user, isLoading, authToken } = useAuth();
@@ -68,11 +70,20 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
     );
   }
 
+  const handleExportReport = async () => {
+    try {
+      await exportToPdf('job-report', `relatorio-vaga-${params.id}`);
+      toast.success('Relatório exportado!');
+    } catch (error) {
+      toast.error('Erro ao exportar relatório');
+    }
+  };
+
   return (
     <>
       <Header />
       <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
-        <div className="max-w-6xl mx-auto">
+        <div id="job-report" className="max-w-6xl mx-auto">
           <div className="mb-8">
             <Link href="/company/jobs" className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block">
               ← Voltar para as minhas vagas
@@ -189,6 +200,12 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                   >
                     Editar Vaga
                   </Link>
+                  <button
+                    onClick={handleExportReport}
+                    className="w-full py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition font-bold"
+                  >
+                    Exportar Relatório PDF
+                  </button>
                   <button className="w-full py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition">
                     Fechar Vaga
                   </button>

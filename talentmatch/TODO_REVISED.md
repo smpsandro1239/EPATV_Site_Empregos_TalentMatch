@@ -51,11 +51,11 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 - [x] **IA**: Infraestrutura para Embeddings e Matching Semântico.
 - [x] **Funcionalidade**: Sistema de Reviews/Avaliações para empresas.
 
-## 🔄 Fase 9: Produção & DevOps (Em Progresso)
+## ✅ Fase 9: Produção & DevOps (Concluído)
 - [x] **Infraestrutura**: Configuração de CI/CD (GitHub Actions).
-- [ ] **Funcionalidade**: Exportação de currículos e relatórios de vagas.
-- [ ] **Email**: Integração real com Resend/Postmark.
-- [ ] **Storage**: Integração com AWS S3 para ficheiros.
+- [x] **Funcionalidade**: Exportação de currículos e relatórios de vagas (PDF).
+- [x] **Email**: Integração real com Resend.
+- [ ] **Storage**: Integração com AWS S3 para ficheiros (Pendente).
 
 ---
 *Atualizado em: 24 de Janeiro de 2026*
