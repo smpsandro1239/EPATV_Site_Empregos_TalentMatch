@@ -1,50 +1,63 @@
-# TalentMatch - TODO List & Roadmap de Desenvolvimento
+# TalentMatch - Roadmap & TODO List
 
-Este documento detalha o progresso atual do projeto TalentMatch e as metas para o futuro.
+Este documento regista o progresso de desenvolvimento da plataforma TalentMatch, uma solução de recrutamento inteligente com matching semântico e IA.
 
-## 🟢 Concluído (✅) - Implementado nas últimas fases
+---
 
-### Backend (NestJS)
-- [x] **Matching Híbrido Avançado**: Integração de 60% lógica determinística (skills, localização, salário) com 40% matching semântico via OpenAI Embeddings.
-- [x] **Sistema de Chat em Tempo Real**: Implementação completa usando Socket.io com persistência em base de dados.
-- [x] **Centro de Notificações**: Notificações in-app (real-time) e integração base para e-mails via Resend.
-- [x] **Gestão de Ficheiros**: Upload real de CVs (PDF) e Logótipos de empresas usando Multer e armazenamento local seguro.
-- [x] **IA Assistant**: Rota para geração automática de descrições de vagas e headlines de candidatos usando GPT-4.
-- [x] **Moderação Admin**: Dashboards para gestão de utilizadores, moderação de vagas e visualização de métricas globais.
-- [x] **Testes Unitários**: Cobertura principal para serviços de Autenticação, Vagas e Matching.
+## 🟢 Concluído (✅)
 
-### Frontend (Next.js)
-- [x] **Dashboards Interativos**:
-    - [x] Uso de **Recharts** para visualização de candidaturas e visualizações de vagas.
-    - [x] Painéis específicos para Admin, Empresa e Candidato.
-- [x] **Exportação de Dados**: Funcionalidade de download de CV em formato PDF e relatórios de vagas.
-- [x] **Experiência do Utilizador (UX)**:
-    - [x] Transições de página suaves com **Framer Motion**.
-    - [x] Sistema de feedback visual com **react-hot-toast**.
-    - [x] Tratamento de erros global com **ErrorBoundary**.
-- [x] **Localização**: Interface totalmente traduzida para Português (PT-PT).
+### 🧩 Fase 1: Fundamentos (Auth + Perfis)
+- [x] **Autenticação**: Login/Registo, JWT + Refresh Tokens, RBAC (Candidato, Empresa, Admin).
+- [x] **Perfis de Candidato**: Dados básicos, experiência, educação, skills e preferências.
+- [x] **Perfis de Empresa**: Dados básicos, website, localização e branding inicial (Logo).
+- [x] **Upload de Ficheiros**: Sistema funcional para CVs (PDF) e Logótipos (Multer).
 
-## 🟡 Próximos Passos (Curto Prazo)
+### 🧩 Fase 2: Vagas + Candidaturas
+- [x] **CRUD de Vagas**: Criação, edição, publicação e alteração de estados (Published, Paused, Closed).
+- [x] **Sistema de Candidaturas**: Fluxo completo de submissão e gestão de estados pela empresa.
+- [x] **Pesquisa & Filtros**: Listagem de vagas com filtros por localização, nível e tipo de contrato.
 
-- [ ] **Integração com Stripe**: Implementar fluxos de subscrição para empresas (Planos Premium para maior visibilidade).
-- [ ] **Templates de E-mail**: Criar templates HTML profissionais para as notificações de e-mail (Boas-vindas, Nova Candidatura).
-- [ ] **Otimização de Pesquisa**: Integrar Meilisearch ou Algolia para pesquisa de vagas ultra-rápida.
+### 🧩 Fase 3: Matching Inteligente + IA
+- [x] **Algoritmo de Matching Híbrido**: 60% determinístico (skills/salário) + 40% semântico.
+- [x] **Integração OpenAI**:
+    - [x] Geração de Embeddings para candidatos e vagas.
+    - [x] IA Assistant para melhoria de descrições e perfis.
+- [x] **Explicação de Score**: Visualização do match score nos dashboards.
+
+### 🧩 Fase 4: Comunicação, Notificações & Admin
+- [x] **Chat em Tempo Real**: Mensagens diretas entre empresa e candidato via WebSockets (Socket.io).
+- [x] **Centro de Notificações**: Notificações em tempo real e integração base com Resend (Mock fallback).
+- [x] **Admin Dashboard**: Gestão de utilizadores, vagas e métricas globais da plataforma.
+- [x] **Analytics**: Gráficos dinâmicos (Recharts) em todos os dashboards.
+- [x] **Exportação**: Geração de PDF para currículos e relatórios de recrutamento.
+
+---
+
+## 🟡 Próximos Passos (Próximo Sprint)
+
+### 🧩 Fase 5: Premium, Monetização & Multi-Tenant
+- [ ] **Integração Stripe**: Checkout e subscrições para empresas (Planos Free, Pro, Enterprise).
+- [ ] **Limites por Plano**: Restringir número de vagas e acesso a IA avançada por subscrição.
+- [ ] **Gestão de Equipa**: Permitir múltiplos recrutadores na mesma conta de empresa.
+- [ ] **Branding por Tenant**: Personalização de cores e subdomínios para empresas Enterprise.
+
+---
 
 ## 🔴 Melhorias Futuras & Sugestões (Roadmap 2.0)
 
-### 1. Funcionalidades Técnicas
-- [ ] **Entrevistas por Vídeo**: Integração de WebRTC para chamadas de vídeo diretamente na plataforma.
-- [ ] **Multi-idioma (i18n)**: Adicionar suporte para Inglês e Espanhol para expansão do mercado.
-- [ ] **App Mobile**: Desenvolvimento de aplicação nativa (React Native ou Flutter) para notificações push móveis.
+### 1. Tecnologia & Infraestrutura
+- [ ] **Aplicação Mobile**: Desenvolvimento em React Native para notificações push.
+- [ ] **Otimização de Pesquisa**: Integrar Meilisearch para pesquisa "fuzzy" ultra-rápida.
+- [ ] **Multi-idioma (i18n)**: Suporte para Inglês e Espanhol.
 
-### 2. Inteligência Artificial (Avançado)
-- [ ] **Análise de Sentimento**: Analisar o tom das cartas de apresentação dos candidatos.
-- [ ] **Previsão Salarial**: Sugerir intervalos salariais baseados no mercado e nos requisitos da vaga.
+### 2. Experiência do Utilizador (UX)
+- [ ] **Video Entrevistas**: Integração de WebRTC para entrevistas remotas na plataforma.
+- [ ] **Templates de E-mail**: E-mails transacionais com design profissional (HTML).
 
-### 3. Analytics & SEO
-- [ ] **Dashboard de Retenção**: Métricas para empresas sobre o tempo médio de contratação.
-- [ ] **SEO Dinâmico**: Otimização automática de metatags para vagas públicas para indexação no Google Jobs.
+### 3. Inteligência Artificial (Avançado)
+- [ ] **Análise de Sentimento**: Avaliação automatizada de cartas de apresentação.
+- [ ] **Previsão Salarial**: Sugestões baseadas em tendências de mercado.
 
 ---
-*Status Atual: ~92% Concluído*
-*Desenvolvido por Jules (AI Engineer) em colaboração com Sandro Pereira.*
+*Status: 92% Concluído (MVP Pronto para Produção)*
+*Última atualização: Julho 2024*
