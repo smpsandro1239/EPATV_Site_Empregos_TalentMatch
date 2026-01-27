@@ -1,6 +1,6 @@
 import { axiosInstance } from './api';
 
-export interface CompanyProfile {
+export interface Company {
   id: string;
   userId: string;
   name: string;
@@ -15,6 +15,22 @@ export interface CompanyProfile {
   updatedAt: string;
 }
 
+export type CompanyProfile = Company;
+
+export interface Job {
+  id: string;
+  title: string;
+  description: string;
+  responsibilities: string;
+  requirementsMust: string;
+  location: string;
+  level: string;
+  contractType: string;
+  remoteType: string;
+  status: string;
+  companyId: string;
+}
+
 export interface CompanyUpdateInput {
   name?: string;
   location?: string;
@@ -25,25 +41,40 @@ export interface CompanyUpdateInput {
 }
 
 export const companyService = {
-  async getProfile(token: string): Promise<CompanyProfile> {
+  async getProfile(userId?: string): Promise<CompanyProfile> {
     try {
-      const { data } = await axiosInstance.get('/company/profile', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
+      const url = userId ? `/companies/by-user/${userId}` : '/companies/profile';
+      const { data } = await axiosInstance.get(url);
       return data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to fetch company profile');
     }
   },
 
-  async updateProfile(profile: Partial<CompanyProfile>, token: string): Promise<CompanyProfile> {
+  async getProfileById(id: string): Promise<CompanyProfile> {
     try {
-      const { data } = await axiosInstance.patch('/company/profile', profile, {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
+      const { data } = await axiosInstance.get(`/companies/${id}`);
+      return data;
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || 'Failed to fetch company profile');
+    }
+  },
+
+  async updateProfile(id: string, profile: Partial<CompanyProfile>): Promise<CompanyProfile> {
+    try {
+      const { data } = await axiosInstance.put(`/companies/${id}`, profile);
       return data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to update company profile');
+    }
+  },
+
+  async createProfile(profile: Partial<CompanyProfile>): Promise<CompanyProfile> {
+    try {
+      const { data } = await axiosInstance.post('/companies', profile);
+      return data;
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || 'Failed to create company profile');
     }
   },
 
@@ -51,7 +82,7 @@ export const companyService = {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const { data } = await axiosInstance.post('/company/upload-logo', formData, {
+      const { data } = await axiosInstance.post('/companies/upload-logo', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -61,5 +92,39 @@ export const companyService = {
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to upload logo');
     }
+  },
+
+  async createJob(companyId: string, job: Partial<Job>): Promise<Job> {
+    const { data } = await axiosInstance.post(`/companies/${companyId}/jobs`, job);
+    return data;
+  },
+
+  async getCompanyJobs(companyId: string): Promise<{ data: Job[] }> {
+    const { data } = await axiosInstance.get(`/companies/${companyId}/jobs`);
+    return { data: Array.isArray(data) ? data : data.data || [] };
+  },
+
+  async updateJob(jobId: string, job: Partial<Job>): Promise<Job> {
+    const { data } = await axiosInstance.put(`/companies/jobs/${jobId}`, job);
+    return data;
+  },
+
+  async deleteJob(jobId: string): Promise<void> {
+    await axiosInstance.delete(`/companies/jobs/${jobId}`);
+  },
+
+  async publishJob(jobId: string): Promise<Job> {
+    const { data } = await axiosInstance.post(`/companies/jobs/${jobId}/publish`);
+    return data;
+  },
+
+  async pauseJob(jobId: string): Promise<Job> {
+    const { data } = await axiosInstance.post(`/companies/jobs/${jobId}/pause`);
+    return data;
+  },
+
+  async closeJob(jobId: string): Promise<Job> {
+    const { data } = await axiosInstance.post(`/companies/jobs/${jobId}/close`);
+    return data;
   },
 };

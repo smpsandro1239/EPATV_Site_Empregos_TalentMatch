@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface Job {
   id: string;
@@ -26,12 +27,13 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
     try {
       setLoading(true);
       // Fetch jobs for this company
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jobs?companyId=${companyId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies/${companyId}/jobs`, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
       if (!response.ok) throw new Error('Failed to fetch jobs');
       const data = await response.json();
-      setJobs(data.data || []);
+      // Handle both { data: [...] } and direct array responses
+      setJobs(Array.isArray(data) ? data : data.data || []);
       setError('');
     } catch (err: any) {
       setError(err.message || 'Failed to load jobs');
@@ -46,16 +48,33 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
 
   const handleStatusChange = async (jobId: string, newStatus: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`, {
-        method: 'PATCH',
+      let endpoint = '';
+      if (newStatus === 'PUBLISHED') endpoint = `/companies/jobs/${jobId}/publish`;
+      else if (newStatus === 'PAUSED') endpoint = `/companies/jobs/${jobId}/pause`;
+      else if (newStatus === 'CLOSED') endpoint = `/companies/jobs/${jobId}/close`;
+      else {
+          // Fallback to general update if not status specific
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies/jobs/${jobId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status: newStatus }),
+          });
+          if (!response.ok) throw new Error('Failed to update job');
+          await fetchJobs();
+          return;
+      }
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ status: newStatus }),
       });
 
-      if (!response.ok) throw new Error('Failed to update job');
+      if (!response.ok) throw new Error('Failed to update job status');
       await fetchJobs();
     } catch (err: any) {
       setError(err.message || 'Failed to update job status');
@@ -98,24 +117,32 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
                   <p className="text-sm text-gray-600">{job.location} • {job.level}</p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  job.status === 'ACTIVE' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                  job.status === 'PUBLISHED' ? 'bg-green-100 text-green-800' :
+                  job.status === 'PAUSED' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-gray-100 text-gray-800'
                 }`}>
                   {job.status}
                 </span>
               </div>
 
-              <div className="flex gap-2">
-                <a
-                  href={`/company/jobs/${job.id}/edit`}
+              <div className="flex gap-4">
+                <Link
+                  href={`/company/jobs/${job.id}`}
                   className="text-primary-600 hover:text-primary-700 text-sm font-medium"
                 >
-                  Edit
-                </a>
+                  Ver Candidatos
+                </Link>
+                <Link
+                  href={`/company/jobs/${job.id}/edit`}
+                  className="text-gray-600 hover:text-gray-700 text-sm font-medium"
+                >
+                  Editar
+                </Link>
                 <button
-                  onClick={() => handleStatusChange(job.id, job.status === 'ACTIVE' ? 'PAUSED' : 'ACTIVE')}
+                  onClick={() => handleStatusChange(job.id, job.status === 'PUBLISHED' ? 'PAUSED' : 'PUBLISHED')}
                   className="text-sm font-medium hover:text-primary-700 text-primary-600"
                 >
-                  {job.status === 'ACTIVE' ? 'Pause' : 'Activate'}
+                  {job.status === 'PUBLISHED' ? 'Pausar' : 'Publicar'}
                 </button>
               </div>
             </div>

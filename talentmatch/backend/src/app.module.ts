@@ -9,9 +9,12 @@ import { JobsModule } from '@modules/jobs/jobs.module';
 import { MatchingModule } from '@modules/matching/matching.module';
 import { MessagesModule } from '@modules/messages/messages.module';
 import { SkillsModule } from '@modules/skills/skills.module';
+import { UploadsModule } from '@modules/uploads/uploads.module';
 import { UsersModule } from '@modules/users/users.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -20,6 +23,10 @@ import { AppService } from './app.service';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
     }),
     PrismaModule,
     AuthModule,
@@ -33,6 +40,7 @@ import { AppService } from './app.service';
     MatchingModule,
     EmbeddingsModule,
     AiModule,
+    UploadsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

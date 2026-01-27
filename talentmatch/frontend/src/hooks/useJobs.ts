@@ -68,7 +68,7 @@ export const useJobs = (initialParams?: JobSearchParams): UseJobsReturn => {
 
   const getJobDetails = useCallback(async (id: string): Promise<Job | null> => {
     try {
-      return await jobsService.getJobById(id);
+      return await jobsService.getJob(id);
     } catch (err: any) {
       setError(err.message || 'Erro ao carregar detalhes da vaga');
       return null;

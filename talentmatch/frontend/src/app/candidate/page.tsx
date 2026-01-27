@@ -1,90 +1,110 @@
-// src/app/candidate/page.tsx
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/providers/AuthProvider';
+import { useCandidate } from '@/hooks/useCandidate';
 import ProfileSummary from '@/components/candidate/ProfileSummary';
 import QuickActions from '@/components/candidate/QuickActions';
 import RecentApplications from '@/components/candidate/RecentApplications';
 import RecommendedJobs from '@/components/candidate/RecommendedJobs';
-import { Application, Job, Candidate } from '@/types/candidate';
-import { fetchCandidateData, fetchRecentApplications, fetchRecommendedJobs } from '@/services/candidate.service';
-import { getUserId } from '@/services/auth.service';
+import Header from '@/components/Header';
 
 export default function CandidateDashboard() {
-  const [candidate, setCandidate] = useState<Candidate | null>(null);
-  const [applications, setApplications] = useState<Application[]>([]);
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { user, isLoading: authLoading } = useAuth();
+  const {
+    profile,
+    loading: candidateLoading,
+    getProfileByUserId,
+    applications,
+    recommendedJobs,
+    getApplications,
+    getRecommendedJobs
+  } = useCandidate();
+  const router = useRouter();
 
   useEffect(() => {
-    const loadDashboardData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+    if (!authLoading && (!user || user.role !== 'CANDIDATE')) {
+      router.push('/auth/login');
+    }
+  }, [user, authLoading, router]);
 
-        const userId = getUserId();
-        if (!userId) {
-          throw new Error("User not logged in");
-        }
+  useEffect(() => {
+    if (user && user.id && user.role === 'CANDIDATE') {
+      getProfileByUserId(user.id);
+    }
+  }, [user, getProfileByUserId]);
 
-        const candidateData = await fetchCandidateData(userId);
-        setCandidate(candidateData);
-        
-        if (candidateData && candidateData.id) {
-            const candidateId = candidateData.id;
-            const [applicationsData, jobsData] = await Promise.all([
-              fetchRecentApplications(candidateId),
-              fetchRecommendedJobs(candidateId),
-            ]);
-            setApplications(applicationsData);
-            setJobs(jobsData);
-        } else {
-            // If the candidate data doesn't contain an ID, we can't fetch the other data.
-            // This might happen if the API response for candidate is different than expected.
-            console.warn("Could not retrieve applications or recommended jobs because candidate ID is missing.");
-            setApplications([]);
-            setJobs([]);
-        }
+  useEffect(() => {
+    if (profile) {
+      getApplications(profile.id);
+      getRecommendedJobs(profile.id);
+    }
+  }, [profile, getApplications, getRecommendedJobs]);
 
-      } catch (error: any) {
-        console.error("Failed to load candidate dashboard:", error);
-        setError(error.message || "An unexpected error occurred.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadDashboardData();
-  }, []);
-
-  if (loading) {
-    return <div className="p-8 text-center">Loading dashboard...</div>;
+  if (authLoading || (candidateLoading && !profile)) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      </div>
+    );
   }
 
-  if (error) {
-    return <div className="p-8 text-center text-red-500">{error}</div>;
+  if (!profile && !candidateLoading) {
+    return (
+      <div className="p-8 text-center">
+        <p className="text-red-500 mb-4">Perfil não encontrado.</p>
+        <button
+          onClick={() => router.push('/candidate/profile')}
+          className="bg-primary-600 text-white px-4 py-2 rounded-lg"
+        >
+          Criar Perfil
+        </button>
+      </div>
+    );
   }
 
-  if (!candidate) {
-    return <div className="p-8 text-center text-red-500">Failed to load candidate data. Please try again later.</div>;
-  }
+  if (!profile) return null;
+
+  // Cálculo de completitude do perfil
+  const calculateCompleteness = () => {
+    let score = 0;
+    if (profile.headline) score += 20;
+    if (profile.about) score += 20;
+    if (profile.experiences && profile.experiences.length > 0) score += 20;
+    if (profile.educations && profile.educations.length > 0) score += 20;
+    if (profile.skills && profile.skills.length > 0) score += 20;
+    return score;
+  };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Candidate Dashboard</h1>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          <ProfileSummary name={candidate.name} profileCompleteness={candidate.profileCompleteness} />
-          <QuickActions />
-          <RecentApplications applications={applications} />
-        </div>
+    <>
+      <Header />
+      <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+        <h1 className="text-3xl font-bold mb-6">Dashboard do Candidato</h1>
         
-        <div className="space-y-6">
-          <RecommendedJobs jobs={jobs} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            <ProfileSummary name={profile.name} profileCompleteness={calculateCompleteness()} />
+            <QuickActions />
+            <RecentApplications applications={applications.map(app => ({
+              id: app.id,
+              title: app.job?.title || 'Posição Desconhecida',
+              company: app.job?.company?.name || 'Empresa Desconhecida',
+              status: app.status
+            }))} />
+          </div>
+
+          <div className="space-y-6">
+            <RecommendedJobs jobs={recommendedJobs.map(job => ({
+              id: job.id,
+              title: job.title || 'Posição Desconhecida',
+              company: job.company?.name || 'Empresa Desconhecida',
+              matchScore: job.matchScore
+            }))} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

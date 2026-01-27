@@ -24,14 +24,15 @@
 ## 🟡 In Progress / Immediate Priority
 
 ### Frontend Integration
-- [ ] **Candidate Profile**: Integrate Education, Experience, and Skills sections (components exist but need to be added to the page).
-- [ ] **Company Profile**: Replace the current "Coming soon" placeholder with a functional profile editing form.
-- [ ] **Dashboard Sync**: Replace placeholder data with real API calls for Recent Applications and Recommended Jobs.
-- [ ] **Matching UI**: Display the match score and reasons in the job listings and candidate lists.
+- [x] **Candidate Profile**: Integrate Education, Experience, and Skills sections.
+- [x] **Company Profile**: Replace the current "Coming soon" placeholder with a functional profile editing form.
+- [x] **Dashboard Sync**: Replace placeholder data with real API calls for Recent Applications and Recommended Jobs.
+- [x] **Matching UI**: Display the match score and reasons in the candidate dashboard and company job detail.
+- [x] **Job Detail (Company)**: Page for companies to view specific job details and the list of matched candidates.
+- [x] **File Uploads**: Implement actual file storage for CVs and Company Logos.
 
 ### Core Features
-- [ ] **File Uploads**: Implement actual file storage for CVs and Company Logos (currently using text URLs).
-- [ ] **Job Detail (Company)**: Page for companies to view specific job details and the list of matched candidates.
+- [ ] **Real-time Notifications**: Socket.io integration for instant alerts.
 
 ---
 

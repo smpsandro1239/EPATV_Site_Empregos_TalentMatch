@@ -14,18 +14,19 @@ Esta lista reflete o estado atual do projeto baseado na análise do código e do
 - [x] **Backend**: CRUD de Empresas.
 - [x] **Backend**: CRUD de Vagas e sistema de filtros.
 - [x] **Frontend**: Edição básica do perfil de Candidato.
-- [ ] **Frontend (Pendente)**: Integrar secções de Experiência, Educação e Skills na página de perfil do Candidato (componentes já existem mas não estão na página).
-- [ ] **Frontend (Crítico)**: Implementar a página de perfil da Empresa (atualmente é um placeholder "Coming soon").
+- [x] **Frontend**: Integrar secções de Experiência, Educação e Skills na página de perfil do Candidato.
+- [x] **Frontend**: Implementar a página de perfil da Empresa.
 - [x] **Frontend**: Formulário de criação de novas vagas por empresas.
-- [ ] **Frontend (Pendente)**: Conectar a Dashboard do Candidato com dados reais (atualmente usa dados estáticos/placeholders).
-- [ ] **Infraestrutura**: Implementar upload real de ficheiros (CV e Logótipos) - atualmente o sistema usa apenas URLs.
+- [x] **Frontend**: Conectar a Dashboard do Candidato com dados reais.
+- [x] **Frontend**: Lista de vagas e detalhes da vaga para empresas com candidatos recomendados.
+- [x] **Infraestrutura**: Implementar upload real de ficheiros (CV e Logótipos).
 
 ## 🔄 Fase 3: Matching & Candidaturas (Em Progresso)
 - [x] **Backend**: CRUD de Candidaturas e fluxo de estados (Submetido, Revisão, Aceite, Rejeitado).
 - [x] **Backend**: Algoritmo de Matching Inteligente (Skills, Localização, Nível, Salário).
-- [ ] **Frontend (Pendente)**: Exibir scores de matching na listagem de vagas para candidatos.
-- [ ] **Frontend (Pendente)**: Página para empresas verem candidatos recomendados por vaga.
-- [ ] **Frontend (Pendente)**: Secção de vagas recomendadas para candidatos baseada no matching.
+- [ ] **Frontend (Pendente)**: Exibir scores de matching na listagem geral de vagas para candidatos.
+- [x] **Frontend**: Página para empresas verem candidatos recomendados por vaga.
+- [x] **Frontend**: Secção de vagas recomendadas para candidatos baseada no matching (Dashboard).
 
 ## ⏳ Fase 4: Notificações & Mensagens (Não Iniciado)
 - [ ] **Backend**: Notificações em tempo real usando Socket.io.

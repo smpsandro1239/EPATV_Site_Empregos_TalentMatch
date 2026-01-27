@@ -1,14 +1,17 @@
 'use client';
 
 import { candidateService, type CandidateEducation, type CandidateExperience, type CandidateProfile, type CandidateSkill } from '@/services/candidateService';
+import { applicationsService, type Application } from '@/services/applicationsService';
+import { matchingService, type MatchResult } from '@/services/matchingService';
 import { useCallback, useState } from 'react';
-import { useAuth } from './useAuth';
 
 interface UseCandidateReturn {
   profile: CandidateProfile | null;
   experiences: CandidateExperience[];
   educations: CandidateEducation[];
   skills: CandidateSkill[];
+  applications: Application[];
+  recommendedJobs: MatchResult[];
   loading: boolean;
   error: string | null;
   createProfile: (data: Partial<CandidateProfile>) => Promise<CandidateProfile | null>;
@@ -16,22 +19,25 @@ interface UseCandidateReturn {
   getProfile: (id: string) => Promise<CandidateProfile | null>;
   getProfileByUserId: (userId: string) => Promise<CandidateProfile | null>;
   addExperience: (profileId: string, data: Partial<CandidateExperience>) => Promise<void>;
-  updateExperience: (expId: string, data: Partial<CandidateExperience>) => Promise<void>;
-  deleteExperience: (expId: string) => Promise<void>;
+  updateExperience: (profileId: string, expId: string, data: Partial<CandidateExperience>) => Promise<void>;
+  deleteExperience: (profileId: string, expId: string) => Promise<void>;
   addEducation: (profileId: string, data: Partial<CandidateEducation>) => Promise<void>;
-  updateEducation: (eduId: string, data: Partial<CandidateEducation>) => Promise<void>;
-  deleteEducation: (eduId: string) => Promise<void>;
-  addSkill: (profileId: string, skillId: string, level: string) => Promise<void>;
+  updateEducation: (profileId: string, eduId: string, data: Partial<CandidateEducation>) => Promise<void>;
+  deleteEducation: (profileId: string, eduId: string) => Promise<void>;
+  addSkill: (profileId: string, skillId: string, level: 'JUNIOR' | 'MID' | 'SENIOR') => Promise<void>;
   removeSkill: (profileId: string, skillId: string) => Promise<void>;
   refreshProfile: () => Promise<void>;
+  getApplications: (candidateId: string) => Promise<void>;
+  getRecommendedJobs: (candidateId: string) => Promise<void>;
 }
 
 export const useCandidate = (): UseCandidateReturn => {
-  const { user } = useAuth();
   const [profile, setProfile] = useState<CandidateProfile | null>(null);
   const [experiences, setExperiences] = useState<CandidateExperience[]>([]);
   const [educations, setEducations] = useState<CandidateEducation[]>([]);
   const [skills, setSkills] = useState<CandidateSkill[]>([]);
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [recommendedJobs, setRecommendedJobs] = useState<MatchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -110,18 +116,18 @@ export const useCandidate = (): UseCandidateReturn => {
     }
   }, [experiences]);
 
-  const updateExperience = useCallback(async (expId: string, data: Partial<CandidateExperience>) => {
+  const updateExperience = useCallback(async (profileId: string, expId: string, data: Partial<CandidateExperience>) => {
     try {
-      const updated = await candidateService.updateExperience(expId, data);
+      const updated = await candidateService.updateExperience(profileId, expId, data);
       setExperiences(experiences.map(e => e.id === expId ? updated : e));
     } catch (err: any) {
       setError(err.message);
     }
   }, [experiences]);
 
-  const deleteExperience = useCallback(async (expId: string) => {
+  const deleteExperience = useCallback(async (profileId: string, expId: string) => {
     try {
-      await candidateService.deleteExperience(expId);
+      await candidateService.deleteExperience(profileId, expId);
       setExperiences(experiences.filter(e => e.id !== expId));
     } catch (err: any) {
       setError(err.message);
@@ -137,27 +143,27 @@ export const useCandidate = (): UseCandidateReturn => {
     }
   }, [educations]);
 
-  const updateEducation = useCallback(async (eduId: string, data: Partial<CandidateEducation>) => {
+  const updateEducation = useCallback(async (profileId: string, eduId: string, data: Partial<CandidateEducation>) => {
     try {
-      const updated = await candidateService.updateEducation(eduId, data);
+      const updated = await candidateService.updateEducation(profileId, eduId, data);
       setEducations(educations.map(e => e.id === eduId ? updated : e));
     } catch (err: any) {
       setError(err.message);
     }
   }, [educations]);
 
-  const deleteEducation = useCallback(async (eduId: string) => {
+  const deleteEducation = useCallback(async (profileId: string, eduId: string) => {
     try {
-      await candidateService.deleteEducation(eduId);
+      await candidateService.deleteEducation(profileId, eduId);
       setEducations(educations.filter(e => e.id !== eduId));
     } catch (err: any) {
       setError(err.message);
     }
   }, [educations]);
 
-  const addSkill = useCallback(async (profileId: string, skillId: string, level: string) => {
+  const addSkill = useCallback(async (profileId: string, skillId: string, level: 'JUNIOR' | 'MID' | 'SENIOR') => {
     try {
-      const skill = await candidateService.addSkill(profileId, skillId, level);
+      const skill = await candidateService.addSkill(profileId, { skillId, level });
       setSkills([...skills, skill]);
     } catch (err: any) {
       setError(err.message);
@@ -179,11 +185,31 @@ export const useCandidate = (): UseCandidateReturn => {
     }
   }, [profile, getProfile]);
 
+  const getApplications = useCallback(async (candidateId: string) => {
+    try {
+      const data = await applicationsService.getCandidateApplications(candidateId, 5);
+      setApplications(data);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  }, []);
+
+  const getRecommendedJobs = useCallback(async (candidateId: string) => {
+    try {
+      const data = await matchingService.getJobsForCandidate(candidateId, 5);
+      setRecommendedJobs(data);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  }, []);
+
   return {
     profile,
     experiences,
     educations,
     skills,
+    applications,
+    recommendedJobs,
     loading,
     error,
     createProfile,
@@ -199,5 +225,7 @@ export const useCandidate = (): UseCandidateReturn => {
     addSkill,
     removeSkill,
     refreshProfile,
+    getApplications,
+    getRecommendedJobs,
   };
 };

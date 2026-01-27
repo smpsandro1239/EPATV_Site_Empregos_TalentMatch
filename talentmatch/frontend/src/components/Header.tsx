@@ -27,7 +27,7 @@ export default function Header() {
         <nav className="flex items-center gap-6">
           {user.role === 'CANDIDATE' && (
             <>
-              <Link href="/candidate/dashboard" className="text-gray-700 hover:text-primary-600">
+              <Link href="/candidate" className="text-gray-700 hover:text-primary-600">
                 Dashboard
               </Link>
               <Link href="/candidate/profile" className="text-gray-700 hover:text-primary-600">
@@ -55,7 +55,7 @@ export default function Header() {
 
           {user.role === 'COMPANY' && (
             <>
-              <Link href="/company/dashboard" className="text-gray-700 hover:text-primary-600">
+              <Link href="/company" className="text-gray-700 hover:text-primary-600">
                 Dashboard
               </Link>
               <Link href="/company/profile" className="text-gray-700 hover:text-primary-600">

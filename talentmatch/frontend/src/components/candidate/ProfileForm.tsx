@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { CandidateProfileDetail } from '@/types/candidate'; // Import the shared interface
+import { apiClient } from '@/services/api';
 
 interface ProfileFormProps {
   token: string;
@@ -14,6 +15,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -69,6 +71,24 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploading(true);
+      setError('');
+      const { url } = await apiClient.uploadFile('/uploads/cv', file);
+      setFormData(prev => ({ ...prev, cvUrl: `${process.env.NEXT_PUBLIC_API_URL}${url}` }));
+      setSuccess('CV carregado com sucesso!');
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Erro no upload do CV');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -199,18 +219,25 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
           />
         </div>
 
-        {/* CV URL */}
+        {/* CV Upload */}
         <div>
-          <label htmlFor="cvUrl" className="block text-sm font-medium text-gray-700 mb-2">CV URL</label>
-          <input
-            id="cvUrl"
-            type="url"
-            name="cvUrl"
-            value={formData.cvUrl}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-            placeholder="https://..."
-          />
+          <label className="block text-sm font-medium text-gray-700 mb-2">Curriculum Vitae (PDF)</label>
+          <div className="flex items-center gap-4">
+            {formData.cvUrl && (
+              <a
+                href={formData.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 hover:underline text-sm font-medium"
+              >
+                Ver CV Atual
+              </a>
+            )}
+            <label className="cursor-pointer bg-white border border-gray-300 rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+              {uploading ? 'A carregar...' : 'Fazer Upload de CV'}
+              <input type="file" className="hidden" onChange={handleCvUpload} accept=".pdf,.doc,.docx" disabled={uploading} />
+            </label>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
