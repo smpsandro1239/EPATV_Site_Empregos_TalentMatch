@@ -23,12 +23,11 @@ export class MatchingService {
   /**
    * Calcula um score de matching entre um candidato e uma vaga (0-100)
    * Baseia-se em:
-   * - Correspondência de skills (40%)
-   * - Localização (20%)
-   * - Nível de experiência (20%)
-   * - Salário esperado vs. ofertado (20%)
+   * - Matching Híbrido: 60% Determinístico + 40% Semântico (IA)
    */
-  private calculateMatchScore(
+  private async calculateMatchScore(
+    candidateId: string,
+    jobId: string,
     candidateSkills: string[],
     jobRequiredSkills: string[],
     candidateLocation: string,
@@ -38,13 +37,13 @@ export class MatchingService {
     candidateSalaryMax: number | null,
     jobSalaryMax: number | null,
     remoteType: string,
-  ): { score: number; reason: string } {
-    let score = 0;
+  ): Promise<{ score: number; reason: string }> {
+    let deterministicScore = 0;
     const reasons: string[] = [];
 
     // 1. Matching de Skills (40%)
     const skillsMatch = this.calculateSkillsMatch(candidateSkills, jobRequiredSkills);
-    score += skillsMatch * 40;
+    deterministicScore += skillsMatch * 40;
     if (skillsMatch === 1) {
       reasons.push('✅ All skills match');
     } else if (skillsMatch > 0.7) {
@@ -57,7 +56,7 @@ export class MatchingService {
 
     // 2. Localização (20%)
     const locationMatch = this.calculateLocationMatch(candidateLocation, jobLocation, remoteType);
-    score += locationMatch * 20;
+    deterministicScore += locationMatch * 20;
     if (locationMatch === 1) {
       reasons.push('✅ Location match');
     } else if (locationMatch > 0.5) {
@@ -66,7 +65,7 @@ export class MatchingService {
 
     // 3. Nível de Experiência (20%)
     const levelMatch = this.calculateLevelMatch(candidateLevel, jobLevel);
-    score += levelMatch * 20;
+    deterministicScore += levelMatch * 20;
     if (levelMatch === 1) {
       reasons.push('✅ Level match');
     } else if (levelMatch > 0.5) {
@@ -75,15 +74,45 @@ export class MatchingService {
 
     // 4. Salário (20%)
     const salaryMatch = this.calculateSalaryMatch(candidateSalaryMax, jobSalaryMax);
-    score += salaryMatch * 20;
+    deterministicScore += salaryMatch * 20;
     if (salaryMatch === 1) {
       reasons.push('✅ Salary OK');
     } else if (salaryMatch > 0.5) {
       reasons.push('⚠️ Salary low');
     }
 
+    // 5. Matching Semântico (IA) - 40% do Score Total
+    let semanticScore = 0;
+    try {
+        const [candEmb, jobEmb] = await Promise.all([
+            this.prisma.embedding.findUnique({ where: { id: `candidate_${candidateId}` } }),
+            this.prisma.embedding.findUnique({ where: { id: `job_${jobId}` } })
+        ]);
+
+        if (candEmb && jobEmb) {
+            const v1 = JSON.parse(candEmb.vector);
+            const v2 = JSON.parse(jobEmb.vector);
+            semanticScore = this.embeddingsService.calculateSimilarity(v1, v2) * 100;
+            reasons.push(`✨ AI Match: ${Math.round(semanticScore)}%`);
+        } else {
+            // Se não houver embeddings, o score determinístico vale 100%
+            return {
+                score: Math.round(deterministicScore),
+                reason: reasons.join(' | '),
+            };
+        }
+    } catch (error) {
+        return {
+            score: Math.round(deterministicScore),
+            reason: reasons.join(' | '),
+        };
+    }
+
+    // Peso Híbrido: 60% Det + 40% Sem
+    const finalScore = (deterministicScore * 0.6) + (semanticScore * 0.4);
+
     return {
-      score: Math.round(score),
+      score: Math.round(finalScore),
       reason: reasons.join(' | '),
     };
   }
@@ -215,11 +244,13 @@ export class MatchingService {
       skip: offset,
     });
 
-    const candidatesWithScore = applications.map((app) => {
+    const candidatesWithScore = await Promise.all(applications.map(async (app) => {
       const candidateSkills = app.candidate.skills.map((cs) => cs.skill.name);
       const jobSkills = job.requirementsMust.split('\n').map((s) => s.trim());
 
-      const matchResult = this.calculateMatchScore(
+      const matchResult = await this.calculateMatchScore(
+        app.candidate.id,
+        job.id,
         candidateSkills,
         jobSkills,
         app.candidate.location,
@@ -228,7 +259,7 @@ export class MatchingService {
         job.level,
         app.candidate.salaryMax,
         job.salaryMax,
-        job.remoteType,
+        job.remoteType
       );
 
       return {
@@ -241,7 +272,7 @@ export class MatchingService {
         applicationId: app.id,
         applicationStatus: app.status,
       };
-    });
+    }));
 
     return candidatesWithScore.sort((a, b) => b.matchScore - a.matchScore);
   }
@@ -266,11 +297,13 @@ export class MatchingService {
       skip: offset,
     });
 
-    const jobsWithScore = jobs.map((job) => {
+    const jobsWithScore = await Promise.all(jobs.map(async (job) => {
       const candidateSkills = candidate.skills.map((cs) => cs.skill.name);
       const jobSkills = job.requirementsMust.split('\n').map((s) => s.trim());
 
-      const matchResult = this.calculateMatchScore(
+      const matchResult = await this.calculateMatchScore(
+        candidate.id,
+        job.id,
         candidateSkills,
         jobSkills,
         candidate.location,
@@ -279,7 +312,7 @@ export class MatchingService {
         job.level,
         candidate.salaryMax,
         job.salaryMax,
-        job.remoteType,
+        job.remoteType
       );
 
       return {
@@ -292,7 +325,7 @@ export class MatchingService {
         matchScore: matchResult.score,
         matchReason: matchResult.reason,
       };
-    });
+    }));
 
     return jobsWithScore.sort((a, b) => b.matchScore - a.matchScore);
   }

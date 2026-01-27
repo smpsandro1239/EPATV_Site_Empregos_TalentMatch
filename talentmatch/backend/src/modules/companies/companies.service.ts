@@ -1,5 +1,6 @@
 import { PrismaService } from '@database/prisma/prisma.service';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { EmbeddingsService } from '@modules/embeddings/embeddings.service';
 
 export interface CreateCompanyProfileDto {
   userId: string;
@@ -54,7 +55,20 @@ export interface UpdateJobDto {
 
 @Injectable()
 export class CompaniesService {
-  constructor(private _prisma: PrismaService) {}
+  constructor(
+    private _prisma: PrismaService,
+    private _embeddingsService: EmbeddingsService,
+  ) {}
+
+  private async updateJobEmbedding(jobId: string) {
+    try {
+        const job = await this.getJob(jobId);
+        const text = `${job.title}. ${job.description}. Responsibilities: ${job.responsibilities}. Requirements: ${job.requirementsMust}`;
+        await this._embeddingsService.saveEmbedding('job', jobId, text);
+    } catch (error) {
+        console.error('Falha ao atualizar embedding da vaga:', error);
+    }
+  }
 
   // Company Profile Management
   async createProfile(dto: CreateCompanyProfileDto) {
@@ -151,7 +165,7 @@ export class CompaniesService {
 
   // Job Management
   async createJob(dto: CreateJobDto) {
-    return this._prisma.job.create({
+    const job = await this._prisma.job.create({
       data: {
         companyId: dto.companyId,
         title: dto.title,
@@ -167,6 +181,9 @@ export class CompaniesService {
         salaryMax: dto.salaryMax,
       },
     });
+
+    await this.updateJobEmbedding(job.id);
+    return job;
   }
 
   async getJob(jobId: string) {
@@ -211,10 +228,13 @@ export class CompaniesService {
     if (dto.salaryMax) updateData.salaryMax = dto.salaryMax;
     if (dto.status) updateData.status = dto.status;
 
-    return this._prisma.job.update({
+    const job = await this._prisma.job.update({
       where: { id: jobId },
       data: updateData,
     });
+
+    await this.updateJobEmbedding(jobId);
+    return job;
   }
 
   async deleteJob(jobId: string) {
@@ -344,6 +364,31 @@ export class CompaniesService {
       },
       orderBy: { createdAt: 'desc' },
     });
+  }
+
+  async getCompanyStats(companyId: string) {
+    const [activeJobs, totalApplications, hired] = await Promise.all([
+      this._prisma.job.count({ where: { companyId, status: 'PUBLISHED' } }),
+      this._prisma.application.count({ where: { job: { companyId } } }),
+      this._prisma.application.count({ where: { job: { companyId }, status: 'HIRED' } }),
+    ]);
+
+    // Candidaturas por vaga para o gráfico
+    const jobs = await this._prisma.job.findMany({
+        where: { companyId },
+        include: { _count: { select: { applications: true } } },
+        take: 5,
+        orderBy: { createdAt: 'desc' }
+    });
+
+    const applicationsByJob = jobs.map(j => ({ name: j.title.substring(0, 15), total: j._count.applications }));
+
+    return {
+      activeJobs,
+      totalApplications,
+      hired,
+      applicationsByJob
+    };
   }
 
   async getCompanyApplications(companyId: string, status?: string, limit: number = 20, offset: number = 0) {
