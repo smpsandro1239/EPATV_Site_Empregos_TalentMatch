@@ -1,0 +1,12 @@
+{
+  "common": {
+    "welcome": "Welcome to TalentMatch",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "jobs": "Jobs",
+    "candidates": "Candidates",
+    "profile": "Profile",
+    "dashboard": "Dashboard"
+  }
+}

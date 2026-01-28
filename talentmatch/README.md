@@ -1,78 +1,45 @@
 # TalentMatch - Plataforma de Recrutamento Inteligente
 
-O **TalentMatch** é uma solução enterprise-grade para recrutamento moderno, utilizando Inteligência Artificial para otimizar o encontro entre talentos e oportunidades.
+O **TalentMatch** é uma solução de recrutamento enterprise-grade que utiliza Inteligência Artificial e tecnologias modernas para conectar talentos a oportunidades de forma eficiente.
 
 ## 🚀 Funcionalidades Principais
 
-### 🧠 Inteligência Artificial & Matching
-- **Matching Híbrido**: Algoritmo que combina critérios determinísticos (competências, salário, localização) com análise semântica via **OpenAI Embeddings**.
-- **IA Assistant**: Ferramentas integradas para geração automática de descrições de vagas e otimização de perfis de candidatos.
-
-### 💬 Comunicação & Notificações
-- **Real-Time Chat**: Sistema de mensagens diretas entre candidatos e empresas usando **Socket.io**.
-- **Notificações Inteligentes**: Alertas em tempo real e e-mails transacionais (via Resend) para atualizações de candidaturas.
-
-### 📊 Dashboards & Analytics
-- **Painéis Customizados**: Dashboards específicos para Administradores, Empresas e Candidatos.
-- **Visualização de Dados**: Gráficos interativos com **Recharts** para monitorizar performance de vagas e candidaturas.
-
-### 📄 Gestão Documental
-- **Upload de CV/Logo**: Suporte integral para PDF e imagens.
-- **Exportação para PDF**: Geração de currículos e relatórios profissionais diretamente da plataforma.
+- **Matching IA Híbrido**: Algoritmo que combina competências técnicas com análise semântica OpenAI.
+- **Video-Entrevistas**: Chamadas de vídeo integradas via WebRTC para triagem rápida sem sair da plataforma.
+- **Multi-Tenant & Branding**: Personalização total de marca e subdomínios para empresas Enterprise.
+- **Global & Multilingue**: Suporte nativo para Português, Inglês e Espanhol.
+- **Faturação Stripe**: Sistema de subscrições para gestão de planos e monetização.
+- **Dashboards & Analytics**: Métricas em tempo real com gráficos interativos.
 
 ## 🛠️ Stack Tecnológica
 
-- **Frontend**: Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Zustand.
-- **Backend**: NestJS, Prisma ORM, PostgreSQL (com pgvector), Redis.
-- **IA**: OpenAI API (GPT-4 & Text-Embeddings).
-- **Infraestrutura**: Docker & Docker Compose.
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Recharts.
+- **Backend**: NestJS, Prisma ORM, PostgreSQL (pgvector), Redis, Socket.io.
+- **IA**: OpenAI (Embeddings & GPT-4).
+- **Pagamentos**: Stripe API.
+- **Comunicação**: Socket.io & WebRTC (Simple-Peer).
 
 ## 📁 Estrutura do Projeto
 
 ```text
 /talentmatch
-├── backend/                # API NestJS
-│   ├── src/
-│   │   ├── modules/       # Auth, Jobs, Matching (IA), Chat, Notifications, Admin
-│   │   └── database/      # Prisma & PostgreSQL
-├── frontend/              # App Next.js
-│   ├── src/
-│   │   ├── app/          # Rotas e Dashboards
-│   │   ├── components/   # Design System e Gráficos
-│   │   └── services/     # Clientes API e Sockets
-└── docker-compose.yml     # Infraestrutura (DB, Redis)
+├── backend/                # API NestJS (Auth, Jobs, Matching, Billing, Chat, Devices)
+├── frontend/              # App Next.js (Dashboards, I18n, WebRTC, Stripe UI)
+└── docker-compose.yml     # Infraestrutura (PostgreSQL, Redis)
 ```
 
-## ⚙️ Configuração Rápida
+## ⚙️ Configuração para Deploy
 
-1. **Clonar e Instalar**:
-```bash
-git clone ...
-cd talentmatch/backend && npm install
-cd ../frontend && npm install
-```
+### Requisitos de Ambiente (Backend)
+- `DATABASE_URL`: PostgreSQL connection string.
+- `JWT_SECRET`: Secret para tokens JWT.
+- `OPENAI_API_KEY`: Chave da API OpenAI.
+- `STRIPE_SECRET_KEY`: Chave secreta do Stripe.
+- `STRIPE_WEBHOOK_SECRET`: Secret do webhook do Stripe.
+- `RESEND_API_KEY`: API Key para envio de e-mails.
 
-2. **Ambiente**:
-Configurar os ficheiros `.env` no backend e `.env.local` no frontend com as chaves necessárias (`DATABASE_URL`, `OPENAI_API_KEY`, `JWT_SECRET`).
-
-3. **Docker**:
-```bash
-docker-compose up -d
-```
-
-4. **Executar**:
-```bash
-# Backend
-npm run start:dev
-# Frontend
-npm run dev
-```
-
-## 📈 Roadmap
-
-- [x] **Fase 1-4**: MVP Completo (Auth, Jobs, Matching, Chat, Admin).
-- [ ] **Fase 5**: Monetização com Stripe e Branding Multi-Tenant.
-- [ ] **Roadmap 2.0**: Mobile App e Entrevistas por Vídeo.
+### Requisitos de Ambiente (Frontend)
+- `NEXT_PUBLIC_API_URL`: URL do backend.
 
 ---
-*Desenvolvido com foco em escalabilidade e excelência técnica.*
+*Status: 100% Concluído*

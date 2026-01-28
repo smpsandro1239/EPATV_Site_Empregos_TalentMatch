@@ -65,7 +65,24 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
 
   @SubscribeMessage('sendMessage')
   handleMessage(@MessageBody() data: any, @ConnectedSocket() client: Socket) {
-    // This is handled via REST for persistence, but we could also do it via WS
-    // For now, let's keep it simple
+    // This is handled via REST for persistence
+  }
+
+  @SubscribeMessage('callUser')
+  handleCallUser(@MessageBody() data: { userToCall: string, signalData: any, from: string }) {
+    this.server.to(`user_${data.userToCall}`).emit('callUser', {
+      signal: data.signalData,
+      from: data.from,
+    });
+  }
+
+  @SubscribeMessage('answerCall')
+  handleAnswerCall(@MessageBody() data: { signal: any, to: string }) {
+    this.server.to(`user_${data.to}`).emit('callAccepted', data.signal);
+  }
+
+  @SubscribeMessage('endCall')
+  handleEndCall(@MessageBody() data: { to: string }) {
+    this.server.to(`user_${data.to}`).emit('callEnded');
   }
 }

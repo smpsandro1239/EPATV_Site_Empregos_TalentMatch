@@ -156,10 +156,7 @@ export class CompaniesController {
     @Body('rating') rating: number,
     @Body('comment') comment?: string,
   ) {
-    // We need to find the candidateId for this user
-    const candidate = await (this.companiesService as any)._prisma.candidateProfile.findUnique({
-        where: { userId: req.user.userId }
-    });
+    const candidate = await this.companiesService.getCandidateByUserId(req.user.userId);
     if (!candidate) throw new BadRequestException('Only candidates can leave reviews');
 
     return this.companiesService.addReview(companyId, candidate.id, rating, comment);

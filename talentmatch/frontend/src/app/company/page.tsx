@@ -152,6 +152,33 @@ export default function CompanyDashboard() {
               <p className="font-semibold text-gray-900">Mensagens</p>
               <p className="text-xs text-gray-600">Conversar com talentos</p>
             </Link>
+
+            <Link
+              href="/company/billing"
+              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
+            >
+              <div className="text-2xl mb-2">💳</div>
+              <p className="font-semibold text-gray-900">Planos</p>
+              <p className="text-xs text-gray-600">Gerir subscrição</p>
+            </Link>
+
+            <Link
+              href="/company/team"
+              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
+            >
+              <div className="text-2xl mb-2">👥</div>
+              <p className="font-semibold text-gray-900">Equipa</p>
+              <p className="text-xs text-gray-600">Gerir membros</p>
+            </Link>
+
+            <Link
+              href="/company/branding"
+              className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition text-center"
+            >
+              <div className="text-2xl mb-2">🎨</div>
+              <p className="font-semibold text-gray-900">Marca</p>
+              <p className="text-xs text-gray-600">Personalizar portal</p>
+            </Link>
             </div>
           </div>
         </div>

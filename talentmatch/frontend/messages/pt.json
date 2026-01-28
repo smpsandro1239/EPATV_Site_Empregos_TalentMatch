@@ -1,0 +1,12 @@
+{
+  "common": {
+    "welcome": "Bem-vindo ao TalentMatch",
+    "login": "Entrar",
+    "register": "Registar",
+    "logout": "Sair",
+    "jobs": "Vagas",
+    "candidates": "Candidatos",
+    "profile": "Perfil",
+    "dashboard": "Painel"
+  }
+}

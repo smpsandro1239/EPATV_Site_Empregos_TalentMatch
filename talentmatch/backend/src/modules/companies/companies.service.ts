@@ -391,6 +391,12 @@ export class CompaniesService {
     };
   }
 
+  async getCandidateByUserId(userId: string) {
+    return this._prisma.candidateProfile.findUnique({
+      where: { userId },
+    });
+  }
+
   async getCompanyApplications(companyId: string, status?: string, limit: number = 20, offset: number = 0) {
     const where: any = {
       job: {

@@ -13,6 +13,8 @@ dist/
 build/
 .next/
 out/
+talentmatch/frontend/.next/
+talentmatch/backend/dist/
 
 # IDE
 .vscode/
