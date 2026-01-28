@@ -4,8 +4,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import pt from '../../messages/pt.json';
 import en from '../../messages/en.json';
 import es from '../../messages/es.json';
+import fr from '../../messages/fr.json';
 
-const messages: any = { pt, en, es };
+const messages: any = { pt, en, es, fr };
 
 const I18nContext = createContext<any>(null);
 

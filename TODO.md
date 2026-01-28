@@ -22,7 +22,7 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 
 ### 🚀 Melhorias Estratégicas (Roadmap 2.0)
 - [x] **Video-Entrevistas**: Chamadas de vídeo integradas via WebRTC no chat.
-- [x] **Multi-idioma (i18n)**: Suporte para Português, Inglês e Espanhol.
+- [x] **Multi-idioma (i18n)**: Suporte expandido para Português (PT-PT), Inglês, Espanhol e Francês.
 - [x] **SEO & Performance**: Metadados dinâmicos, robots.txt e sitemaps otimizados.
 - [x] **Mobile Ready**: Infraestrutura para notificações push e registo de dispositivos.
 - [x] **Build Fix**: Correção do erro de build na página de faturação (unused variable 'subscription') e outros erros de tipo.
@@ -39,5 +39,5 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 - [ ] **AI Mock Interviews**: Simulador de entrevistas com IA para candidatos treinarem.
 
 ---
-*Status: 95% (Roadmap 3.0 em curso)*
+*Status: 96% (i18n expandido para 4 idiomas)*
 *Última atualização: Fevereiro 2026*
