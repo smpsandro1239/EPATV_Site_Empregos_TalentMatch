@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword, validatePasswordMatch } from './validators';
+import { validateEmail, validatePassword, validatePasswordMatch } from '../validators';
 
 describe('Validators', () => {
   describe('validateEmail', () => {

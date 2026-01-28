@@ -158,6 +158,26 @@ export const companyService = {
         ]
       };
     }
+  },
+
+  async getMembers(): Promise<any[]> {
+    const { data } = await axiosInstance.get('/companies/team');
+    return data;
+  },
+
+  async addMember(email: string, role: string): Promise<any> {
+    const { data } = await axiosInstance.post('/companies/team', { email, role });
+    return data;
+  },
+
+  async getBranding(): Promise<any> {
+    const { data } = await axiosInstance.get('/companies/branding');
+    return data;
+  },
+
+  async updateBranding(branding: any): Promise<any> {
+    const { data } = await axiosInstance.put('/companies/branding', branding);
+    return data;
   }
 };
 
