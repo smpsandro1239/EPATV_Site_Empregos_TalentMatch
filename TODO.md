@@ -25,6 +25,7 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 - [x] **Multi-idioma (i18n)**: Suporte para Português, Inglês e Espanhol.
 - [x] **SEO & Performance**: Metadados dinâmicos, robots.txt e sitemaps otimizados.
 - [x] **Mobile Ready**: Infraestrutura para notificações push e registo de dispositivos.
+- [x] **Build Fix**: Correção do erro de build na página de faturação (unused variable 'subscription') e outros erros de tipo.
 
 ---
 
@@ -33,7 +34,10 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 - [ ] **Templates HTML para E-mails**: Refinar o design visual das notificações.
 - [ ] **App Mobile Nativa**: Desenvolvimento do cliente React Native.
 - [ ] **AI Interviews**: Assistente de IA para pré-triagem em vídeo.
+- [ ] **Gamification (Desafios Técnicos)**: Implementar mini-jogos ou desafios de código para candidatos ganharem medalhas e melhorarem o matching score.
+- [ ] **Leaderboard de Recrutadores**: Gamificação para o lado das empresas, premiando eficiência no recrutamento.
+- [ ] **AI Mock Interviews**: Simulador de entrevistas com IA para candidatos treinarem.
 
 ---
-*Status: 100% (Funcionalidades Planeadas Concluídas)*
-*Última atualização: Janeiro 2026*
+*Status: 95% (Roadmap 3.0 em curso)*
+*Última atualização: Fevereiro 2026*

@@ -50,20 +50,34 @@ export default function BillingPage() {
         <div className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-4xl font-bold mb-12">Planos e Faturação</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border p-8 rounded-xl shadow">
+            <div className={`border p-8 rounded-xl shadow ${(!subscription || subscription.plan === 'FREE') ? 'border-primary-500 ring-2 ring-primary-500' : ''}`}>
                <h3 className="text-2xl font-bold mb-4">FREE</h3>
                <p className="text-4xl font-bold mb-6">0€</p>
-               <button disabled className="w-full bg-gray-200 py-2 rounded">Plano Atual</button>
+               <button disabled={!subscription || subscription.plan === 'FREE'} className="w-full bg-gray-200 py-2 rounded">
+                 {!subscription || subscription.plan === 'FREE' ? 'Plano Atual' : 'Selecionar'}
+               </button>
             </div>
-            <div className="border p-8 rounded-xl shadow border-primary-500 ring-2 ring-primary-500">
+            <div className={`border p-8 rounded-xl shadow ${subscription?.plan === 'PRO' ? 'border-primary-500 ring-2 ring-primary-500' : ''}`}>
                <h3 className="text-2xl font-bold mb-4">PRO</h3>
                <p className="text-4xl font-bold mb-6">49€/mês</p>
-               <button onClick={() => handleUpgrade('PRO')} className="w-full bg-primary-600 text-white py-2 rounded font-bold">Upgrade</button>
+               <button
+                 onClick={() => handleUpgrade('PRO')}
+                 disabled={subscription?.plan === 'PRO'}
+                 className="w-full bg-primary-600 text-white py-2 rounded font-bold"
+               >
+                 {subscription?.plan === 'PRO' ? 'Plano Atual' : 'Upgrade'}
+               </button>
             </div>
-            <div className="border p-8 rounded-xl shadow">
+            <div className={`border p-8 rounded-xl shadow ${subscription?.plan === 'ENTERPRISE' ? 'border-primary-500 ring-2 ring-primary-500' : ''}`}>
                <h3 className="text-2xl font-bold mb-4">ENTERPRISE</h3>
                <p className="text-4xl font-bold mb-6">199€/mês</p>
-               <button onClick={() => handleUpgrade('ENTERPRISE')} className="w-full bg-gray-800 text-white py-2 rounded font-bold">Upgrade</button>
+               <button
+                 onClick={() => handleUpgrade('ENTERPRISE')}
+                 disabled={subscription?.plan === 'ENTERPRISE'}
+                 className="w-full bg-gray-800 text-white py-2 rounded font-bold"
+               >
+                 {subscription?.plan === 'ENTERPRISE' ? 'Plano Atual' : 'Upgrade'}
+               </button>
             </div>
           </div>
         </div>

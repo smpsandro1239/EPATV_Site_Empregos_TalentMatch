@@ -39,12 +39,12 @@ interface JobDetail {
   applications: { id: string; status: string }[];
 }
 
-export default function JobDetailPage() {
+export default function JobDetailPage({ params: initialParams }: { params: { id: string } }) {
   const params = useParams();
   const router = useRouter();
   const { user } = useAuth();
   const { profile, getProfileByUserId } = useCandidate();
-  const jobId = params.id as string;
+  const jobId = (initialParams?.id || params.id) as string;
 
   const [job, setJob] = useState<JobDetail | null>(null);
   const [matchInfo, setMatchInfo] = useState<any>(null);

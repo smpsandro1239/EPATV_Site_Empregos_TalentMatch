@@ -12,7 +12,6 @@ export default function TeamPage() {
   const { user, isLoading } = useAuth();
   const router = useRouter();
   const [members, setMembers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('RECRUITER');
   const [adding, setAdding] = useState(false);
@@ -31,8 +30,6 @@ export default function TeamPage() {
       setMembers(data);
     } catch (error: any) {
       console.error('Erro ao carregar membros:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
