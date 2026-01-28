@@ -13,6 +13,8 @@ import { NotificationsModule } from '@modules/notifications/notifications.module
 import { SkillsModule } from '@modules/skills/skills.module';
 import { UploadsModule } from '@modules/uploads/uploads.module';
 import { UsersModule } from '@modules/users/users.module';
+import { BillingModule } from '@modules/billing/billing.module';
+import { DevicesModule } from '@modules/devices/devices.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -45,6 +47,8 @@ import { AppService } from './app.service';
     EmbeddingsModule,
     AiModule,
     UploadsModule,
+    BillingModule,
+    DevicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

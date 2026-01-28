@@ -31,6 +31,16 @@ export function useNotifications() {
     }
   };
 
+  const markAllAsRead = async () => {
+    try {
+      await notificationsService.markAllAsRead();
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+      setUnreadCount(0);
+    } catch (error) {
+      console.error('Error marking all notifications as read:', error);
+    }
+  };
+
   useEffect(() => {
     if (user && authToken) {
       fetchNotifications();
@@ -54,6 +64,7 @@ export function useNotifications() {
     notifications,
     unreadCount,
     markAsRead,
+    markAllAsRead,
     refresh: fetchNotifications,
   };
 }

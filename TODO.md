@@ -1,46 +1,39 @@
-# TalentMatch - TODO List & Status
+# TalentMatch - Roadmap & TODO List
 
-Este documento regista o progresso das tarefas para a conclusão do projeto TalentMatch.
+Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
+
+---
 
 ## 🟢 Concluído (✅)
 
-### Backend (NestJS)
-- [x] **Autenticação & RBAC**: JWT, Roles (ADMIN, CANDIDATE, COMPANY).
-- [x] **Perfis**: CRUD para Candidatos e Empresas.
-- [x] **Vagas**: Gestão completa de anúncios de emprego.
-- [x] **Candidaturas**: Sistema de submissão e alteração de estado.
-- [x] **Matching Inteligente**:
-    - [x] Algoritmo híbrido (60% determinístico / 40% semântico).
-    - [x] Integração com OpenAI Embeddings.
-- [x] **Upload de Ficheiros**: Sistema para CVs e Logótipos (Multer).
-- [x] **Chat & Notificações**: Socket.io para mensagens em tempo real e notificações in-app.
-- [x] **Admin**: Estatísticas globais e moderação.
-- [x] **IA Assistant**: Melhoria de descrições e headlines via GPT-4.
-- [x] **Testes**: Suíte de testes unitários base para Auth, Jobs e Matching.
+### 🧩 Fase 1-4: Core Business (MVP)
+- [x] **Autenticação**: Login/Registo, JWT + Refresh Tokens, RBAC (Candidato, Empresa, Admin).
+- [x] **Perfis**: Perfis completos para Candidato e Empresa.
+- [x] **Vagas & Candidaturas**: CRUD total de vagas e gestão de fluxo de candidaturas.
+- [x] **Matching Inteligente**: Algoritmo híbrido (Determinístico + OpenAI Semantic).
+- [x] **Comunicação**: Chat real-time (Socket.io) e Notificações (in-app/email).
+- [x] **Admin**: Painel de moderação e métricas globais.
 
-### Frontend (Next.js)
-- [x] **UI/UX**: Design moderno com Tailwind CSS e Framer Motion.
-- [x] **Dashboards**:
-    - [x] Candidato: Resumo, candidaturas e recomendações.
-    - [x] Empresa: Gestão de vagas, candidatos e estatísticas (Charts).
-    - [x] Admin: Painel de controlo global com gráficos.
-- [x] **Feedback**: Notificações toast (react-hot-toast) e Error Boundaries.
-- [x] **Funcionalidades Extra**:
-    - [x] Exportação de CVs e Relatórios para PDF.
-    - [x] Filtros avançados de pesquisa.
+### 🧩 Fase 5: Monetização & Expansão
+- [x] **Integração Stripe**: Sistema de subscrições (Free, Pro, Enterprise) funcional.
+- [x] **Gestão de Equipa**: Suporte para múltiplos recrutadores (Multi-tenant).
+- [x] **Branding por Tenant**: Personalização de cores e subdomínios (Enterprise).
+- [x] **Limites por Plano**: Restrições automáticas baseadas no nível de subscrição.
 
-## 🟡 Em Progresso (🔄)
-
-- [ ] **Integração de Pagamentos**: Implementar Stripe para funcionalidades Premium.
-- [ ] **E-mails Transacionais**: Finalizar integração real com Resend (atualmente em mock).
-- [ ] **SEO & Performance**: Otimização de meta tags e Core Web Vitals.
-
-## 🔴 Pendente / Futuro (🚀)
-
-- [ ] **Aplicação Mobile**: Versão em React Native.
-- [ ] **Video Entrevistas**: Integração com WebRTC para entrevistas remotas.
-- [ ] **Multi-idioma (i18n)**: Suporte para Inglês e Espanhol.
+### 🚀 Melhorias Estratégicas (Roadmap 2.0)
+- [x] **Video-Entrevistas**: Chamadas de vídeo integradas via WebRTC no chat.
+- [x] **Multi-idioma (i18n)**: Suporte para Português, Inglês e Espanhol.
+- [x] **SEO & Performance**: Metadados dinâmicos, robots.txt e sitemaps otimizados.
+- [x] **Mobile Ready**: Infraestrutura para notificações push e registo de dispositivos.
 
 ---
-*Última atualização: Julho 2024*
-*Status: 90% Concluído*
+
+## 🟡 Próximos Passos (Roadmap 3.0)
+
+- [ ] **Templates HTML para E-mails**: Refinar o design visual das notificações.
+- [ ] **App Mobile Nativa**: Desenvolvimento do cliente React Native.
+- [ ] **AI Interviews**: Assistente de IA para pré-triagem em vídeo.
+
+---
+*Status: 100% (Funcionalidades Planeadas Concluídas)*
+*Última atualização: Janeiro 2026*
