@@ -75,6 +75,7 @@ model User {
   companyProfile   Company?
   notifications    Notification[]
   auditLogs        AuditLog[]
+  devices          Device[]
 
   @@index([email])
   @@index([role])
@@ -203,6 +204,7 @@ model Company {
   embeddings  Embedding[]
   reviews     Review[]
   branding    TenantBranding?
+  subscription Subscription?
 
   @@index([userId])
   @@index([name])
@@ -423,4 +425,35 @@ model TenantBranding {
   updatedAt       DateTime @updatedAt
 
   company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+// ===== BILLING & SUBSCRIPTIONS =====
+
+model Subscription {
+  id                   String   @id @default(cuid())
+  companyId            String   @unique
+  plan                 String   // FREE, PRO, ENTERPRISE
+  stripeCustomerId     String?
+  stripeSubscriptionId String?  @unique
+  status               String   @default("inactive")
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  company              Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+// ===== DEVICES =====
+
+model Device {
+  id        String   @id @default(cuid())
+  userId    String
+  fcmToken  String   @unique
+  platform  String   // ios, android, web
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

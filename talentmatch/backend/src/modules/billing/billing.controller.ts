@@ -2,7 +2,7 @@ import { Controller, Post, Get, Body, UseGuards, Request, Headers, RawBodyReques
 import { BillingService } from './billing.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '../auth/decorators/roles.decorator';
+import { Roles } from '../../common/decorators/roles.decorator';
 import { UserRole } from '@prisma/client';
 import { PrismaService } from '../../database/prisma/prisma.service';
 
