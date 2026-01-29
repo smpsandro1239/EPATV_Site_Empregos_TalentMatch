@@ -26,6 +26,8 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 - [x] **SEO & Performance**: Metadados dinâmicos, robots.txt e sitemaps otimizados.
 - [x] **Mobile Ready**: Infraestrutura para notificações push e registo de dispositivos.
 - [x] **Build Fix**: Correção do erro de build na página de faturação (unused variable 'subscription') e outros erros de tipo.
+- [x] **PT-PT Localization**: Tradução completa dos perfis (Empresa/Candidato) e gestão de vagas para Português Europeu.
+- [x] **Backend Alignment**: Implementação de endpoints em falta para Team, Stats e Branding.
 
 ---
 

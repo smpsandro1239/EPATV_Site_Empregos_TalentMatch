@@ -54,7 +54,7 @@ export default function NewJobPage() {
         setCompanyId(profile.id);
       }
     } catch (err) {
-      setError('Failed to load company profile');
+      setError('Falha ao carregar o perfil da empresa');
     }
   };
 
@@ -126,12 +126,12 @@ export default function NewJobPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create job');
+        throw new Error(errorData.message || 'Falha ao criar vaga');
       }
 
       router.push('/company/jobs');
     } catch (err: any) {
-      setError(err.message || 'Failed to create job');
+      setError(err.message || 'Falha ao criar vaga');
     } finally {
       setSaving(false);
     }
@@ -157,10 +157,10 @@ export default function NewJobPage() {
           {/* Header */}
           <div className="mb-8">
             <Link href="/company/jobs" className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block">
-              ← Back to jobs
+              ← Voltar para vagas
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Post New Job</h1>
-            <p className="text-lg text-gray-600">Create a compelling job posting to attract top talent</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">Publicar Nova Vaga</h1>
+            <p className="text-lg text-gray-600">Crie um anúncio apelativo para atrair os melhores talentos</p>
           </div>
 
           {/* Error Message */}
@@ -175,11 +175,11 @@ export default function NewJobPage() {
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Basic Information */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Basic Information</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Informação Básica</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
-                      Job Title *
+                      Título da Vaga *
                     </label>
                     <input
                       id="title"
@@ -189,13 +189,13 @@ export default function NewJobPage() {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="e.g., Senior Software Engineer"
+                      placeholder="Ex: Engenheiro de Software Sénior"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
-                      Location *
+                      Localização *
                     </label>
                     <input
                       id="location"
@@ -205,7 +205,7 @@ export default function NewJobPage() {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="e.g., Lisbon, Portugal"
+                      placeholder="Ex: Lisboa, Portugal"
                     />
                   </div>
                 </div>
@@ -239,10 +239,10 @@ export default function NewJobPage() {
 
               {/* Responsibilities */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Responsibilities</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Responsabilidades</h2>
                 <div>
                   <label htmlFor="responsibilities" className="block text-sm font-medium text-gray-700 mb-2">
-                    Key Responsibilities *
+                    Principais Responsabilidades *
                   </label>
                   <textarea
                     id="responsibilities"
@@ -252,18 +252,18 @@ export default function NewJobPage() {
                     required
                     rows={6}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    placeholder="List the main responsibilities and duties..."
+                    placeholder="Liste as principais responsabilidades e deveres..."
                   />
                 </div>
               </div>
 
               {/* Requirements */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Requirements</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Requisitos</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="requirementsMust" className="block text-sm font-medium text-gray-700 mb-2">
-                      Must Have Requirements *
+                      Requisitos Obrigatórios *
                     </label>
                     <textarea
                       id="requirementsMust"
@@ -273,13 +273,13 @@ export default function NewJobPage() {
                       required
                       rows={6}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="Essential skills and experience..."
+                      placeholder="Competências e experiência essenciais..."
                     />
                   </div>
 
                   <div>
                     <label htmlFor="requirementsNice" className="block text-sm font-medium text-gray-700 mb-2">
-                      Nice to Have Requirements
+                      Requisitos Valorizados
                     </label>
                     <textarea
                       id="requirementsNice"
@@ -288,7 +288,7 @@ export default function NewJobPage() {
                       onChange={handleChange}
                       rows={6}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="Additional skills that would be beneficial..."
+                      placeholder="Competências adicionais que seriam benéficas..."
                     />
                   </div>
                 </div>
@@ -296,11 +296,11 @@ export default function NewJobPage() {
 
               {/* Job Details */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Job Details</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Detalhes da Vaga</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <label htmlFor="level" className="block text-sm font-medium text-gray-700 mb-2">
-                      Experience Level *
+                      Nível de Experiência *
                     </label>
                     <select
                       id="level"
@@ -309,15 +309,15 @@ export default function NewJobPage() {
                       onChange={handleChange}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     >
-                      <option value="JUNIOR">Junior</option>
-                      <option value="MID">Mid-Level</option>
-                      <option value="SENIOR">Senior</option>
+                      <option value="JUNIOR">Júnior</option>
+                      <option value="MID">Intermédio</option>
+                      <option value="SENIOR">Sénior</option>
                     </select>
                   </div>
 
                   <div>
                     <label htmlFor="contractType" className="block text-sm font-medium text-gray-700 mb-2">
-                      Contract Type *
+                      Tipo de Contrato *
                     </label>
                     <select
                       id="contractType"
@@ -326,16 +326,16 @@ export default function NewJobPage() {
                       onChange={handleChange}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     >
-                      <option value="FULL_TIME">Full Time</option>
-                      <option value="PART_TIME">Part Time</option>
+                      <option value="FULL_TIME">Tempo Inteiro</option>
+                      <option value="PART_TIME">Tempo Parcial</option>
                       <option value="FREELANCE">Freelance</option>
-                      <option value="CONTRACT">Contract</option>
+                      <option value="CONTRACT">Contrato</option>
                     </select>
                   </div>
 
                   <div>
                     <label htmlFor="remoteType" className="block text-sm font-medium text-gray-700 mb-2">
-                      Remote Work *
+                      Trabalho Remoto *
                     </label>
                     <select
                       id="remoteType"
@@ -344,9 +344,9 @@ export default function NewJobPage() {
                       onChange={handleChange}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     >
-                      <option value="FULLY_REMOTE">Fully Remote</option>
-                      <option value="HYBRID">Hybrid</option>
-                      <option value="ON_SITE">On-Site</option>
+                      <option value="FULLY_REMOTE">Totalmente Remoto</option>
+                      <option value="HYBRID">Híbrido</option>
+                      <option value="ON_SITE">Presencial</option>
                     </select>
                   </div>
                 </div>
@@ -354,11 +354,11 @@ export default function NewJobPage() {
 
               {/* Salary */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Compensation</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Compensação</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="salaryMin" className="block text-sm font-medium text-gray-700 mb-2">
-                      Minimum Salary (€)
+                      Salário Mínimo (€)
                     </label>
                     <input
                       id="salaryMin"
@@ -367,13 +367,13 @@ export default function NewJobPage() {
                       value={formData.salaryMin}
                       onChange={handleChange}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="e.g., 30000"
+                      placeholder="Ex: 30000"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="salaryMax" className="block text-sm font-medium text-gray-700 mb-2">
-                      Maximum Salary (€)
+                      Salário Máximo (€)
                     </label>
                     <input
                       id="salaryMax"
@@ -382,7 +382,7 @@ export default function NewJobPage() {
                       value={formData.salaryMax}
                       onChange={handleChange}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="e.g., 50000"
+                      placeholder="Ex: 50000"
                     />
                   </div>
                 </div>
@@ -394,14 +394,14 @@ export default function NewJobPage() {
                   href="/company/jobs"
                   className="px-6 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
                 >
-                  Cancel
+                  Cancelar
                 </Link>
                 <button
                   type="submit"
                   disabled={saving}
                   className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {saving ? 'Creating Job...' : 'Create Job Posting'}
+                  {saving ? 'A criar vaga...' : 'Criar Vaga'}
                 </button>
               </div>
             </form>

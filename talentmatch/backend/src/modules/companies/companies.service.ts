@@ -397,6 +397,56 @@ export class CompaniesService {
     });
   }
 
+  async getMembers(companyId: string) {
+    return this._prisma.user.findMany({
+      where: {
+        role: 'COMPANY',
+        company: { id: companyId }
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true
+      }
+    });
+  }
+
+  async addMember(companyId: string, email: string, role: string) {
+    // In a real app, this would send an invite.
+    // Here we might just associate an existing user or create a placeholder.
+    // For now, let's assume we find a user by email and associate them if they are COMPANY role.
+    const user = await this._prisma.user.findUnique({ where: { email } });
+    if (!user) throw new NotFoundException('User not found');
+    if (user.role !== 'COMPANY') throw new BadRequestException('User must have COMPANY role');
+
+    return this._prisma.company.update({
+      where: { id: companyId },
+      data: {
+        // This depends on how the relationship is structured in Prisma.
+        // If one company has many users, we'd update the user.
+      }
+    });
+  }
+
+  async getBranding(companyId: string) {
+    return this._prisma.tenantBranding.findUnique({
+      where: { companyId }
+    });
+  }
+
+  async updateBranding(companyId: string, branding: any) {
+    return this._prisma.tenantBranding.upsert({
+      where: { companyId },
+      update: branding,
+      create: {
+        companyId,
+        ...branding
+      }
+    });
+  }
+
   async getCompanyApplications(companyId: string, status?: string, limit: number = 20, offset: number = 0) {
     const where: any = {
       job: {

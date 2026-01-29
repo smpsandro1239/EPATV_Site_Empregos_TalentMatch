@@ -30,13 +30,13 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies/${companyId}/jobs`, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
-      if (!response.ok) throw new Error('Failed to fetch jobs');
+      if (!response.ok) throw new Error('Falha ao procurar vagas');
       const data = await response.json();
       // Handle both { data: [...] } and direct array responses
       setJobs(Array.isArray(data) ? data : data.data || []);
       setError('');
     } catch (err: any) {
-      setError(err.message || 'Failed to load jobs');
+      setError(err.message || 'Falha ao carregar vagas');
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,7 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
             },
             body: JSON.stringify({ status: newStatus }),
           });
-          if (!response.ok) throw new Error('Failed to update job');
+          if (!response.ok) throw new Error('Falha ao atualizar vaga');
           await fetchJobs();
           return;
       }
@@ -74,10 +74,10 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
         },
       });
 
-      if (!response.ok) throw new Error('Failed to update job status');
+      if (!response.ok) throw new Error('Falha ao atualizar o estado da vaga');
       await fetchJobs();
     } catch (err: any) {
-      setError(err.message || 'Failed to update job status');
+      setError(err.message || 'Falha ao atualizar o estado da vaga');
     }
   };
 
@@ -99,12 +99,12 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
 
       {jobs.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">You haven't posted any jobs yet</p>
+          <p className="text-gray-600 mb-4">Ainda não publicou nenhuma vaga</p>
           <a
             href="/company/jobs/new"
             className="inline-block bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700"
           >
-            Post a Job
+            Publicar Vaga
           </a>
         </div>
       ) : (
@@ -121,7 +121,7 @@ export default function JobsSection({ token, companyId }: JobsSectionProps) {
                   job.status === 'PAUSED' ? 'bg-yellow-100 text-yellow-800' :
                   'bg-gray-100 text-gray-800'
                 }`}>
-                  {job.status}
+                  {job.status === 'PUBLISHED' ? 'PUBLICADA' : job.status === 'PAUSED' ? 'PAUSADA' : 'FECHADA'}
                 </span>
               </div>
 

@@ -34,12 +34,12 @@ const statusColors: { [key: string]: string } = {
 };
 
 const statusLabels: { [key: string]: string } = {
-  SUBMITTED: 'Submitted',
-  IN_REVIEW: 'In Review',
-  INTERVIEW: 'Interview',
-  OFFER: 'Offer',
-  HIRED: 'Hired',
-  REJECTED: 'Rejected',
+  SUBMITTED: 'Submetida',
+  IN_REVIEW: 'Em Revisão',
+  INTERVIEW: 'Entrevista',
+  OFFER: 'Proposta',
+  HIRED: 'Contratado',
+  REJECTED: 'Rejeitado',
 };
 
 export default function CompanyCandidatesPage() {
@@ -82,7 +82,7 @@ export default function CompanyCandidatesPage() {
         setCompanyId(profile.id);
       }
     } catch (err) {
-      setError('Failed to load company profile');
+      setError('Falha ao carregar o perfil da empresa');
       setLoading(false);
     }
   };
@@ -102,14 +102,14 @@ export default function CompanyCandidatesPage() {
         },
       });
 
-      if (!response.ok) throw new Error('Failed to fetch applications');
+      if (!response.ok) throw new Error('Falha ao procurar candidaturas');
 
       const data = await response.json();
       setApplications(Array.isArray(data) ? data : data.data || []);
       setError('');
     } catch (err) {
-      console.error('Error fetching applications:', err);
-      setError('Failed to load applications');
+      console.error('Erro ao procurar candidaturas:', err);
+      setError('Falha ao carregar candidaturas');
       setApplications([]);
     } finally {
       setLoading(false);
@@ -131,7 +131,7 @@ export default function CompanyCandidatesPage() {
         fetchApplications();
       }
     } catch (err) {
-      setError('Failed to update application status');
+      setError('Falha ao atualizar o estado da candidatura');
     }
   };
 
@@ -154,11 +154,11 @@ export default function CompanyCandidatesPage() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <Link href="/company/dashboard" className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block">
-              ← Back to dashboard
+            <Link href="/company" className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block">
+              ← Voltar para o painel
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Candidate Applications</h1>
-            <p className="text-lg text-gray-600">Review and manage applications to your job postings</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">Candidaturas</h1>
+            <p className="text-lg text-gray-600">Analise e gira as candidaturas recebidas para as suas vagas</p>
           </div>
 
           {/* Stats */}
@@ -171,31 +171,31 @@ export default function CompanyCandidatesPage() {
               <p className="text-2xl font-bold text-blue-600">
                 {applications.filter(a => a.status === 'SUBMITTED').length}
               </p>
-              <p className="text-sm text-gray-600">Submitted</p>
+              <p className="text-sm text-gray-600">Submetidas</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4 text-center">
               <p className="text-2xl font-bold text-yellow-600">
                 {applications.filter(a => a.status === 'IN_REVIEW').length}
               </p>
-              <p className="text-sm text-gray-600">In Review</p>
+              <p className="text-sm text-gray-600">Em Revisão</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4 text-center">
               <p className="text-2xl font-bold text-purple-600">
                 {applications.filter(a => a.status === 'INTERVIEW').length}
               </p>
-              <p className="text-sm text-gray-600">Interview</p>
+              <p className="text-sm text-gray-600">Entrevista</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4 text-center">
               <p className="text-2xl font-bold text-green-600">
                 {applications.filter(a => a.status === 'OFFER').length}
               </p>
-              <p className="text-sm text-gray-600">Offers</p>
+              <p className="text-sm text-gray-600">Propostas</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4 text-center">
               <p className="text-2xl font-bold text-red-600">
                 {applications.filter(a => a.status === 'REJECTED').length}
               </p>
-              <p className="text-sm text-gray-600">Rejected</p>
+              <p className="text-sm text-gray-600">Rejeitadas</p>
             </div>
           </div>
 
@@ -203,7 +203,7 @@ export default function CompanyCandidatesPage() {
           <div className="bg-white rounded-lg shadow-md p-6 mb-6">
             <div className="flex gap-4 items-center">
               <label htmlFor="statusFilter" className="font-medium text-gray-700">
-                Filter by status:
+                Filtrar por estado:
               </label>
               <select
                 id="statusFilter"
@@ -211,13 +211,13 @@ export default function CompanyCandidatesPage() {
                 onChange={(e) => setFilterStatus(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                <option value="">All Applications</option>
-                <option value="SUBMITTED">Submitted</option>
-                <option value="IN_REVIEW">In Review</option>
-                <option value="INTERVIEW">Interview</option>
-                <option value="OFFER">Offer</option>
-                <option value="HIRED">Hired</option>
-                <option value="REJECTED">Rejected</option>
+                <option value="">Todas as Candidaturas</option>
+                <option value="SUBMITTED">Submetida</option>
+                <option value="IN_REVIEW">Em Revisão</option>
+                <option value="INTERVIEW">Entrevista</option>
+                <option value="OFFER">Proposta</option>
+                <option value="HIRED">Contratado</option>
+                <option value="REJECTED">Rejeitado</option>
               </select>
             </div>
           </div>
@@ -248,23 +248,23 @@ export default function CompanyCandidatesPage() {
                           <h3 className="text-xl font-bold text-gray-900">
                             {application.candidate.name}
                           </h3>
-                          <p className="text-gray-600">{application.candidate.headline || 'No headline'}</p>
-                          <p className="text-sm text-gray-500">{application.candidate.location || 'Location not specified'}</p>
+                          <p className="text-gray-600">{application.candidate.headline || 'Sem título profissional'}</p>
+                          <p className="text-sm text-gray-500">{application.candidate.location || 'Localização não especificada'}</p>
                         </div>
                       </div>
 
                       <div className="mb-3">
                         <p className="text-sm text-gray-600">
-                          Applied to: <span className="font-semibold">{application.job.title}</span>
+                          Candidatou-se a: <span className="font-semibold">{application.job.title}</span>
                         </p>
                         <p className="text-sm text-gray-500">
-                          Applied on {new Date(application.createdAt).toLocaleDateString()}
+                          Submetida a {new Date(application.createdAt).toLocaleDateString()}
                         </p>
                       </div>
 
                       {application.message && (
                         <div className="mb-4">
-                          <p className="text-sm font-medium text-gray-700 mb-1">Cover Letter:</p>
+                          <p className="text-sm font-medium text-gray-700 mb-1">Carta de Apresentação:</p>
                           <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
                             {application.message}
                           </p>
@@ -285,9 +285,9 @@ export default function CompanyCandidatesPage() {
                         {application.status === 'SUBMITTED' && (
                           <button
                             onClick={() => handleStatusChange(application.id, 'IN_REVIEW')}
-                            className="text-yellow-600 hover:text-yellow-700 text-sm font-medium"
+                            className="text-yellow-600 hover:text-yellow-700 text-sm font-medium font-bold"
                           >
-                            Move to Review
+                            Mover para Revisão
                           </button>
                         )}
 
@@ -295,15 +295,15 @@ export default function CompanyCandidatesPage() {
                           <>
                             <button
                               onClick={() => handleStatusChange(application.id, 'INTERVIEW')}
-                              className="text-purple-600 hover:text-purple-700 text-sm font-medium"
+                              className="text-purple-600 hover:text-purple-700 text-sm font-medium font-bold"
                             >
-                              Schedule Interview
+                              Marcar Entrevista
                             </button>
                             <button
                               onClick={() => handleStatusChange(application.id, 'REJECTED')}
-                              className="text-red-600 hover:text-red-700 text-sm font-medium"
+                              className="text-red-600 hover:text-red-700 text-sm font-medium font-bold"
                             >
-                              Reject
+                              Rejeitar
                             </button>
                           </>
                         )}
@@ -312,15 +312,15 @@ export default function CompanyCandidatesPage() {
                           <>
                             <button
                               onClick={() => handleStatusChange(application.id, 'OFFER')}
-                              className="text-green-600 hover:text-green-700 text-sm font-medium"
+                              className="text-green-600 hover:text-green-700 text-sm font-medium font-bold"
                             >
-                              Make Offer
+                              Fazer Proposta
                             </button>
                             <button
                               onClick={() => handleStatusChange(application.id, 'REJECTED')}
-                              className="text-red-600 hover:text-red-700 text-sm font-medium"
+                              className="text-red-600 hover:text-red-700 text-sm font-medium font-bold"
                             >
-                              Reject
+                              Rejeitar
                             </button>
                           </>
                         )}
@@ -328,9 +328,9 @@ export default function CompanyCandidatesPage() {
                         {application.status === 'OFFER' && (
                           <button
                             onClick={() => handleStatusChange(application.id, 'HIRED')}
-                            className="text-emerald-600 hover:text-emerald-700 text-sm font-medium"
+                            className="text-emerald-600 hover:text-emerald-700 text-sm font-medium font-bold"
                           >
-                            Mark as Hired
+                            Marcar como Contratado
                           </button>
                         )}
                       </div>
@@ -345,14 +345,14 @@ export default function CompanyCandidatesPage() {
           {!loading && applications.length === 0 && (
             <div className="bg-white rounded-lg shadow-md p-12 text-center">
               <p className="text-lg text-gray-600 mb-6">
-                {filterStatus ? `No applications with status "${filterStatus}"` : 'No applications received yet'}
+                {filterStatus ? `Sem candidaturas com o estado "${filterStatus}"` : 'Ainda não recebeu nenhuma candidatura'}
               </p>
               {!filterStatus && (
                 <Link
                   href="/company/jobs/new"
                   className="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition"
                 >
-                  Post Your First Job
+                  Publicar a Primeira Vaga
                 </Link>
               )}
             </div>

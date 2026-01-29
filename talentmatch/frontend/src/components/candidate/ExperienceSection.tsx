@@ -51,7 +51,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
         fetchExperiences(profile.id);
       }
     } catch (err) {
-      setError('Failed to load profile');
+      setError('Falha ao carregar o perfil');
       setLoading(false);
     }
   };
@@ -69,7 +69,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
         setExperiences(data);
       }
     } catch (err) {
-      setError('Failed to load experiences');
+      setError('Falha ao carregar experiências');
     } finally {
       setLoading(false);
     }
@@ -123,21 +123,21 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || 'Failed to save experience');
+        throw new Error(error.message || 'Falha ao guardar experiência');
       }
 
       await fetchExperiences(candidateId);
       resetForm();
       setShowForm(false);
     } catch (err: any) {
-      setError(err.message || 'Failed to save experience');
+      setError(err.message || 'Falha ao guardar experiência');
     } finally {
       setSaving(false);
     }
   };
 
   const handleDelete = async (expId: string) => {
-    if (!confirm('Are you sure you want to delete this experience?')) return;
+    if (!confirm('Tem a certeza que pretende eliminar esta experiência?')) return;
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/candidates/${candidateId}/experiences/${expId}`, {
@@ -148,12 +148,12 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete experience');
+        throw new Error('Falha ao eliminar experiência');
       }
 
       await fetchExperiences(candidateId);
     } catch (err: any) {
-      setError(err.message || 'Failed to delete experience');
+      setError(err.message || 'Falha ao eliminar experiência');
     }
   };
 
@@ -186,7 +186,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
       )}
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Professional Experience</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Experiência Profissional</h2>
         <button
           onClick={() => {
             setShowForm(!showForm);
@@ -194,7 +194,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
           }}
           className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition"
         >
-          {showForm ? 'Cancel' : 'Add Experience'}
+          {showForm ? 'Cancelar' : 'Adicionar Experiência'}
         </button>
       </div>
 
@@ -202,7 +202,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
         <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg mb-6 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Nome da Empresa *</label>
               <input
                 type="text"
                 name="companyName"
@@ -210,12 +210,12 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-                placeholder="Company Ltd."
+                placeholder="Ex: Empresa Lda."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Job Title *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Cargo *</label>
               <input
                 type="text"
                 name="role"
@@ -223,26 +223,26 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-                placeholder="Software Engineer"
+                placeholder="Ex: Engenheiro de Software"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Descrição</label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
               rows={3}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-              placeholder="Describe your responsibilities and achievements..."
+              placeholder="Descreva as suas responsabilidades e conquistas..."
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Start Date *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Data de Início *</label>
               <input
                 type="date"
                 name="startDate"
@@ -254,7 +254,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Data de Fim</label>
               <input
                 type="date"
                 name="endDate"
@@ -262,7 +262,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
               />
-              <small className="text-gray-500">Leave empty if still working here</small>
+              <small className="text-gray-500">Deixe em branco se ainda estiver a trabalhar aqui</small>
             </div>
           </div>
 
@@ -272,7 +272,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
               disabled={saving}
               className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition disabled:bg-gray-400"
             >
-              {saving ? 'Saving...' : editingId ? 'Update Experience' : 'Add Experience'}
+              {saving ? 'A guardar...' : editingId ? 'Atualizar Experiência' : 'Adicionar Experiência'}
             </button>
           </div>
         </form>
@@ -280,7 +280,7 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
 
       <div className="space-y-4">
         {experiences.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No experiences yet. Add one to get started!</p>
+          <p className="text-gray-500 text-center py-8">Sem experiências ainda. Adicione uma para começar!</p>
         ) : (
           experiences.map((exp) => (
             <div key={exp.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
@@ -294,18 +294,18 @@ export default function ExperienceSection({ token, userId }: ExperienceSectionPr
                     onClick={() => handleEdit(exp)}
                     className="text-primary-600 hover:text-primary-700 font-medium"
                   >
-                    Edit
+                    Editar
                   </button>
                   <button
                     onClick={() => handleDelete(exp.id)}
                     className="text-red-600 hover:text-red-700 font-medium"
                   >
-                    Delete
+                    Eliminar
                   </button>
                 </div>
               </div>
               <p className="text-sm text-gray-500 mb-2">
-                {new Date(exp.startDate).toLocaleDateString()} - {exp.endDate ? new Date(exp.endDate).toLocaleDateString() : 'Present'}
+                {new Date(exp.startDate).toLocaleDateString()} - {exp.endDate ? new Date(exp.endDate).toLocaleDateString() : 'Presente'}
               </p>
               {exp.description && <p className="text-gray-700">{exp.description}</p>}
             </div>

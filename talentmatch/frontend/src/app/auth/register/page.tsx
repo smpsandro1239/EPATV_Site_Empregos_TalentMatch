@@ -32,12 +32,12 @@ export default function RegisterPage() {
     setError('');
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError('As palavras-passe não coincidem');
       return;
     }
 
     if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters long');
+      setError('A palavra-passe deve ter pelo menos 8 caracteres');
       return;
     }
 

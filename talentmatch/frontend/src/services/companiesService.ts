@@ -47,7 +47,7 @@ export const companyService = {
       const { data } = await axiosInstance.get(url);
       return data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to fetch company profile');
+      throw new Error(error.response?.data?.message || 'Falha ao procurar o perfil da empresa');
     }
   },
 
@@ -56,7 +56,7 @@ export const companyService = {
       const { data } = await axiosInstance.get(`/companies/${id}`);
       return data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to fetch company profile');
+      throw new Error(error.response?.data?.message || 'Falha ao procurar o perfil da empresa');
     }
   },
 
@@ -65,7 +65,7 @@ export const companyService = {
       const { data } = await axiosInstance.put(`/companies/${id}`, profile);
       return data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to update company profile');
+      throw new Error(error.response?.data?.message || 'Falha ao atualizar o perfil da empresa');
     }
   },
 
@@ -74,7 +74,7 @@ export const companyService = {
       const { data } = await axiosInstance.post('/companies', profile);
       return data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to create company profile');
+      throw new Error(error.response?.data?.message || 'Falha ao criar o perfil da empresa');
     }
   },
 
@@ -90,7 +90,7 @@ export const companyService = {
       });
       return data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to upload logo');
+      throw new Error(error.response?.data?.message || 'Falha ao carregar o logótipo');
     }
   },
 
