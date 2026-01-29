@@ -40,6 +40,14 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 - [ ] **Leaderboard de Recrutadores**: Gamificação para o lado das empresas, premiando eficiência no recrutamento.
 - [ ] **AI Mock Interviews**: Simulador de entrevistas com IA para candidatos treinarem.
 
+### 🚀 Futuro (Roadmap 4.0)
+
+- [ ] **Parsing de CVs com IA**: Extração automática de dados de PDFs/LinkedIn para preencher perfis de candidatos.
+- [ ] **Integração com Calendários**: Agendamento sincronizado de entrevistas (Google Calendar, Outlook).
+- [ ] **Sistema de Referenciação**: Recompensas para utilizadores que indiquem candidatos contratados.
+- [ ] **Dark Mode**: Suporte para tema escuro em toda a plataforma.
+- [ ] **Analytics Avançado**: Dashboards de retenção e tempo médio de contratação para empresas.
+
 ---
-*Status: 96% (i18n expandido para 4 idiomas)*
+*Status: 97% (Roadmap expandido e i18n implementado)*
 *Última atualização: Fevereiro 2026*
