@@ -46,6 +46,14 @@ export class CompaniesController {
     return this.companiesService.getCompanyByUserId(userId);
   }
 
+  @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get current company profile' })
+  async getMyProfile(@Request() req: any) {
+    return this.companiesService.getCompanyByUserId(req.user.userId);
+  }
+
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
@@ -168,12 +176,57 @@ export class CompaniesController {
     return this.companiesService.getCompanyReviews(companyId);
   }
 
+  @Get('stats')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get current company dashboard statistics' })
+  async getMyStats(@Request() req: any) {
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
+    return this.companiesService.getCompanyStats(company.id);
+  }
+
   @Get(':id/stats')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get company dashboard statistics' })
   async getCompanyStats(@Param('id') id: string) {
     return this.companiesService.getCompanyStats(id);
+  }
+
+  @Get('team')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get company team members' })
+  async getTeam(@Request() req: any) {
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
+    return this.companiesService.getMembers(company.id);
+  }
+
+  @Post('team')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Add team member' })
+  async addMember(@Request() req: any, @Body() dto: { email: string; role: string }) {
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
+    return this.companiesService.addMember(company.id, dto.email, dto.role);
+  }
+
+  @Get('branding')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get company branding' })
+  async getBranding(@Request() req: any) {
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
+    return this.companiesService.getBranding(company.id);
+  }
+
+  @Put('branding')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update company branding' })
+  async updateBranding(@Request() req: any, @Body() branding: any) {
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
+    return this.companiesService.updateBranding(company.id, branding);
   }
 
   @Get(':id/applications')

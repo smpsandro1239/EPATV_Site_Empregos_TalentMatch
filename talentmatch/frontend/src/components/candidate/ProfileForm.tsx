@@ -61,7 +61,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
         setProfile(null);
       }
     } catch (err) {
-      setError('Failed to load profile');
+      setError('Falha ao carregar o perfil');
     } finally {
       setLoading(false);
     }
@@ -157,13 +157,13 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || 'Failed to save profile');
+        throw new Error(error.message || 'Falha ao guardar o perfil');
       }
 
       const result = await response.json();
       setProfile(result);
       toast.success('Perfil atualizado!');
-      setSuccess('Profile updated successfully!');
+      setSuccess('Perfil atualizado com sucesso!');
       setTimeout(() => setSuccess(''), 3000);
     } catch (err: any) {
       const msg = err.message || 'Erro ao guardar perfil';
@@ -199,7 +199,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
             <input
               id="name"
               type="text"
@@ -208,13 +208,13 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-              placeholder="John Doe"
+              placeholder="Ex: João Silva"
             />
           </div>
 
           {/* Location */}
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">Location *</label>
+            <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">Localização *</label>
             <input
               id="location"
               type="text"
@@ -223,7 +223,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-              placeholder="City, Country"
+              placeholder="Cidade, País"
             />
           </div>
         </div>
@@ -254,7 +254,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
 
         {/* About */}
         <div>
-          <label htmlFor="about" className="block text-sm font-medium text-gray-700 mb-2">About Me</label>
+          <label htmlFor="about" className="block text-sm font-medium text-gray-700 mb-2">Sobre Mim</label>
           <textarea
             id="about"
             name="about"
@@ -262,7 +262,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
             onChange={handleChange}
             rows={4}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
-            placeholder="Tell us about yourself..."
+            placeholder="Conte-nos um pouco sobre si..."
           />
         </div>
 
@@ -290,7 +290,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Salary Min */}
           <div>
-            <label htmlFor="salaryMin" className="block text-sm font-medium text-gray-700 mb-2">Minimum Salary (€)</label>
+            <label htmlFor="salaryMin" className="block text-sm font-medium text-gray-700 mb-2">Salário Mínimo (€)</label>
             <input
               id="salaryMin"
               type="number"
@@ -304,7 +304,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
 
           {/* Salary Max */}
           <div>
-            <label htmlFor="salaryMax" className="block text-sm font-medium text-gray-700 mb-2">Maximum Salary (€)</label>
+            <label htmlFor="salaryMax" className="block text-sm font-medium text-gray-700 mb-2">Salário Máximo (€)</label>
             <input
               id="salaryMax"
               type="number"
@@ -319,7 +319,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
 
         {/* Remote Preference */}
         <div>
-          <label htmlFor="remotePreference" className="block text-sm font-medium text-gray-700 mb-2">Remote Preference</label>
+          <label htmlFor="remotePreference" className="block text-sm font-medium text-gray-700 mb-2">Preferência de Remoto</label>
           <select
             id="remotePreference"
             name="remotePreference"
@@ -327,10 +327,10 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
           >
-            <option value="">No preference</option>
-            <option value="FULLY_REMOTE">Fully Remote</option>
-            <option value="HYBRID">Hybrid</option>
-            <option value="ON_SITE">On-Site</option>
+            <option value="">Sem preferência</option>
+            <option value="FULLY_REMOTE">Totalmente Remoto</option>
+            <option value="HYBRID">Híbrido</option>
+            <option value="ON_SITE">Presencial</option>
           </select>
         </div>
 
@@ -341,7 +341,7 @@ export default function ProfileForm({ token, userId }: ProfileFormProps) {
             disabled={saving}
             className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition disabled:bg-gray-400"
           >
-            {saving ? 'Saving...' : 'Save Profile'}
+            {saving ? 'A guardar...' : 'Guardar Perfil'}
           </button>
         </div>
       </form>

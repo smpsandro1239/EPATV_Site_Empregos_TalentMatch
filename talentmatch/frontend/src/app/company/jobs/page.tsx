@@ -25,7 +25,7 @@ export default function CompanyJobsPage() {
         setCompanyId(profile.id);
       }
     } catch (err) {
-      console.error('Failed to load company profile', err);
+      console.error('Falha ao carregar o perfil da empresa', err);
     }
   }, [user?.id, authToken]);
 

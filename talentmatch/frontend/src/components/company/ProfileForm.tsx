@@ -42,7 +42,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
         setProfile(null);
         setFormData({ name: '', location: '' });
       } else {
-        setError(err.message || 'Failed to load profile');
+        setError(err.message || 'Falha ao carregar perfil');
       }
     } finally {
       setLoading(false);
@@ -123,7 +123,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
 
       {success && (
         <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-          Profile updated successfully!
+          Perfil atualizado com sucesso!
         </div>
       )}
 
@@ -143,7 +143,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
 
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-          Company Name
+          Nome da Empresa
         </label>
         <input
           type="text"
@@ -158,7 +158,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
 
       <div>
         <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
-          Location
+          Localização
         </label>
         <input
           type="text"
@@ -186,7 +186,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
 
       <div>
         <label htmlFor="industry" className="block text-sm font-medium text-gray-700 mb-1">
-          Industry
+          Setor de Atividade
         </label>
         <select
           id="industry"
@@ -195,19 +195,19 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
         >
-          <option value="">Select industry</option>
-          <option value="Technology">Technology</option>
-          <option value="Finance">Finance</option>
-          <option value="Healthcare">Healthcare</option>
-          <option value="Education">Education</option>
-          <option value="Retail">Retail</option>
-          <option value="Other">Other</option>
+          <option value="">Selecionar setor</option>
+          <option value="Technology">Tecnologia</option>
+          <option value="Finance">Finanças</option>
+          <option value="Healthcare">Saúde</option>
+          <option value="Education">Educação</option>
+          <option value="Retail">Retalho</option>
+          <option value="Other">Outro</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="size" className="block text-sm font-medium text-gray-700 mb-1">
-          Company Size
+          Tamanho da Empresa
         </label>
         <select
           id="size"
@@ -216,17 +216,17 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
         >
-          <option value="">Select size</option>
-          <option value="1-50">1-50 employees</option>
-          <option value="51-200">51-200 employees</option>
-          <option value="201-500">201-500 employees</option>
-          <option value="500+">500+ employees</option>
+          <option value="">Selecionar tamanho</option>
+          <option value="1-50">1-50 colaboradores</option>
+          <option value="51-200">51-200 colaboradores</option>
+          <option value="201-500">201-500 colaboradores</option>
+          <option value="500+">Mais de 500 colaboradores</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-          Description
+          Descrição
         </label>
         <textarea
           id="description"
@@ -235,7 +235,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
           onChange={handleChange}
           rows={6}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-          placeholder="Tell us about your company..."
+          placeholder="Fale-nos sobre a sua empresa..."
         />
       </div>
 
@@ -244,7 +244,7 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
         disabled={saving}
         className="w-full bg-primary-600 text-white py-2 rounded-lg font-semibold hover:bg-primary-700 transition disabled:opacity-50"
       >
-        {saving ? 'Saving...' : 'Save Profile'}
+        {saving ? 'A guardar...' : 'Guardar Perfil'}
       </button>
     </form>
   );

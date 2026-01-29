@@ -14,7 +14,7 @@ export function getErrorMessage(error: unknown): string {
     return String((error as { message: unknown }).message);
   }
 
-  return 'Um erro desconhecido ocorreu';
+  return 'Ocorreu um erro desconhecido';
 }
 
 export function handleAuthError(error: unknown, context: 'login' | 'register'): string {
@@ -30,7 +30,7 @@ export function handleAuthError(error: unknown, context: 'login' | 'register'): 
   }
 
   if (errorMessage.includes('network')) {
-    return 'Erro de conexão. Verifique sua internet';
+    return 'Erro de ligação. Verifique a sua internet';
   }
 
   if (errorMessage.includes('401') || errorMessage.includes('unauthorized')) {

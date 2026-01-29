@@ -58,7 +58,7 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
     try {
       setLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`);
-      if (!response.ok) throw new Error('Failed to fetch job');
+      if (!response.ok) throw new Error('Falha ao procurar vaga');
 
       const data = await response.json();
       setJob(data);
@@ -73,8 +73,8 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
 
       setError('');
     } catch (err) {
-      console.error('Error fetching job:', err);
-      setError('Failed to load job details');
+      console.error('Erro ao procurar vaga:', err);
+      setError('Falha ao carregar detalhes da vaga');
       setJob(null);
     } finally {
       setLoading(false);
@@ -102,7 +102,7 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
     }
 
     if (user.role !== 'CANDIDATE') {
-      setError('Only candidates can apply for jobs');
+      setError('Apenas candidatos se podem candidatar a vagas');
       return;
     }
 
@@ -122,7 +122,7 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to submit application');
+        throw new Error(errorData.message || 'Falha ao submeter candidatura');
       }
 
       setAppliedSuccessfully(true);
@@ -131,8 +131,8 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
         router.push('/candidate/applications');
       }, 2000);
     } catch (err: any) {
-      console.error('Error applying for job:', err);
-      setError(err.message || 'Failed to submit application');
+      console.error('Erro ao candidatar à vaga:', err);
+      setError(err.message || 'Falha ao submeter candidatura');
     } finally {
       setApplying(false);
     }
@@ -156,10 +156,10 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
         <main className="min-h-screen bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 py-8">
             <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg">
-              {error || 'Job not found'}
+              {error || 'Vaga não encontrada'}
             </div>
             <Link href="/jobs" className="mt-4 text-primary-600 hover:text-primary-700 font-semibold">
-              ← Back to jobs
+              ← Voltar para as vagas
             </Link>
           </div>
         </main>
@@ -182,7 +182,7 @@ export default function JobDetailPage({ params: initialParams }: { params: { id:
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Back Button */}
           <Link href="/jobs" className="text-primary-600 hover:text-primary-700 font-semibold mb-6 inline-block">
-            ← Back to jobs
+            ← Voltar para as vagas
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

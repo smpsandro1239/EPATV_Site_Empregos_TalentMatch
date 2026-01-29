@@ -75,14 +75,14 @@ export default function ApplicationsPage() {
         }
       );
 
-      if (!response.ok) throw new Error('Failed to fetch applications');
+      if (!response.ok) throw new Error('Falha ao procurar candidaturas');
 
       const data = await response.json();
       setApplications(Array.isArray(data) ? data : data.data || []);
       setError('');
     } catch (err) {
-      console.error('Error fetching applications:', err);
-      setError('Failed to load applications');
+      console.error('Erro ao procurar candidaturas:', err);
+      setError('Falha ao carregar candidaturas');
       setApplications([]);
     } finally {
       setLoading(false);

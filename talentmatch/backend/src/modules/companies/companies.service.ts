@@ -397,6 +397,45 @@ export class CompaniesService {
     });
   }
 
+  async getMembers(companyId: string) {
+    return this._prisma.companyMember.findMany({
+      where: {
+        companyId: companyId
+      }
+    });
+  }
+
+  async addMember(companyId: string, email: string, role: string) {
+    const user = await this._prisma.user.findUnique({ where: { email } });
+    if (!user) throw new NotFoundException('Utilizador não encontrado');
+    if (user.role !== 'COMPANY') throw new BadRequestException('O utilizador deve ter a função COMPANY');
+
+    return this._prisma.companyMember.create({
+      data: {
+        companyId,
+        userId: user.id,
+        role,
+      },
+    });
+  }
+
+  async getBranding(companyId: string) {
+    return this._prisma.tenantBranding.findUnique({
+      where: { companyId }
+    });
+  }
+
+  async updateBranding(companyId: string, branding: any) {
+    return this._prisma.tenantBranding.upsert({
+      where: { companyId },
+      update: branding,
+      create: {
+        companyId,
+        ...branding
+      }
+    });
+  }
+
   async getCompanyApplications(companyId: string, status?: string, limit: number = 20, offset: number = 0) {
     const where: any = {
       job: {

@@ -32,12 +32,12 @@ export default function RegisterPage() {
     setError('');
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError('As palavras-passe não coincidem');
       return;
     }
 
     if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters long');
+      setError('A palavra-passe deve ter pelo menos 8 caracteres');
       return;
     }
 
@@ -60,7 +60,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-primary-600 mb-2">TalentMatch</h1>
-        <p className="text-gray-600 mb-8">Create your account</p>
+        <p className="text-gray-600 mb-8">Crie a sua conta</p>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
@@ -71,7 +71,7 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-2">
-              I am a
+              Eu sou um
             </label>
             <select
               id="role"
@@ -80,14 +80,14 @@ export default function RegisterPage() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
             >
-              <option value="CANDIDATE">Job Seeker (Candidate)</option>
-              <option value="COMPANY">Recruiter (Company)</option>
+              <option value="CANDIDATE">Candidato (À procura de emprego)</option>
+              <option value="COMPANY">Recrutador (Empresa)</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name
+              Nome Completo
             </label>
             <input
               type="text"
@@ -97,13 +97,13 @@ export default function RegisterPage() {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-              placeholder="John Doe"
+              placeholder="João Silva"
             />
           </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
+              Endereço de Email
             </label>
             <input
               type="email"
@@ -113,13 +113,13 @@ export default function RegisterPage() {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-              placeholder="you@example.com"
+              placeholder="exemplo@email.com"
             />
           </div>
 
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Password
+              Palavra-passe
             </label>
             <input
               type="password"
@@ -131,12 +131,12 @@ export default function RegisterPage() {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               placeholder="••••••••"
             />
-            <p className="text-xs text-gray-500 mt-1">At least 8 characters</p>
+            <p className="text-xs text-gray-500 mt-1">Mínimo 8 caracteres</p>
           </div>
 
           <div>
             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-              Confirm Password
+              Confirmar Palavra-passe
             </label>
             <input
               type="password"
@@ -155,14 +155,14 @@ export default function RegisterPage() {
             disabled={isLoading}
             className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Creating account...' : 'Sign Up'}
+            {isLoading ? 'A criar conta...' : 'Registar'}
           </button>
         </form>
 
         <p className="text-center mt-6 text-gray-600">
-          Already have an account?{' '}
+          Já tem uma conta?{' '}
           <Link href="/auth/login" className="text-primary-600 font-semibold hover:underline">
-            Sign in
+            Inicie sessão
           </Link>
         </p>
       </div>

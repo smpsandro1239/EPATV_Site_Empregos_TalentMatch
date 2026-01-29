@@ -80,6 +80,7 @@ export default function Header() {
                 <option value="pt">PT</option>
                 <option value="en">EN</option>
                 <option value="es">ES</option>
+                <option value="fr">FR</option>
             </select>
 
             <Link href="/notifications" className="relative text-gray-600 hover:text-primary-600">
