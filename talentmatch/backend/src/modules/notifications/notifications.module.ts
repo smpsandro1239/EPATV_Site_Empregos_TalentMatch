@@ -1,11 +1,17 @@
-import { Module, Global } from '@nestjs/common';
+import { MessagesModule } from '@modules/messages/messages.module';
+import { Global, Module } from '@nestjs/common';
 import { NotificationsController } from './notifications.controller';
 import { NotificationsService } from './notifications.service';
-import { MessagesModule } from '@modules/messages/messages.module';
+
+// CAMINHO CORRIGIDO:
+import { PrismaModule } from '../../database/prisma/prisma.module';
 
 @Global()
 @Module({
-  imports: [MessagesModule],
+  imports: [
+    MessagesModule,
+    PrismaModule, // Adicionei aqui
+  ],
   controllers: [NotificationsController],
   providers: [NotificationsService],
   exports: [NotificationsService],
