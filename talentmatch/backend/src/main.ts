@@ -36,7 +36,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  const port = process.env.PORT || 3000;
+  const port = 3005;
   await app.listen(port);
   console.log(`🚀 TalentMatch API running on http://localhost:${port}`);
   console.log(`📚 Swagger docs available at http://localhost:${port}/docs`);
