@@ -144,7 +144,7 @@ export const useCompany = (): UseCompanyReturn => {
   }, []);
 
   const refreshJobs = useCallback(async () => {
-    if (company) {
+    if (company && company.id) {
       await getCompanyJobs(company.id);
     }
   }, [company, getCompanyJobs]);

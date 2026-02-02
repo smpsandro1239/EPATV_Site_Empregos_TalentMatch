@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 interface CompanyProfile {
-  id: string;
+  id?: string;
   name: string;
   location: string;
   website?: string;
@@ -21,7 +21,10 @@ interface ProfileFormProps {
   userId: string;
 }
 
-export default function CompanyProfileForm({ token, userId }: ProfileFormProps) {
+export default function CompanyProfileForm({
+  token,
+  userId,
+}: ProfileFormProps) {
   const [profile, setProfile] = useState<CompanyProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -53,9 +56,13 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
     fetchProfile();
   }, [fetchProfile]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +73,10 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       setUploading(true);
       setError('');
       const { url } = await apiClient.uploadFile('/uploads/logo', file);
-      setFormData(prev => ({ ...prev, logoUrl: `${process.env.NEXT_PUBLIC_API_URL}${url}` }));
+      setFormData((prev) => ({
+        ...prev,
+        logoUrl: `${process.env.NEXT_PUBLIC_API_URL}${url}`,
+      }));
       toast.success('Logótipo carregado!');
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
@@ -83,12 +93,18 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
     e.preventDefault();
     try {
       setSaving(true);
-      if (profile) {
-        const updated = await companyService.updateProfile(profile.id, formData as CompanyProfile);
+      if (profile && profile.id) {
+        const updated = await companyService.updateProfile(
+          profile.id,
+          formData as CompanyProfile
+        );
         setProfile(updated);
         setFormData(updated);
       } else {
-        const created = await companyService.createProfile({ ...formData, userId } as CompanyProfile);
+        const created = await companyService.createProfile({
+          ...formData,
+          userId,
+        } as CompanyProfile);
         setProfile(created);
         setFormData(created);
       }
@@ -129,7 +145,11 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
 
       <div className="flex flex-col items-center mb-6">
         {formData.logoUrl ? (
-          <img src={formData.logoUrl} alt="Logo" className="w-32 h-32 object-contain border rounded-lg mb-4" />
+          <img
+            src={formData.logoUrl}
+            alt="Logo"
+            className="w-32 h-32 object-contain border rounded-lg mb-4"
+          />
         ) : (
           <div className="w-32 h-32 bg-gray-100 flex items-center justify-center border rounded-lg mb-4 text-gray-400">
             Sem Logo
@@ -137,12 +157,21 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
         )}
         <label className="cursor-pointer bg-white border border-gray-300 rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
           {uploading ? 'A carregar...' : 'Alterar Logótipo'}
-          <input type="file" className="hidden" onChange={handleLogoUpload} accept="image/*" disabled={uploading} />
+          <input
+            type="file"
+            className="hidden"
+            onChange={handleLogoUpload}
+            accept="image/*"
+            disabled={uploading}
+          />
         </label>
       </div>
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Nome da Empresa
         </label>
         <input
@@ -157,7 +186,10 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       </div>
 
       <div>
-        <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="location"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Localização
         </label>
         <input
@@ -171,7 +203,10 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       </div>
 
       <div>
-        <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="website"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Website
         </label>
         <input
@@ -185,7 +220,10 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       </div>
 
       <div>
-        <label htmlFor="industry" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="industry"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Setor de Atividade
         </label>
         <select
@@ -206,7 +244,10 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       </div>
 
       <div>
-        <label htmlFor="size" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="size"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Tamanho da Empresa
         </label>
         <select
@@ -225,7 +266,10 @@ export default function CompanyProfileForm({ token, userId }: ProfileFormProps) 
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Descrição
         </label>
         <textarea

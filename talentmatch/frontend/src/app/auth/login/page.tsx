@@ -22,7 +22,18 @@ export default function LoginPage() {
     try {
       await login(email, password);
       toast.success('Bem-vindo de volta!');
-      router.push('/candidate');
+
+      // Redirect based on user role
+      const userRole = localStorage.getItem('userRole');
+      if (userRole === 'COMPANY') {
+        router.push('/company');
+      } else if (userRole === 'CANDIDATE') {
+        router.push('/candidate');
+      } else if (userRole === 'ADMIN') {
+        router.push('/admin');
+      } else {
+        router.push('/');
+      }
     } catch (err: any) {
       const msg = err.message || 'Falha ao iniciar sessão';
       setError(msg);

@@ -1,8 +1,7 @@
 import { axiosInstance } from './api';
 
 export interface Company {
-  id: string;
-  userId: string;
+  id?: string;
   name: string;
   location: string;
   website?: string;
@@ -10,9 +9,6 @@ export interface Company {
   industry?: string;
   size?: string;
   logoUrl?: string;
-  verified: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export type CompanyProfile = Company;

@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PrismaService } from '../../database/prisma/prisma.service';
 import Stripe from 'stripe';
+import { PrismaService } from '../../database/prisma/prisma.service';
 
 @Injectable()
 export class BillingService implements OnModuleInit {
@@ -27,6 +27,35 @@ export class BillingService implements OnModuleInit {
 
     if (!company) throw new Error('Company not found');
 
+    // Mock implementation for development/testing without Stripe integration
+    const isMock = this.configService.get<string>('STRIPE_SECRET_KEY') === 'sk_test_mock' || !this.configService.get<string>('STRIPE_SECRET_KEY');
+
+    if (isMock) {
+      // Create or update subscription in database
+      await this.prisma.subscription.upsert({
+        where: { companyId },
+        update: {
+          plan,
+          status: 'active',
+          stripeCustomerId: 'mock_customer_' + companyId,
+          stripeSubscriptionId: 'mock_subscription_' + companyId + '_' + plan,
+        },
+        create: {
+          companyId,
+          plan,
+          status: 'active',
+          stripeCustomerId: 'mock_customer_' + companyId,
+          stripeSubscriptionId: 'mock_subscription_' + companyId + '_' + plan,
+        },
+      });
+
+      return {
+        sessionId: 'mock_session_' + Date.now(),
+        url: `${this.configService.get('FRONTEND_URL') || 'http://localhost:3000'}/company/billing/success?session_id=mock_session`
+      };
+    }
+
+    // Real Stripe implementation
     let customerId = company.subscription?.stripeCustomerId;
 
     if (!customerId) {

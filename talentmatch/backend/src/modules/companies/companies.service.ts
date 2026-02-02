@@ -1,6 +1,6 @@
 import { PrismaService } from '@database/prisma/prisma.service';
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { EmbeddingsService } from '@modules/embeddings/embeddings.service';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 
 export interface CreateCompanyProfileDto {
   userId: string;
@@ -17,6 +17,17 @@ export interface UpdateCompanyProfileDto {
   name?: string;
   description?: string;
   location?: string;
+  website?: string;
+  logoUrl?: string;
+  industry?: string;
+  size?: string;
+}
+
+export interface CompanyProfile {
+  id?: string;
+  name: string;
+  description?: string;
+  location: string;
   website?: string;
   logoUrl?: string;
   industry?: string;
@@ -81,7 +92,7 @@ export class CompaniesService {
       throw new BadRequestException('Company profile already exists');
     }
 
-    return this._prisma.company.create({
+    const company = await this._prisma.company.create({
       data: {
         userId: dto.userId,
         name: dto.name,
@@ -98,6 +109,10 @@ export class CompaniesService {
         },
       },
     });
+
+    // Exclude properties that should not exist
+    const { userId, verified, createdAt, updatedAt, user, ...filteredCompany } = company;
+    return filteredCompany;
   }
 
   async getProfile(companyId: string) {
@@ -118,10 +133,12 @@ export class CompaniesService {
       throw new NotFoundException('Company not found');
     }
 
-    return company;
+    // Exclude properties that should not exist
+    const { userId, verified, createdAt, updatedAt, user, ...filteredCompany } = company;
+    return filteredCompany;
   }
 
-  async getCompanyByUserId(userId: string) {
+  async getCompanyByUserId(userId: string, includeId = false): Promise<CompanyProfile> {
     const company = await this._prisma.company.findUnique({
       where: { userId },
       include: {
@@ -135,14 +152,26 @@ export class CompaniesService {
       throw new NotFoundException('Company not found');
     }
 
-    return company;
+    if (includeId) {
+      // Exclude properties except id
+      const { userId: _, verified, createdAt, updatedAt, user, ...filteredCompany } = company;
+      return filteredCompany as unknown as CompanyProfile;
+    }
+
+    // Exclude properties that should not exist
+    const { userId: _, verified, createdAt, updatedAt, user, ...filteredCompany } = company;
+    return filteredCompany as unknown as CompanyProfile;
   }
 
   async updateProfile(companyId: string, dto: UpdateCompanyProfileDto) {
-    return this._prisma.company.update({
+    const company = await this._prisma.company.update({
       where: { id: companyId },
       data: dto,
     });
+
+    // Exclude properties that should not exist
+    const { userId, verified, createdAt, updatedAt, ...filteredCompany } = company;
+    return filteredCompany;
   }
 
   async listCompanies(limit: number = 10, offset: number = 0) {

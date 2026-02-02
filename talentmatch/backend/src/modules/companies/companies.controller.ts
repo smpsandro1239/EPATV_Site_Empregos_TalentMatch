@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGuards, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CompaniesService } from './companies.service';
@@ -78,10 +78,12 @@ export class CompaniesController {
   @ApiOperation({ summary: 'List company jobs' })
   async getCompanyJobs(
     @Param('id') companyId: string,
-    @Query('limit') limit: number = 20,
-    @Query('offset') offset: number = 0,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
   ) {
-    return this.companiesService.getCompanyJobs(companyId, limit, offset);
+    const limitNum = limit ? parseInt(limit, 10) : 20;
+    const offsetNum = offset ? parseInt(offset, 10) : 0;
+    return this.companiesService.getCompanyJobs(companyId, limitNum, offsetNum);
   }
 
   @Get('jobs/search')
@@ -181,8 +183,8 @@ export class CompaniesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get current company dashboard statistics' })
   async getMyStats(@Request() req: any) {
-    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
-    return this.companiesService.getCompanyStats(company.id);
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId, true);
+    return this.companiesService.getCompanyStats(company.id!);
   }
 
   @Get(':id/stats')
@@ -198,8 +200,8 @@ export class CompaniesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get company team members' })
   async getTeam(@Request() req: any) {
-    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
-    return this.companiesService.getMembers(company.id);
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId, true);
+    return this.companiesService.getMembers(company.id!);
   }
 
   @Post('team')
@@ -207,8 +209,8 @@ export class CompaniesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Add team member' })
   async addMember(@Request() req: any, @Body() dto: { email: string; role: string }) {
-    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
-    return this.companiesService.addMember(company.id, dto.email, dto.role);
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId, true);
+    return this.companiesService.addMember(company.id!, dto.email, dto.role);
   }
 
   @Get('branding')
@@ -216,8 +218,8 @@ export class CompaniesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get company branding' })
   async getBranding(@Request() req: any) {
-    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
-    return this.companiesService.getBranding(company.id);
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId, true);
+    return this.companiesService.getBranding(company.id!);
   }
 
   @Put('branding')
@@ -225,8 +227,8 @@ export class CompaniesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update company branding' })
   async updateBranding(@Request() req: any, @Body() branding: any) {
-    const company = await this.companiesService.getCompanyByUserId(req.user.userId);
-    return this.companiesService.updateBranding(company.id, branding);
+    const company = await this.companiesService.getCompanyByUserId(req.user.userId, true);
+    return this.companiesService.updateBranding(company.id!, branding);
   }
 
   @Get(':id/applications')

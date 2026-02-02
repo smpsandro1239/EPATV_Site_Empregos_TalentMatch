@@ -10,7 +10,13 @@ import { useEffect, useState } from 'react';
 interface Application {
   id: string;
   jobId: string;
-  status: 'SUBMITTED' | 'IN_REVIEW' | 'INTERVIEW' | 'REJECTED' | 'OFFER' | 'HIRED';
+  status:
+    | 'SUBMITTED'
+    | 'IN_REVIEW'
+    | 'INTERVIEW'
+    | 'REJECTED'
+    | 'OFFER'
+    | 'HIRED';
   message?: string;
   createdAt: string;
   job?: {
@@ -66,23 +72,44 @@ export default function ApplicationsPage() {
   const fetchApplications = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/applications/candidate/${user?.id}`,
+      // Note: user.id é o ID do usuário, mas a API espera o candidateId (profile.id)
+      // Vamos usar o serviço de candidatos para obter o perfil primeiro
+      const candidateProfile = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/candidates/profile/${user?.id}`,
         {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
 
-      if (!response.ok) throw new Error('Falha ao procurar candidaturas');
+      if (!candidateProfile.ok) {
+        throw new Error('Perfil de candidato não encontrado');
+      }
+
+      const profileData = await candidateProfile.json();
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/applications/candidate/${profileData.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Falha ao procurar candidaturas');
+      }
 
       const data = await response.json();
       setApplications(Array.isArray(data) ? data : data.data || []);
       setError('');
     } catch (err) {
       console.error('Erro ao procurar candidaturas:', err);
-      setError('Falha ao carregar candidaturas');
+      // Não exibir erro se o candidato não tem perfil ou não há candidaturas
+      // Apenas logar o erro e deixar a lista vazia
+      setError('');
       setApplications([]);
     } finally {
       setLoading(false);
@@ -108,32 +135,38 @@ export default function ApplicationsPage() {
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">As Minhas Candidaturas</h1>
-            <p className="text-lg text-gray-600">Acompanha todas as tuas candidaturas num só lugar</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              As Minhas Candidaturas
+            </h1>
+            <p className="text-lg text-gray-600">
+              Acompanha todas as tuas candidaturas num só lugar
+            </p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-white rounded-lg shadow-md p-6">
               <p className="text-gray-600 text-sm mb-1">Total</p>
-              <p className="text-3xl font-bold text-gray-900">{applications.length}</p>
+              <p className="text-3xl font-bold text-gray-900">
+                {applications.length}
+              </p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">
               <p className="text-gray-600 text-sm mb-1">Em Revisão</p>
               <p className="text-3xl font-bold text-yellow-600">
-                {applications.filter(a => a.status === 'IN_REVIEW').length}
+                {applications.filter((a) => a.status === 'IN_REVIEW').length}
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">
               <p className="text-gray-600 text-sm mb-1">Propostas</p>
               <p className="text-3xl font-bold text-green-600">
-                {applications.filter(a => a.status === 'OFFER').length}
+                {applications.filter((a) => a.status === 'OFFER').length}
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6">
               <p className="text-gray-600 text-sm mb-1">Rejeitadas</p>
               <p className="text-3xl font-bold text-red-600">
-                {applications.filter(a => a.status === 'REJECTED').length}
+                {applications.filter((a) => a.status === 'REJECTED').length}
               </p>
             </div>
           </div>
@@ -156,7 +189,10 @@ export default function ApplicationsPage() {
           {!loading && applications.length > 0 && (
             <div className="space-y-4">
               {applications.map((application) => (
-                <div key={application.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                <div
+                  key={application.id}
+                  className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition"
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       {application.job && (
@@ -173,26 +209,36 @@ export default function ApplicationsPage() {
                               <h3 className="text-xl font-bold text-gray-900">
                                 {application.job.title}
                               </h3>
-                              <p className="text-gray-600">{application.job.company.name}</p>
+                              <p className="text-gray-600">
+                                {application.job.company.name}
+                              </p>
                             </div>
                           </div>
 
                           <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                             <span>📍 {application.job.location}</span>
-                            <span>📅 {new Date(application.createdAt).toLocaleDateString()}</span>
+                            <span>
+                              📅{' '}
+                              {new Date(
+                                application.createdAt
+                              ).toLocaleDateString()}
+                            </span>
                           </div>
                         </>
                       )}
 
                       {application.message && (
-                        <p className="text-gray-700 text-sm mb-3">{application.message}</p>
+                        <p className="text-gray-700 text-sm mb-3">
+                          {application.message}
+                        </p>
                       )}
                     </div>
 
                     <div className="ml-4">
                       <span
                         className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
-                          statusColors[application.status] || 'bg-gray-100 text-gray-800'
+                          statusColors[application.status] ||
+                          'bg-gray-100 text-gray-800'
                         }`}
                       >
                         {statusLabels[application.status] || application.status}
@@ -210,15 +256,21 @@ export default function ApplicationsPage() {
                       </Link>
                     )}
                     <button
-                        onClick={() => setActiveChat(activeChat === application.id ? null : application.id)}
-                        className="text-primary-600 hover:text-primary-700 font-semibold"
+                      onClick={() =>
+                        setActiveChat(
+                          activeChat === application.id ? null : application.id
+                        )
+                      }
+                      className="text-primary-600 hover:text-primary-700 font-semibold"
                     >
-                        {activeChat === application.id ? 'Fechar Chat' : 'Conversar com Empresa'}
+                      {activeChat === application.id
+                        ? 'Fechar Chat'
+                        : 'Conversar com Empresa'}
                     </button>
                   </div>
                   {activeChat === application.id && (
                     <div className="mt-6 border-t pt-6">
-                        <Chat applicationId={application.id} />
+                      <Chat applicationId={application.id} />
                     </div>
                   )}
                 </div>
@@ -229,7 +281,9 @@ export default function ApplicationsPage() {
           {/* No Applications */}
           {!loading && applications.length === 0 && (
             <div className="bg-white rounded-lg shadow-md p-12 text-center">
-              <p className="text-lg text-gray-600 mb-6">Ainda não te candidataste a nenhuma vaga.</p>
+              <p className="text-lg text-gray-600 mb-6">
+                Ainda não te candidataste a nenhuma vaga.
+              </p>
               <Link
                 href="/jobs"
                 className="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition"

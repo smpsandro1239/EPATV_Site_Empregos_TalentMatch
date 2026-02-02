@@ -44,10 +44,16 @@ export class JobsService {
         },
       });
 
+      // Garantir que publishedAt esteja definido
+      const jobsWithPublishedDate = jobs.map(job => ({
+        ...job,
+        publishedAt: job.publishedAt || job.createdAt,
+      }));
+
       const total = await this.prisma.job.count();
 
       return {
-        data: jobs,
+        data: jobsWithPublishedDate,
         pagination: {
           total,
           limit,
@@ -93,7 +99,10 @@ export class JobsService {
       throw new NotFoundException('Job not found');
     }
 
-    return job;
+    return {
+      ...job,
+      publishedAt: job.publishedAt || job.createdAt,
+    };
   }
 
   /**

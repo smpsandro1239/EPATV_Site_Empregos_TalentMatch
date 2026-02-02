@@ -18,6 +18,7 @@ interface Job {
     logoUrl?: string;
   };
   createdAt: string;
+  publishedAt?: string;
 }
 
 interface JobCardProps {
@@ -46,8 +47,12 @@ export default function JobCard({ job }: JobCardProps) {
           </div>
           {job.matchScore !== undefined && (
             <div className="text-right">
-              <div className="text-xl font-bold text-green-600">{job.matchScore}%</div>
-              <div className="text-[10px] text-gray-500 uppercase font-bold">Match</div>
+              <div className="text-xl font-bold text-green-600">
+                {job.matchScore}%
+              </div>
+              <div className="text-[10px] text-gray-500 uppercase font-bold">
+                Match
+              </div>
             </div>
           )}
         </div>
@@ -80,14 +85,22 @@ export default function JobCard({ job }: JobCardProps) {
           {job.salaryMin && job.salaryMax && (
             <div className="flex items-center text-sm text-gray-600">
               <span className="w-24 font-medium">💰 Salário:</span>
-              <span>€{job.salaryMin.toLocaleString()} - €{job.salaryMax.toLocaleString()}</span>
+              <span>
+                €{job.salaryMin.toLocaleString()} - €
+                {job.salaryMax.toLocaleString()}
+              </span>
             </div>
           )}
         </div>
 
         {/* Posted Date */}
         <p className="text-xs text-gray-500">
-          Publicada em {new Date(job.createdAt).toLocaleDateString()}
+          Publicada em{' '}
+          {job.publishedAt
+            ? new Date(job.publishedAt).toLocaleDateString()
+            : job.createdAt
+              ? new Date(job.createdAt).toLocaleDateString()
+              : 'Data não disponível'}
         </p>
       </div>
     </Link>

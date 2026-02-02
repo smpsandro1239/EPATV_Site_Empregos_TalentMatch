@@ -159,8 +159,8 @@ export class CandidatesService {
         candidateId: dto.candidateId,
         companyName: dto.companyName,
         role: dto.role,
-        startDate: dto.startDate,
-        endDate: dto.endDate,
+        startDate: new Date(dto.startDate),
+        endDate: dto.endDate ? new Date(dto.endDate) : null,
         description: dto.description,
       },
     });

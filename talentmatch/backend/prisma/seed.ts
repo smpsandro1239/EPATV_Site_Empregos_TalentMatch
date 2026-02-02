@@ -122,7 +122,29 @@ async function main() {
     },
   });
 
-  console.log('✅ Job 2 criado:', job2.title);
+  // 6. Criar Skills de Teste
+  const skills = [
+    { name: 'JavaScript', category: 'Frontend' },
+    { name: 'TypeScript', category: 'Frontend' },
+    { name: 'React', category: 'Frontend' },
+    { name: 'Node.js', category: 'Backend' },
+    { name: 'Python', category: 'Backend' },
+    { name: 'PostgreSQL', category: 'Database' },
+    { name: 'MongoDB', category: 'Database' },
+    { name: 'Docker', category: 'DevOps' },
+    { name: 'AWS', category: 'Cloud' },
+    { name: 'Git', category: 'Version Control' },
+  ];
+
+  for (const skillData of skills) {
+    await prisma.skill.upsert({
+      where: { name: skillData.name },
+      update: {},
+      create: skillData,
+    });
+  }
+
+  console.log('✅ Skills criadas:', skills.length);
 
   console.log('\n✅ Seed completado com sucesso!\n');
   console.log('📋 Credenciais de Teste:');
