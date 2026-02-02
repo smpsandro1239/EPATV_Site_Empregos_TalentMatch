@@ -27,12 +27,24 @@ export class AuthService {
     // Hash password using Argon2
     const passwordHash = await argon2.hash(dto.password);
 
-    // Create user
+    // Create user and profile
     const user = await this._prisma.user.create({
       data: {
         email: dto.email,
         passwordHash,
         role: dto.role,
+        candidateProfile: dto.role === 'CANDIDATE' ? {
+          create: {
+            name: dto.name,
+            location: 'Not specified', // Valor padrão
+          },
+        } : undefined,
+        companyProfile: dto.role === 'COMPANY' ? {
+          create: {
+            name: dto.name,
+            location: 'Not specified', // Valor padrão
+          },
+        } : undefined,
       },
     });
 

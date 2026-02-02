@@ -1,6 +1,6 @@
 import { PrismaService } from '@database/prisma/prisma.service';
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { EmbeddingsService } from '@modules/embeddings/embeddings.service';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 
 export interface CreateCandidateProfileDto {
   userId: string;
@@ -200,8 +200,8 @@ export class CandidatesService {
         institution: dto.institution,
         degree: dto.degree,
         field: dto.field,
-        startDate: dto.startDate,
-        endDate: dto.endDate,
+        startDate: new Date(dto.startDate),
+        endDate: dto.endDate ? new Date(dto.endDate) : null,
       },
     });
   }
