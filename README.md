@@ -7,6 +7,7 @@ TalentMatch é uma plataforma de recrutamento inovadora que combina tecnologia d
 ## 🚀 Funcionalidades Principais
 
 ### Para Candidatos
+
 - 📝 Perfil completo com informações profissionais, habilidades e experiência
 - 🔍 Pesquisa e filtragem de vagas
 - 🤖 Matching inteligente de vagas com perfil do candidato
@@ -15,6 +16,7 @@ TalentMatch é uma plataforma de recrutamento inovadora que combina tecnologia d
 - 💬 Notificações e atualizações em tempo real
 
 ### Para Empresas
+
 - 📝 Perfil da empresa com informações detalhadas
 - 📋 Criação e gestão de vagas
 - 🔍 Pesquisa e filtragem de candidatos
@@ -23,6 +25,7 @@ TalentMatch é uma plataforma de recrutamento inovadora que combina tecnologia d
 - 📊 Dashboard com analytics de recrutamento
 
 ### Para Administradores
+
 - 📊 Dashboard completo de gestão
 - 👥 Administração de usuários e perfis
 - 📋 Moderador de vagas e candidaturas
@@ -31,21 +34,25 @@ TalentMatch é uma plataforma de recrutamento inovadora que combina tecnologia d
 ## 🎨 Interface do Usuário
 
 ### Página Inicial
+
 A página inicial oferece uma visão geral da plataforma e acesso rápido às funcionalidades principais.
 
 ![Página Inicial](screenshots/homepage.png)
 
 ### Página de Login
+
 Tela de autenticação segura com suporte a diferentes tipos de usuários.
 
 ![Página de Login](screenshots/login-page.png)
 
 ### Página de Registro
+
 Formulário de registro com opções para candidatos e empresas.
 
 ![Página de Registro](screenshots/register-page.png)
 
 ### Página de Vagas
+
 Página de exploração de vagas com filtros avançados e visualização de detalhes.
 
 ![Página de Vagas](screenshots/jobs-page.png)
@@ -55,6 +62,7 @@ Página de exploração de vagas com filtros avançados e visualização de deta
 ### Stack Tecnológica
 
 #### Frontend
+
 - **React 18** com TypeScript
 - **Next.js 14** para renderização SSR e SSG
 - **Tailwind CSS** para estilização
@@ -63,6 +71,7 @@ Página de exploração de vagas com filtros avançados e visualização de deta
 - **Axios** para requisições HTTP
 
 #### Backend
+
 - **NestJS** com TypeScript
 - **Prisma ORM** para acesso a dados
 - **PostgreSQL** como banco de dados
@@ -72,6 +81,7 @@ Página de exploração de vagas com filtros avançados e visualização de deta
 - **Stripe** para processamento de pagamentos
 
 #### DevOps
+
 - **Docker** para containerização
 - **Docker Compose** para orquestração
 - **GitHub Actions** para CI/CD
@@ -81,6 +91,7 @@ Página de exploração de vagas com filtros avançados e visualização de deta
 ## 📦 Instalação e Configuração
 
 ### Pré-requisitos
+
 - Node.js 18+
 - Docker e Docker Compose
 - PostgreSQL
@@ -89,12 +100,14 @@ Página de exploração de vagas com filtros avançados e visualização de deta
 ### Passos de Instalação
 
 1. **Clone o repositório**
+
    ```bash
    git clone https://github.com/seu-usuario/talentmatch.git
    cd talentmatch
    ```
 
 2. **Configuração do ambiente**
+
    ```bash
    # Copie os arquivos de exemplo de configuração
    cp backend/.env.example backend/.env
@@ -104,11 +117,13 @@ Página de exploração de vagas com filtros avançados e visualização de deta
    ```
 
 3. **Inicie os containers Docker**
+
    ```bash
    docker-compose up -d
    ```
 
 4. **Inicie o backend**
+
    ```bash
    cd backend
    npm install
@@ -118,6 +133,7 @@ Página de exploração de vagas com filtros avançados e visualização de deta
    ```
 
 5. **Inicie o frontend**
+
    ```bash
    cd frontend
    npm install
@@ -127,11 +143,13 @@ Página de exploração de vagas com filtros avançados e visualização de deta
 ## 🚀 Uso
 
 ### Acesso à Plataforma
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:3001
+
+- **Frontend**: <http://localhost:3000>
+- **Backend API**: <http://localhost:3001>
 
 ### Credenciais de Teste
-```
+
+```bash
 CANDIDATO:
   Email:    candidato@test.com
   Password: TestPass123!
@@ -157,6 +175,7 @@ A plataforma é completamente responsiva e funciona em dispositivos móveis, tab
 ## 📊 Analytics
 
 A plataforma inclui analytics detalhados para:
+
 - Número de usuários ativos
 - Taxa de aplicação em vagas
 - Conversão de candidatos para contratações
@@ -166,9 +185,11 @@ A plataforma inclui analytics detalhados para:
 ## 🔄 Atualizações e Manutenção
 
 ### Versão Atual
+
 v1.0.0
 
 ### Roadmap
+
 - Integração com redes sociais
 - Vídeo entrevista embutida
 - Recomendações personalizadas
@@ -186,12 +207,14 @@ Este projeto está licenciado sob a licença MIT.
 ## 📞 Suporte
 
 Para suporte, entre em contato:
-- Email: support@talentmatch.pt
+
+- Email: <support@talentmatch.pt>
 - Telefone: +351 123 456 789
 
 ## 📈 Desempenho
 
 ### Métricas de Desempenho
+
 - Tempo de carregamento médio: < 2s
 - Taxa de sucesso de API: 99.5%
 - Tempo de resposta do backend: < 500ms
@@ -200,6 +223,7 @@ Para suporte, entre em contato:
 ## 🌍 Internacionalização
 
 A plataforma suporta os seguintes idiomas:
+
 - Português (PT)
 - English (EN)
 - Español (ES)
@@ -208,15 +232,18 @@ A plataforma suporta os seguintes idiomas:
 ## 📱 Integrações
 
 ### Redes Sociais
+
 - LinkedIn
 - GitHub
 - Indeed
 
 ### Payment Gateways
+
 - Stripe
 - PayPal
 
 ### Outras Integrações
+
 - Google Workspace
 - Microsoft 365
 - Slack
@@ -224,18 +251,21 @@ A plataforma suporta os seguintes idiomas:
 ## 🔮 Funcionalidades Futuras
 
 ### AI e Machine Learning
+
 - Análise de currículos usando NLP
 - Previsão de retenção de colaboradores
 - Recomendações de cursos e certificações
 - Análise de sentimento em entrevistas
 
 ### Melhorias de UX
+
 - Interface de chat com IA
 - Tours interativos da plataforma
 - Modo escuro
 - Personalização de dashboard
 
 ### Funcionalidades Empresariais
+
 - Integração com ATS (Applicant Tracking Systems)
 - Recrutamento em massa
 - Análise de equidade salarial
@@ -252,12 +282,15 @@ Para soluções de problemas comuns, consulte o arquivo TROUBLESHOOTING.md.
 ## 📚 Documentação
 
 ### Guia de Desenvolvimento
+
 Consulte o arquivo DEVELOPMENT_GUIDE.md para instruções sobre como contribuir para o códigobase.
 
 ### API Documentation
+
 A documentação da API está disponível em:
-- Swagger: http://localhost:3001/api/docs
-- Postman: https://documenter.getpostman.com/...
+
+- Swagger: <http://localhost:3001/api/docs>
+- Postman: <https://documenter.getpostman.com/>...
 
 ## 📄 Termos e Condições
 
