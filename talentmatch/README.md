@@ -2,6 +2,10 @@
 
 O **TalentMatch** é uma solução de recrutamento enterprise-grade que utiliza Inteligência Artificial e tecnologias modernas para conectar talentos a oportunidades de forma eficiente.
 
+## Live Demo
+
+The application is deployed and can be accessed here: [epatv-site-empregos-talent-match-enzg04cf8.vercel.app](httpss://epatv-site-empregos-talent-match-enzg04cf8.vercel.app/)
+
 ## 🚀 Funcionalidades Principais
 
 - **Matching IA Híbrido**: Algoritmo que combina competências técnicas com análise semântica OpenAI.
