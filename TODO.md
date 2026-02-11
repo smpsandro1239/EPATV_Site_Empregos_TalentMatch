@@ -16,38 +16,38 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 
 ### 🧩 Fase 5: Monetização & Expansão
 - [x] **Integração Stripe**: Sistema de subscrições (Free, Pro, Enterprise) funcional.
-- [x] **Gestão de Equipa**: Suporte para múltiplos recrutadores (Multi-tenant).
-- [x] **Branding por Tenant**: Personalização de cores e subdomínios (Enterprise).
+- [x] **Gestão de Equipa**: Suporte para múltiplos recrutadores com UX melhorada.
+- [x] **Branding por Tenant**: Personalização de cores e subdomínios via CSS Variables.
 - [x] **Limites por Plano**: Restrições automáticas baseadas no nível de subscrição.
 
 ### 🚀 Melhorias Estratégicas (Roadmap 2.0)
-- [x] **Video-Entrevistas**: Chamadas de vídeo integradas via WebRTC no chat.
-- [x] **Multi-idioma (i18n)**: Suporte expandido para Português (PT-PT), Inglês, Espanhol e Francês.
-- [x] **SEO & Performance**: Metadados dinâmicos, robots.txt e sitemaps otimizados.
+- [x] **Video-Entrevistas**: Chamadas de vídeo integradas via WebRTC (Frontend + Backend).
+- [x] **Performance AI**: Migração para **pgvector** para cálculos de similaridade nativos.
+- [x] **Data Fetching**: Implementação de **TanStack Query** para cache e performance.
+- [x] **Users Module**: Implementação completa de gestão de perfil e segurança de conta.
+- [x] **Admin Insights**: Dashboard com estatísticas reais agregadas do banco de dados.
+- [x] **Multi-idioma (i18n)**: Suporte expandido para PT-PT, EN, ES e FR.
+- [x] **SEO & Performance**: Metadados dinâmicos e infraestrutura pronta para produção.
 - [x] **Mobile Ready**: Infraestrutura para notificações push e registo de dispositivos.
-- [x] **Build Fix**: Correção do erro de build na página de faturação (unused variable 'subscription') e outros erros de tipo.
-- [x] **PT-PT Localization**: Tradução completa dos perfis (Empresa/Candidato) e gestão de vagas para Português Europeu.
-- [x] **Backend Alignment**: Implementação de endpoints em falta para Team, Stats e Branding.
 
 ---
 
 ## 🟡 Próximos Passos (Roadmap 3.0)
 
-- [x] **Videochamadas (UI)**: Interface frontend para entrevistas via WebRTC integrada.
 - [ ] **Templates HTML para E-mails**: Refinar o design visual das notificações.
 - [ ] **App Mobile Nativa**: Desenvolvimento do cliente React Native.
 - [ ] **AI Interviews**: Assistente de IA para pré-triagem em vídeo.
-- [ ] **Gamification (Desafios Técnicos)**: Implementar mini-jogos ou desafios de código para candidatos ganharem medalhas e melhorarem o matching score.
-- [ ] **Leaderboard de Recrutadores**: Gamificação para o lado das empresas, premiando eficiência no recrutamento.
+- [ ] **Gamification (Desafios Técnicos)**: Implementar mini-jogos ou desafios de código.
 - [ ] **AI Mock Interviews**: Simulador de entrevistas com IA para candidatos treinarem.
+- [ ] **SEO Middleware**: Migração total para next-intl com roteamento localizado.
 
 ---
-*Status: 96% (i18n expandido para 4 idiomas)*
+*Status: 99% (Fases 1-5 + Roadmap 2.0 Concluídos)*
 *Última atualização: Fevereiro 2026*
 
 ---
-## 📝 Notas da Auditoria Técnica (Fev 2026)
-- **Estado**: 98% Concluído.
-- **Dívida Técnica**: Migrar similaridade vetorial para o PostgreSQL (pgvector).
-- [x] **UI de Videochamada**: Implementada e integrada (Frontend + Backend).
-- **Otimização**: Refatorar data-fetching para TanStack Query.
+## 📝 Notas da Auditoria Técnica
+- **Dívida Técnica**: Migração para pgvector concluída ✅.
+- **UI de Videochamada**: Implementada e integrada ✅.
+- **Otimização**: TanStack Query configurado e em uso ✅.
+- **Segurança**: Dependências limpas (Argon2 apenas) ✅.

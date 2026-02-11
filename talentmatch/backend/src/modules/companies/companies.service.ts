@@ -429,7 +429,8 @@ export class CompaniesService {
   async getMembers(companyId: string) {
     return this._prisma.companyMember.findMany({
       where: {
-        companyId: companyId
+        companyId: companyId,
+      include: { user: { select: { email: true, candidateProfile: { select: { name: true } }, companyProfile: { select: { name: true } } } } }
       }
     });
   }

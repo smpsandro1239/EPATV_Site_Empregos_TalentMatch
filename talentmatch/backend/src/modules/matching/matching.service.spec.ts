@@ -9,7 +9,7 @@ describe('MatchingService', () => {
 
   const mockEmbeddingsService = {
     generateEmbedding: jest.fn().mockResolvedValue(new Array(1536).fill(0)),
-    calculateSimilarity: jest.fn().mockReturnValue(0.8),
+    getSimilarity: jest.fn().mockResolvedValue(0.8),
   };
 
   const mockPrismaService = {
@@ -61,7 +61,7 @@ describe('MatchingService', () => {
       );
 
       expect(result.score).toBeGreaterThan(50);
-      expect(result.reason).toContain('✅ Location match');
+      expect(result.reason).toContain('✅ Localização ideal');
     });
   });
 });

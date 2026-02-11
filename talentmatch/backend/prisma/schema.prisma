@@ -3,11 +3,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  extensions = [vector]
 }
 
 // ===== ENUMS =====
@@ -76,6 +78,7 @@ model User {
   notifications    Notification[]
   auditLogs        AuditLog[]
   devices          Device[]
+  companyMemberships CompanyMember[]
 
   @@index([email])
   @@index([role])
@@ -220,9 +223,12 @@ model CompanyMember {
 
   // Relações
   company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, companyId])
   @@index([companyId])
+  @@index([userId])
+
 }
 
 // ===== JOBS =====
@@ -343,7 +349,7 @@ model Embedding {
   id         String   @id @default(cuid())
   entityType String   // "job" ou "candidate"
   entityId   String
-  vector     String   // Vector armazenado como texto para agora, usar pgvector no futuro
+  vector     Unsupported("vector(1536)")?
   createdAt  DateTime @default(now())
 
   // Relações

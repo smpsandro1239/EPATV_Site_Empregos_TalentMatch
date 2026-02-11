@@ -17,7 +17,9 @@ export class EmbeddingsService {
   }
 
   async generateEmbedding(text: string): Promise<number[]> {
-    if (!this.configService.get('OPENAI_API_KEY')) {
+    const apiKey = this.configService.get('OPENAI_API_KEY');
+    if (!apiKey || apiKey === 'your_openai_api_key') {
+      console.warn('OPENAI_API_KEY not set, using dummy embedding');
       return new Array(1536).fill(0);
     }
 
@@ -35,22 +37,41 @@ export class EmbeddingsService {
 
   async saveEmbedding(entityType: 'job' | 'candidate', entityId: string, text: string) {
     const vector = await this.generateEmbedding(text);
+    const vectorString = `[${vector.join(',')}]`;
+    const id = `${entityType}_${entityId}`;
 
-    return this.prisma.embedding.upsert({
-      where: { id: `${entityType}_${entityId}` }, // Assuming we use a composite ID or similar
-      update: {
-        vector: JSON.stringify(vector),
-      },
-      create: {
-        id: `${entityType}_${entityId}`,
-        entityType,
-        entityId,
-        vector: JSON.stringify(vector),
-      },
-    });
+    // Use raw SQL to insert vector since Prisma doesn't support vector type natively for writing easily
+    return this.prisma.$executeRawUnsafe(
+      `INSERT INTO "Embedding" (id, "entityType", "entityId", vector, "createdAt")
+       VALUES ($1, $2, $3, $4::vector, NOW())
+       ON CONFLICT (id) DO UPDATE SET vector = $4::vector`,
+      id, entityType, entityId, vectorString
+    );
   }
 
-  // Cosine similarity in JS (since we store as string for now)
+  /**
+   * Calcula a similaridade entre duas entidades usando pgvector no banco de dados
+   */
+  async getSimilarity(id1: string, id2: string): Promise<number> {
+    try {
+        const result: any[] = await this.prisma.$queryRawUnsafe(
+            `SELECT (1 - (e1.vector <=> e2.vector)) as similarity
+             FROM "Embedding" e1, "Embedding" e2
+             WHERE e1.id = $1 AND e2.id = $2`,
+            id1, id2
+        );
+
+        if (result.length > 0) {
+            return result[0].similarity;
+        }
+        return 0;
+    } catch (error) {
+        console.error('Erro ao calcular similaridade no DB:', error);
+        return 0;
+    }
+  }
+
+  // Fallback Cosine similarity in JS if needed
   calculateSimilarity(v1: number[], v2: number[]): number {
     let dotProduct = 0;
     let mA = 0;
@@ -62,6 +83,7 @@ export class EmbeddingsService {
     }
     mA = Math.sqrt(mA);
     mB = Math.sqrt(mB);
+    if (mA === 0 || mB === 0) return 0;
     return dotProduct / (mA * mB);
   }
 }

@@ -26,15 +26,31 @@ export class AdminService {
       include: { company: { select: { name: true } } },
     });
 
-    // Dados para gráfico (vagas por mês - últimos 6 meses)
-    const months = [];
+    // Dados reais para o gráfico (vagas por mês - últimos 6 meses)
+    const jobsByMonth = [];
     for (let i = 5; i >= 0; i--) {
-        const d = new Date();
-        d.setMonth(d.getMonth() - i);
-        months.push(d.toLocaleString('pt-PT', { month: 'short' }));
-    }
+      const startOfMonth = new Date();
+      startOfMonth.setMonth(startOfMonth.getMonth() - i);
+      startOfMonth.setDate(1);
+      startOfMonth.setHours(0, 0, 0, 0);
 
-    const jobsByMonth = months.map(m => ({ name: m, total: Math.floor(Math.random() * 50) + 10 })); // Mock data for now
+      const endOfMonth = new Date(startOfMonth);
+      endOfMonth.setMonth(endOfMonth.getMonth() + 1);
+
+      const count = await this.prisma.job.count({
+        where: {
+          createdAt: {
+            gte: startOfMonth,
+            lt: endOfMonth,
+          },
+        },
+      });
+
+      jobsByMonth.push({
+        name: startOfMonth.toLocaleString('pt-PT', { month: 'short' }),
+        total: count,
+      });
+    }
 
     return {
       stats: {
