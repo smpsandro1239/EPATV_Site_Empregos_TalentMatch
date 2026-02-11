@@ -124,4 +124,4 @@ npm start
 - [ ] Assistente de IA para pré-triagem de vídeo.
 
 ---
-*Gerado automaticamente pela auditoria Jules Engineering.*
+*Sandro Pereira.*
