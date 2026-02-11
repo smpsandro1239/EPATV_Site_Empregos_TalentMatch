@@ -19,3 +19,34 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+  --dynamic-primary: #0284c7; /* Default primary-600 */
+  --dynamic-primary-transparent: rgba(2, 132, 199, 0.1);
+  --dynamic-secondary: #10b981; /* Default emerald-500 */
+  --dynamic-secondary-transparent: rgba(16, 185, 129, 0.1);
+}
+
+.bg-dynamic-primary {
+  background-color: var(--dynamic-primary);
+}
+
+.text-dynamic-primary {
+  color: var(--dynamic-primary);
+}
+
+.border-dynamic-primary {
+  border-color: var(--dynamic-primary);
+}
+
+.bg-dynamic-secondary {
+  background-color: var(--dynamic-secondary);
+}
+
+.text-dynamic-secondary {
+  color: var(--dynamic-secondary);
+}
+
+.border-dynamic-secondary {
+  border-color: var(--dynamic-secondary);
+}

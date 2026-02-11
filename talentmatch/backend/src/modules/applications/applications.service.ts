@@ -93,7 +93,7 @@ export class ApplicationsService {
         job: {
           include: {
             company: {
-              select: { name: true, logoUrl: true, location: true },
+              select: { id: true, userId: true, name: true, logoUrl: true, location: true },
             },
           },
         },
@@ -132,7 +132,7 @@ export class ApplicationsService {
         job: {
           include: {
             company: {
-              select: { name: true, logoUrl: true, location: true },
+              select: { id: true, userId: true, name: true, logoUrl: true, location: true },
             },
           },
         },

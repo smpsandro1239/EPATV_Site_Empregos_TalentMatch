@@ -23,9 +23,9 @@ TalentMatch é uma solução SaaS enterprise de recrutamento que utiliza Intelig
 - **Monetização**: Planos de subscrição integrados com Stripe.
 - **Notificações & Chat**: Sistema em tempo real (Socket.io) e e-mails (Resend).
 - **Multi-idioma**: Suporte total para PT-PT, EN, ES e FR.
+- **Video-Entrevistas (UI)**: Interface WebRTC integrada no chat para entrevistas remotas.
 
 ### 🟡 Em Desenvolvimento / Planeado
-- **Video-Entrevistas (UI)**: Sinalização backend pronta, interface frontend em desenvolvimento.
 - **AI Mock Interviews**: Simulador de entrevistas para candidatos.
 - **Gamification**: Desafios técnicos e medalhas para candidatos.
 - **App Mobile**: Versão nativa em React Native.
@@ -100,20 +100,6 @@ npm install
 npm run build
 npm start
 ```
-
----
-
-## 📊 Relatório de Auditoria (Resumo)
-
-### Problemas Identificados
-1. **Performance de Busca**: Cálculo de similaridade vetorial feito em JS (recomendado migrar para `pgvector`).
-2. **UI de Vídeo**: Ausência de componentes visuais para chamadas WebRTC (backend funcional).
-3. **Redundância**: Presença de `bcrypt` e `argon2` nas dependências.
-
-### Recomendações
-- Implementar **TanStack Query** globalmente no frontend.
-- Centralizar branding via **CSS Variables** num Provider dedicado.
-- Migrar i18n para **next-intl middleware** para melhor SEO.
 
 ---
 
