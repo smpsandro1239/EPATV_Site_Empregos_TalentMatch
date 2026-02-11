@@ -1,3 +1,5 @@
+import { QueryProvider } from '@/providers/QueryProvider';
+import { BrandingProvider } from '@/providers/BrandingProvider';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { I18nProvider } from '@/providers/I18nProvider';
 import type { Metadata } from 'next';
@@ -36,12 +38,16 @@ export default function RootLayout({
     <html lang="pt">
       <body>
         <ErrorBoundary>
+          <QueryProvider>
           <I18nProvider>
+            <BrandingProvider>
             <AuthProvider>
               {children}
               <Toaster position="bottom-right" />
             </AuthProvider>
+          </BrandingProvider>
           </I18nProvider>
+        </QueryProvider>
         </ErrorBoundary>
       </body>
     </html>

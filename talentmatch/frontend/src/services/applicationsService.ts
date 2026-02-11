@@ -13,6 +13,8 @@ export interface Application {
     id: string;
     title: string;
     company?: {
+      id: string;
+      userId: string;
       name: string;
       logoUrl?: string;
       location: string;
@@ -20,6 +22,7 @@ export interface Application {
   };
   candidate?: {
     id: string;
+    userId: string;
     name: string;
     headline?: string;
     location: string;

@@ -2,8 +2,10 @@
 
 import { useAuth } from '@/providers/AuthProvider';
 import { Message, messagesService } from '@/services/messagesService';
-import { useEffect, useRef, useState } from 'react';
+import { applicationsService, Application } from '@/services/applicationsService';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
+import VideoCall from './VideoCall';
 
 interface ChatProps {
   applicationId: string;
@@ -14,6 +16,8 @@ export default function Chat({ applicationId }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [application, setApplication] = useState<Application | null>(null);
+  const [showVideoCall, setShowVideoCall] = useState(false);
   const socketRef = useRef<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +25,29 @@ export default function Chat({ applicationId }: ChatProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const fetchApplication = useCallback(async () => {
+    try {
+      const data = await applicationsService.getApplication(applicationId);
+      setApplication(data);
+    } catch (error) {
+      console.error('Error fetching application:', error);
+    }
+  }, [applicationId]);
+
+  const fetchMessages = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await messagesService.getMessages(applicationId);
+      setMessages(data);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [applicationId]);
+
   useEffect(() => {
+    fetchApplication();
     fetchMessages();
 
     // Setup Socket.io
@@ -40,23 +66,11 @@ export default function Chat({ applicationId }: ChatProps) {
     return () => {
       socket.disconnect();
     };
-  }, [applicationId, authToken]);
+  }, [applicationId, authToken, fetchApplication, fetchMessages]);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  const fetchMessages = async () => {
-    try {
-      setLoading(true);
-      const data = await messagesService.getMessages(applicationId);
-      setMessages(data);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,14 +85,42 @@ export default function Chat({ applicationId }: ChatProps) {
     }
   };
 
+  const getRecipientId = () => {
+    if (!application || !user) return null;
+    if (user.role === 'CANDIDATE') {
+      return application.job?.company?.userId;
+    } else {
+      return application.candidate?.userId;
+    }
+  };
+
   if (loading) {
     return <div className="text-center py-4 text-gray-500 italic">A carregar chat...</div>;
   }
 
+  const recipientId = getRecipientId();
+
   return (
-    <div className="flex flex-col h-[500px] bg-white rounded-lg border border-gray-200">
-      <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 rounded-t-lg">
+    <div className="flex flex-col h-[500px] bg-white rounded-lg border border-gray-200 shadow-sm relative">
+      {showVideoCall && socketRef.current && user && recipientId && (
+        <VideoCall
+          socket={socketRef.current}
+          userId={user.id}
+          recipientId={recipientId}
+          onClose={() => setShowVideoCall(false)}
+        />
+      )}
+
+      <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 rounded-t-lg flex justify-between items-center">
         <h3 className="font-bold text-gray-800">Mensagens</h3>
+        {recipientId && (
+          <button
+            onClick={() => setShowVideoCall(true)}
+            className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-primary-100 shadow-sm"
+          >
+            <span className="text-lg">📹</span> Videochamada
+          </button>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

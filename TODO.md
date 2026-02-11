@@ -33,6 +33,7 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 
 ## 🟡 Próximos Passos (Roadmap 3.0)
 
+- [x] **Videochamadas (UI)**: Interface frontend para entrevistas via WebRTC integrada.
 - [ ] **Templates HTML para E-mails**: Refinar o design visual das notificações.
 - [ ] **App Mobile Nativa**: Desenvolvimento do cliente React Native.
 - [ ] **AI Interviews**: Assistente de IA para pré-triagem em vídeo.
@@ -46,7 +47,7 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 
 ---
 ## 📝 Notas da Auditoria Técnica (Fev 2026)
-- **Estado**: 96% Concluído.
+- **Estado**: 98% Concluído.
 - **Dívida Técnica**: Migrar similaridade vetorial para o PostgreSQL (pgvector).
-- **Pendência Crítica**: Implementar UI de Videochamada no Frontend (Backend OK).
+- [x] **UI de Videochamada**: Implementada e integrada (Frontend + Backend).
 - **Otimização**: Refatorar data-fetching para TanStack Query.
