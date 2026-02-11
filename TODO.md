@@ -43,3 +43,10 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 ---
 *Status: 96% (i18n expandido para 4 idiomas)*
 *Última atualização: Fevereiro 2026*
+
+---
+## 📝 Notas da Auditoria Técnica (Fev 2026)
+- **Estado**: 96% Concluído.
+- **Dívida Técnica**: Migrar similaridade vetorial para o PostgreSQL (pgvector).
+- **Pendência Crítica**: Implementar UI de Videochamada no Frontend (Backend OK).
+- **Otimização**: Refatorar data-fetching para TanStack Query.
