@@ -118,7 +118,7 @@ npm run start:dev
 cd frontend
 npm install --legacy-peer-deps
 npm run build
-npm run st""art
+npm start
 ```
 
 ---

@@ -113,6 +113,7 @@ model CandidateProfile {
 
   @@index([userId])
   @@index([location])
+  challengeResults   ChallengeResult[]
 }
 
 // ===== CANDIDATE EXPERIENCE =====
@@ -462,4 +463,47 @@ model Device {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+// ===== GAMIFICATION (CHALLENGES) =====
+
+enum ChallengeType {
+  QUIZ
+  CODE
+}
+
+enum ChallengeDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Challenge {
+  id           String             @id @default(cuid())
+  title        String
+  description  String
+  type         ChallengeType      @default(QUIZ)
+  difficulty   ChallengeDifficulty @default(MEDIUM)
+  category     String             // ex: "Frontend", "Backend", "DevOps"
+  points       Int                @default(100)
+  content      String             // JSON string for quiz questions or code template
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  results      ChallengeResult[]
+}
+
+model ChallengeResult {
+  id           String    @id @default(cuid())
+  challengeId  String
+  candidateId  String
+  score        Float     // percentage 0-100
+  passed       Boolean   @default(false)
+  completedAt  DateTime  @default(now())
+
+  challenge    Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  candidate    CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, candidateId])
+  @@index([candidateId])
 }
