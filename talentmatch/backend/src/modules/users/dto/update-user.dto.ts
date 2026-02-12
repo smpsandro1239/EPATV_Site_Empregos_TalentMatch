@@ -17,10 +17,10 @@ export class UpdatePasswordDto {
   @ApiProperty()
   @IsString()
   @MinLength(6)
-  oldPassword: string;
+  oldPassword!: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(6)
-  newPassword: string;
+  newPassword!: string;
 }
