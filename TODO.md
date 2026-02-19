@@ -51,3 +51,10 @@ Este documento regista o progresso de desenvolvimento da plataforma TalentMatch.
 - **Dívida Técnica**: Migrar similaridade vetorial para o PostgreSQL (pgvector).
 - [x] **UI de Videochamada**: Implementada e integrada (Frontend + Backend).
 - **Otimização**: Refatorar data-fetching para TanStack Query.
+
+---
+## 🛡️ Auditoria Técnica (Fev 2026) - Desafios Identificados
+- [ ] **Segurança**: Adicionar `@nestjs/throttler` (Rate Limiting).
+- [ ] **Performance**: Migrar similaridade de cosseno de JS para `pgvector` no PostgreSQL.
+- [ ] **Dados**: Substituir mocks no Dashboard Admin por agregação real via Prisma.
+- [ ] **Qualidade**: Refatorar o frontend para uso consistente de TanStack Query em todos os serviços.
