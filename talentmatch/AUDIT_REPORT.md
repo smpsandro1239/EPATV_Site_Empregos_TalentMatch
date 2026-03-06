@@ -1,7 +1,7 @@
 # 🛡️ Relatório de Auditoria Técnica: TalentMatch
 
 **Data**: Fevereiro 2026
-**Avaliador**: Jules (AI Senior Software Engineer)
+**Avaliador**: Sandro Pereira
 **Estado Global**: 96% Concluído (MVP + Phase 5)
 
 ---

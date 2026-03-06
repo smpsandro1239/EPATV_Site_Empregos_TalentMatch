@@ -157,4 +157,4 @@ O chat utiliza Socket.io para trocar os "signals" do WebRTC. Uma vez estabelecid
    - Refinar templates de e-mail transacionais.
 
 ---
-*Documento gerado como parte da Auditoria Técnica - Fevereiro 2026*
+*Documento gerado como parte da Auditoria Técnica por Sandro Pereira - Fevereiro 2026*
