@@ -1,6 +1,19 @@
 # 🚀 TalentMatch - Plataforma de Recrutamento Inteligente (AI-Powered)
 
-TalentMatch é uma solução SaaS enterprise de recrutamento que utiliza Inteligência Artificial (OpenAI) para realizar o matching perfeito entre candidatos e empresas. Com uma arquitetura multi-tenant, permite que empresas personalizem a sua identidade visual, gerenciem equipas e realizem entrevistas por vídeo, tudo numa única plataforma.
+TalentMatch é uma solução SaaS de recrutamento que utiliza Inteligência Artificial (OpenAI) para apoiar o matching entre candidatos e empresas. Com uma arquitetura multi-tenant, permite personalização da identidade visual por empresa e reúne fluxos de gestão de vagas, candidaturas e comunicação.
+
+## 🖼️ Demonstração visual
+
+As capturas seguintes estão versionadas em `screenshots/` e mostram áreas centrais da interface.
+
+| Homepage | Pesquisa e listagem de vagas |
+|---|---|
+| ![Homepage do TalentMatch](screenshots/homepage.png) | ![Página de vagas do TalentMatch](screenshots/jobs-page.png) |
+
+### Dashboard de gestão
+
+![Dashboard de gestão do TalentMatch](screenshots/jobs-page2.png)
+
 
 ---
 
